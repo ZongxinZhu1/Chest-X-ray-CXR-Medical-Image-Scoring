@@ -86,11 +86,6 @@
       border-color: var(--primary);
     }
     .btn-primary:hover { background: #1f2937; }
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
     .action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -111,11 +106,6 @@
     .warn { background: var(--warnbg); color: var(--warn); }
     .muted { color: var(--muted); }
     .small { font-size: 12px; }
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
     .chip {
       border: 1px solid #e5e7eb;
       border-radius: 14px;
@@ -132,14 +122,7 @@
       background: #f8fafc;
       border-color: #cbd5e1;
     }
-    .chip input {
-      margin: 0;
-    }
-    .chip:has(input:checked) {
-      background: #eff6ff;
-      border-color: #93c5fd;
-      box-shadow: inset 0 0 0 1px #93c5fd;
-    }
+    .chip input { margin: 0; }
     .viewer-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -231,11 +214,17 @@
       color: #111827;
       white-space: pre-wrap;
     }
+    iframe.hidden-frame {
+      display: none;
+      width: 0;
+      height: 0;
+      border: 0;
+    }
     @media (max-width: 1250px) {
       .container { grid-template-columns: 1fr; }
     }
     @media (max-width: 900px) {
-      .viewer-grid, .split, .action-grid { grid-template-columns: 1fr; }
+      .viewer-grid, .action-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -286,8 +275,8 @@
           <input type="text" id="syntheticImageUrl" placeholder="https://... or local relative path" />
         </div>
         <div class="action-grid">
-          <button class="btn" id="bindImagesBtn">Load and randomize</button>
-          <button class="btn" id="loadDemoBtn">Load demo</button>
+          <button class="btn" id="bindImagesBtn" type="button">Load and randomize</button>
+          <button class="btn" id="loadDemoBtn" type="button">Load demo</button>
         </div>
         <div class="status ok">The reviewer only sees Image A and Image B. The real/synthetic identity is stored in the submission payload.</div>
       </section>
@@ -317,9 +306,9 @@
               <div class="placeholder">Please load image A</div>
             </div>
             <div class="toolbar">
-              <button class="btn" onclick="zoomImage('A', 0.2)">Zoom A in</button>
-              <button class="btn" onclick="zoomImage('A', -0.2)">Zoom A out</button>
-              <button class="btn" onclick="resetZoom('A')">Reset A</button>
+              <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
+              <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
+              <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
             </div>
           </div>
         </div>
@@ -334,9 +323,9 @@
               <div class="placeholder">Please load image B</div>
             </div>
             <div class="toolbar">
-              <button class="btn" onclick="zoomImage('B', 0.2)">Zoom B in</button>
-              <button class="btn" onclick="zoomImage('B', -0.2)">Zoom B out</button>
-              <button class="btn" onclick="resetZoom('B')">Reset B</button>
+              <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
+              <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
+              <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
             </div>
           </div>
         </div>
@@ -389,8 +378,8 @@
         </div>
 
         <div class="action-grid">
-          <button class="btn" id="previewBtn">Preview</button>
-          <button class="btn btn-primary" id="submitBtn">Submit</button>
+          <button class="btn" id="previewBtn" type="button">Preview</button>
+          <button class="btn btn-primary" id="submitBtn" type="button">Submit</button>
         </div>
         <div id="msg" class="status warn" style="margin-top: 14px;">Please load both CXR images first. Binary preference and scoring are optional, but at least one action is required.</div>
       </section>
@@ -402,6 +391,8 @@
     </aside>
   </main>
 
+  <iframe name="gas_submit_frame" id="gasSubmitFrame" class="hidden-frame"></iframe>
+
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzRmvRcvxpNHDJl3jndM2dIKf7Esec6YEp9ywg_gIzCVKn4B6JGihkO7ay238a5NKyT/exec';
 
@@ -410,7 +401,7 @@
       images: { A: '', B: '' },
       pair: { real: '', synthetic: '' },
       mapping: { A_type: '', B_type: '', swapped: false },
-      showTruth: false,
+      submitInProgress: false,
     };
 
     const els = {
@@ -431,6 +422,7 @@
       previewBtn: document.getElementById('previewBtn'),
       submitBtn: document.getElementById('submitBtn'),
       comment: document.getElementById('comment'),
+      gasSubmitFrame: document.getElementById('gasSubmitFrame'),
     };
 
     init();
@@ -441,6 +433,13 @@
       els.previewBtn.addEventListener('click', previewResult);
       els.submitBtn.addEventListener('click', submitResult);
       els.reportText.addEventListener('input', syncReportDisplay);
+
+      els.gasSubmitFrame.addEventListener('load', () => {
+        if (!state.submitInProgress) return;
+        state.submitInProgress = false;
+        setMsg('Submission request sent to Google Apps Script. Check your Google Sheet for the new row.', 'ok');
+      });
+
       syncReportDisplay();
       renderTypeLabels();
       runSelfTests();
@@ -505,8 +504,8 @@
     }
 
     function renderTypeLabels() {
-      els.labelAType.textContent = state.showTruth && state.mapping.A_type ? state.mapping.A_type : 'Blind review';
-      els.labelBType.textContent = state.showTruth && state.mapping.B_type ? state.mapping.B_type : 'Blind review';
+      els.labelAType.textContent = 'Blind review';
+      els.labelBType.textContent = 'Blind review';
     }
 
     function renderImage(slot, url) {
@@ -516,12 +515,16 @@
         wrap.innerHTML = '<div class="placeholder">No image loaded</div>';
         return;
       }
-      wrap.innerHTML = '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot + '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
+      wrap.innerHTML =
+        '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot +
+        '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
     }
 
     function handleImageError(slot, url) {
       const wrap = slot === 'A' ? els.wrapA : els.wrapB;
-      wrap.innerHTML = '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' + escapeHtml(url) + '</span></div>';
+      wrap.innerHTML =
+        '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' +
+        escapeHtml(url) + '</span></div>';
       setMsg('One or more images could not be loaded. Check whether the URL is a direct image link.', 'warn');
     }
 
@@ -607,7 +610,7 @@
       }
     }
 
-    async function submitResult() {
+    function submitResult() {
       try {
         if (!API_URL) {
           throw new Error('API_URL is missing.');
@@ -617,28 +620,30 @@
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
         setMsg('Submitting...', 'warn');
 
-        const resp = await fetch(API_URL, {
-          method: 'POST',
-          body: JSON.stringify(result),
-        });
-
-        const text = await resp.text();
-
-        let data = {};
-        try {
-          data = JSON.parse(text);
-        } catch (e) {
-          throw new Error('Server returned non-JSON response: ' + text);
-        }
-
-        if (!data.ok) {
-          throw new Error(data.error || 'Submission failed.');
-        }
-
-        setMsg('Submitted successfully to Google Sheets.', 'ok');
+        submitViaHiddenForm(API_URL, result);
       } catch (error) {
+        state.submitInProgress = false;
         setMsg(error.message || String(error), 'warn');
       }
+    }
+
+    function submitViaHiddenForm(url, payload) {
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = url;
+      form.target = 'gas_submit_frame';
+      form.style.display = 'none';
+
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'payload';
+      input.value = JSON.stringify(payload);
+      form.appendChild(input);
+
+      document.body.appendChild(form);
+      state.submitInProgress = true;
+      form.submit();
+      form.remove();
     }
 
     function loadDemo() {
