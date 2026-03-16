@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CXR Report Matching Review</title>
+  <title>CXR Report Matching Blind Review</title>
   <style>
     :root {
       --bg: #f3f4f6;
@@ -242,8 +242,8 @@
 <body>
   <header class="topbar">
     <div>
-      <h1>CXR Report Matching Review</h1>
-      <p>Report is displayed above the images. Binary preference and separate scoring are both optional.</p>
+      <h1>CXR Report Matching Blind Review</h1>
+      <p>Report is displayed above the images. Real and synthetic images are randomized into A/B for blind review.</p>
     </div>
     <div class="muted">CXR only</div>
   </header>
@@ -278,17 +278,18 @@
       <section class="card">
         <h2>Image Sources</h2>
         <div class="field">
-          <label>Image A URL</label>
-          <input type="text" id="imageAUrl" placeholder="https://... or local relative path" />
+          <label>Real image URL</label>
+          <input type="text" id="realImageUrl" placeholder="https://... or local relative path" />
         </div>
         <div class="field">
-          <label>Image B URL</label>
-          <input type="text" id="imageBUrl" placeholder="https://... or local relative path" />
+          <label>Synthetic image URL</label>
+          <input type="text" id="syntheticImageUrl" placeholder="https://... or local relative path" />
         </div>
         <div class="action-grid">
-          <button class="btn" id="bindImagesBtn">Load images</button>
+          <button class="btn" id="bindImagesBtn">Load and randomize</button>
           <button class="btn" id="loadDemoBtn">Load demo</button>
         </div>
+        <div class="status ok">The reviewer only sees Image A and Image B. The real/synthetic identity is stored in the submission payload.</div>
       </section>
     </aside>
 
@@ -309,7 +310,7 @@
         <div class="image-panel">
           <div class="panel-head">
             <strong>Image A</strong>
-            <span class="muted small">For report matching</span>
+            <span class="muted small" id="labelAType">Blind review</span>
           </div>
           <div class="panel-body">
             <div class="image-wrap" id="wrapA">
@@ -326,7 +327,7 @@
         <div class="image-panel">
           <div class="panel-head">
             <strong>Image B</strong>
-            <span class="muted small">For report matching</span>
+            <span class="muted small" id="labelBType">Blind review</span>
           </div>
           <div class="panel-body">
             <div class="image-wrap" id="wrapB">
@@ -407,6 +408,9 @@
     const state = {
       zoom: { A: 1, B: 1 },
       images: { A: '', B: '' },
+      pair: { real: '', synthetic: '' },
+      mapping: { A_type: '', B_type: '', swapped: false },
+      showTruth: false,
     };
 
     const els = {
@@ -414,10 +418,12 @@
       doctorName: document.getElementById('doctorName'),
       reportText: document.getElementById('reportText'),
       reportDisplay: document.getElementById('reportDisplay'),
-      imageAUrl: document.getElementById('imageAUrl'),
-      imageBUrl: document.getElementById('imageBUrl'),
+      realImageUrl: document.getElementById('realImageUrl'),
+      syntheticImageUrl: document.getElementById('syntheticImageUrl'),
       wrapA: document.getElementById('wrapA'),
       wrapB: document.getElementById('wrapB'),
+      labelAType: document.getElementById('labelAType'),
+      labelBType: document.getElementById('labelBType'),
       msg: document.getElementById('msg'),
       resultPreview: document.getElementById('resultPreview'),
       bindImagesBtn: document.getElementById('bindImagesBtn'),
@@ -436,45 +442,69 @@
       els.submitBtn.addEventListener('click', submitResult);
       els.reportText.addEventListener('input', syncReportDisplay);
       syncReportDisplay();
+      renderTypeLabels();
     }
 
     function syncReportDisplay() {
       els.reportDisplay.textContent = els.reportText.value.trim() || 'No report provided';
     }
 
-    function bindImages() {
-      const a = normalizeGitHubImageUrl(els.imageAUrl.value.trim());
-      const b = normalizeGitHubImageUrl(els.imageBUrl.value.trim());
-
-      els.imageAUrl.value = a;
-      els.imageBUrl.value = b;
-
-      state.images.A = a;
-      state.images.B = b;
-
-      renderImage('A', a);
-      renderImage('B', b);
-
-      if (a && b) {
-        setMsg('Both CXR images have been loaded.', 'ok');
-      } else {
-        setMsg('Please provide both image A and image B.', 'warn');
-      }
-    }
-
     function normalizeGitHubImageUrl(url) {
       if (!url) return '';
       if (url.includes('github.com') && url.includes('/blob/')) {
-        return url
-          .replace('https://github.com/', 'https://raw.githubusercontent.com/')
-          .replace('/blob/', '/');
+        return url.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/blob/', '/');
       }
       if (url.includes('github.com') && url.includes('/raw/')) {
-        return url
-          .replace('https://github.com/', 'https://raw.githubusercontent.com/')
-          .replace('/raw/', '/');
+        return url.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/raw/', '/');
       }
       return url;
+    }
+
+    function bindImages() {
+      const real = normalizeGitHubImageUrl(els.realImageUrl.value.trim());
+      const synthetic = normalizeGitHubImageUrl(els.syntheticImageUrl.value.trim());
+
+      els.realImageUrl.value = real;
+      els.syntheticImageUrl.value = synthetic;
+
+      state.pair.real = real;
+      state.pair.synthetic = synthetic;
+
+      if (!real || !synthetic) {
+        state.images.A = '';
+        state.images.B = '';
+        state.mapping = { A_type: '', B_type: '', swapped: false };
+        renderImage('A', '');
+        renderImage('B', '');
+        renderTypeLabels();
+        setMsg('Please provide both real image URL and synthetic image URL.', 'warn');
+        return;
+      }
+
+      if (Math.random() > 0.5) {
+        state.images.A = real;
+        state.images.B = synthetic;
+        state.mapping.A_type = 'real';
+        state.mapping.B_type = 'synthetic';
+        state.mapping.swapped = false;
+      } else {
+        state.images.A = synthetic;
+        state.images.B = real;
+        state.mapping.A_type = 'synthetic';
+        state.mapping.B_type = 'real';
+        state.mapping.swapped = true;
+      }
+
+      renderImage('A', state.images.A);
+      renderImage('B', state.images.B);
+      renderTypeLabels();
+      clearBinaryChoice();
+      setMsg('Real and synthetic images have been loaded and randomized into A/B.', 'ok');
+    }
+
+    function renderTypeLabels() {
+      els.labelAType.textContent = state.showTruth && state.mapping.A_type ? state.mapping.A_type : 'Blind review';
+      els.labelBType.textContent = state.showTruth && state.mapping.B_type ? state.mapping.B_type : 'Blind review';
     }
 
     function renderImage(slot, url) {
@@ -512,9 +542,22 @@
       return checked ? checked.value : '';
     }
 
+    function clearBinaryChoice() {
+      document.querySelectorAll('input[name="binaryChoice"]').forEach((el) => {
+        el.checked = false;
+      });
+    }
+
+    function selectedImageType(choice) {
+      if (choice === 'A') return state.mapping.A_type;
+      if (choice === 'B') return state.mapping.B_type;
+      if (choice === 'tie') return 'tie';
+      return '';
+    }
+
     function buildResult() {
       if (!state.images.A || !state.images.B) {
-        throw new Error('Please load both image A and image B first.');
+        throw new Error('Please load both real and synthetic images first.');
       }
 
       const choice = getRadioValue('binaryChoice');
@@ -527,16 +570,29 @@
 
       return {
         reviewer_name: els.doctorName.value.trim(),
+        sample_id: extractSampleId(els.samplePath.value.trim()),
         sample_path: els.samplePath.value.trim(),
         report_text: els.reportText.value.trim(),
-        image_A_url: els.imageAUrl.value.trim(),
-        image_B_url: els.imageBUrl.value.trim(),
+        real_image_url: state.pair.real,
+        synthetic_image_url: state.pair.synthetic,
+        image_A_url: state.images.A,
+        image_B_url: state.images.B,
+        image_A_type: state.mapping.A_type,
+        image_B_type: state.mapping.B_type,
+        swapped: state.mapping.swapped ? 'yes' : 'no',
         binary_choice: choice,
+        selected_image_type: selectedImageType(choice),
         score_A: scoreA,
         score_B: scoreB,
         comment: els.comment.value.trim(),
         timestamp: new Date().toISOString(),
       };
+    }
+
+    function extractSampleId(samplePath) {
+      if (!samplePath) return '';
+      const parts = samplePath.split('/');
+      return parts[parts.length - 1] || samplePath;
     }
 
     function previewResult() {
@@ -554,29 +610,32 @@
         if (!API_URL) {
           throw new Error('API_URL is missing.');
         }
-    
+
         const result = buildResult();
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
         setMsg('Submitting...', 'warn');
-    
+
         const resp = await fetch(API_URL, {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify(result),
         });
-    
+
         const text = await resp.text();
-    
+
         let data = {};
         try {
           data = JSON.parse(text);
         } catch (e) {
           throw new Error('Server returned non-JSON response: ' + text);
         }
-    
+
         if (!data.ok) {
           throw new Error(data.error || 'Submission failed.');
         }
-    
+
         setMsg('Submitted successfully to Google Sheets.', 'ok');
       } catch (error) {
         setMsg(error.message || String(error), 'warn');
@@ -586,8 +645,8 @@
     function loadDemo() {
       els.samplePath.value = 'p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg';
       els.reportText.value = 'Lingular lobe pneumonia with possible right lower lobe pneumonia.';
-      els.imageAUrl.value = 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/medical-review/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg';
-      els.imageBUrl.value = 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/medical-review/ddpo.png';
+      els.realImageUrl.value = 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/medical-review/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg';
+      els.syntheticImageUrl.value = 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/medical-review/ddpo.png';
       syncReportDisplay();
       bindImages();
     }
@@ -608,9 +667,9 @@
 
     function escapeJs(s) {
       return String(s)
-        .replace(/\\/g, '\\\\')
-        .replace(/'/g, "\\'")
-        .replace(/"/g, '\\"');
+        .replace(/\/g, '\\')
+        .replace(/'/g, "\'")
+        .replace(/"/g, '\"');
     }
   </script>
 </body>
