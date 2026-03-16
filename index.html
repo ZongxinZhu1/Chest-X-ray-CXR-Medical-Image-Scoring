@@ -42,7 +42,7 @@
       margin: 0 auto;
       padding: 24px;
       display: grid;
-      grid-template-columns: 260px minmax(0, 1fr) 340px;
+      grid-template-columns: minmax(0, 1fr) 320px;
       gap: 16px;
     }
     .card {
@@ -111,6 +111,7 @@
     .warn { background: var(--warnbg); color: var(--warn); }
     .muted { color: var(--muted); }
     .small { font-size: 12px; }
+    .hidden { display: none !important;}
     .chip {
       border: 1px solid #e5e7eb;
       border-radius: 14px;
@@ -255,33 +256,91 @@
     </div>
     <div class="muted">CXR only</div>
   </header>
-
+###############
   <main class="container">
-    <aside class="stack">
+    <!-- CENTER -->
+    <section class="stack">
       <section class="card">
         <h2>Sample Info</h2>
-        <div class="field">
-          <label>Image path format example</label>
-          <div class="path-box">p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6</div>
-        </div>
         <div class="field">
           <label>Reviewer name</label>
           <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
         </div>
-        <div class="field">
+  
+        <div class="field hidden">
           <label>Current sample path / ID</label>
           <input type="text" id="samplePath" readonly />
         </div>
-        <div class="field">
+  
+        <div class="field hidden">
           <label>Current sample ID</label>
           <input type="text" id="sampleId" readonly />
         </div>
+  
         <div class="inline-meta">
           <div class="meta-box"><strong>Index</strong><br/><span id="sampleIndexLabel">-</span></div>
           <div class="meta-box"><strong>Total samples</strong><br/><span id="sampleTotalLabel">-</span></div>
         </div>
       </section>
-
+  
+      <section class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div>
+            <h2 style="margin-bottom: 6px;">Report and CXR Comparison</h2>
+            <div class="muted">Read the report first, then inspect images A and B. Zoom in, zoom out, and reset are supported.</div>
+          </div>
+        </div>
+  
+        <div class="report-box">
+          <div class="label">Report</div>
+          <div id="reportDisplay" class="content"></div>
+        </div>
+  
+        <div class="viewer-grid">
+          <div class="image-panel">
+            <div class="panel-head">
+              <strong>Image A</strong>
+              <span class="muted small" id="labelAType">Blind review</span>
+            </div>
+            <div class="panel-body">
+              <div class="image-wrap" id="wrapA">
+                <div class="placeholder">Please load image A</div>
+              </div>
+              <div class="toolbar">
+                <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
+                <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
+                <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
+              </div>
+            </div>
+          </div>
+  
+          <div class="image-panel">
+            <div class="panel-head">
+              <strong>Image B</strong>
+              <span class="muted small" id="labelBType">Blind review</span>
+            </div>
+            <div class="panel-body">
+              <div class="image-wrap" id="wrapB">
+                <div class="placeholder">Please load image B</div>
+              </div>
+              <div class="toolbar">
+                <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
+                <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
+                <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <section class="card">
+        <h3>Current Result Preview</h3>
+        <pre id="resultPreview" style="margin:0; white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.5; color:#374151;">None</pre>
+      </section>
+    </section>
+  
+    <!-- RIGHT -->
+    <aside class="stack">
       <section class="card">
         <h2>Manifest Loader</h2>
         <div class="field">
@@ -297,82 +356,13 @@
           <button class="btn" id="randomBtn" type="button">Random sample</button>
           <button class="btn" id="nextBtn" type="button">Next</button>
         </div>
-        <div class="status ok" style="margin-top:12px;">The page reads docs/manifest.json and fills report, sample path, and both image URLs automatically.</div>
+        <div class="status ok" style="margin-top:12px;">The page reads docs/manifest.json and fills report and image URLs automatically.</div>
       </section>
-
-      <section class="card">
-        <h2>Image Sources</h2>
-        <div class="field">
-          <label>Real image URL</label>
-          <input type="text" id="realImageUrl" readonly />
-        </div>
-        <div class="field">
-          <label>Synthetic image URL</label>
-          <input type="text" id="syntheticImageUrl" readonly />
-        </div>
-        <div class="action-grid">
-          <button class="btn" id="bindImagesBtn" type="button">Load and randomize</button>
-          <button class="btn" id="loadDemoBtn" type="button">Load demo</button>
-        </div>
-        <div class="status ok">The reviewer only sees Image A and Image B. The real/synthetic identity is stored in the submission fields.</div>
-      </section>
-    </aside>
-
-    <section class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-        <div>
-          <h2 style="margin-bottom: 6px;">Report and CXR Comparison</h2>
-          <div class="muted">Read the report first, then inspect images A and B. Zoom in, zoom out, and reset are supported.</div>
-        </div>
-      </div>
-
-      <div class="report-box">
-        <div class="label">Report</div>
-        <div id="reportDisplay" class="content"></div>
-      </div>
-
-      <div class="viewer-grid">
-        <div class="image-panel">
-          <div class="panel-head">
-            <strong>Image A</strong>
-            <span class="muted small" id="labelAType">Blind review</span>
-          </div>
-          <div class="panel-body">
-            <div class="image-wrap" id="wrapA">
-              <div class="placeholder">Please load image A</div>
-            </div>
-            <div class="toolbar">
-              <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
-              <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
-              <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="image-panel">
-          <div class="panel-head">
-            <strong>Image B</strong>
-            <span class="muted small" id="labelBType">Blind review</span>
-          </div>
-          <div class="panel-body">
-            <div class="image-wrap" id="wrapB">
-              <div class="placeholder">Please load image B</div>
-            </div>
-            <div class="toolbar">
-              <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
-              <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
-              <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <aside class="stack">
+  
       <section class="card">
         <h2>Scoring</h2>
         <div class="status ok" style="margin-bottom: 16px;">Binary preference and separate scoring both remain available. You can fill only one of them, or both.</div>
-
+  
         <div class="field">
           <label>Which image matches the report better? (optional)</label>
           <div class="score-grid">
@@ -381,7 +371,7 @@
             <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> Similar / Tie</label>
           </div>
         </div>
-
+  
         <div class="field">
           <label>Image A score (-2 to 2, optional)</label>
           <div class="score-row">
@@ -394,7 +384,7 @@
             </div>
           </div>
         </div>
-
+  
         <div class="field">
           <label>Image B score (-2 to 2, optional)</label>
           <div class="score-row">
@@ -407,22 +397,17 @@
             </div>
           </div>
         </div>
-
+  
         <div class="field">
           <label>Comment</label>
           <textarea id="comment" placeholder="e.g. A better matches bibasilar atelectatic change, while B is less consistent with the report statement of no pleural effusion."></textarea>
         </div>
-
+  
         <div class="action-grid">
           <button class="btn" id="previewBtn" type="button">Preview</button>
           <button class="btn btn-primary" id="submitBtn" type="button">Submit</button>
         </div>
         <div id="msg" class="status warn" style="margin-top: 14px;">Load the manifest first. Binary preference and scoring are optional, but at least one action is required.</div>
-      </section>
-
-      <section class="card">
-        <h3>Current Result Preview</h3>
-        <pre id="resultPreview" style="margin:0; white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.5; color:#374151;">None</pre>
       </section>
     </aside>
   </main>
