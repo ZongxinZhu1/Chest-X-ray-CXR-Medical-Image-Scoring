@@ -38,12 +38,12 @@
     .topbar h1 { margin: 0; font-size: 22px; }
     .topbar p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
     .container {
-      max-width: 1500px;
+      max-width: 1720px;
       margin: 0 auto;
       padding: 24px;
       display: grid;
-      grid-template-columns: 320px 1fr 360px;
-      gap: 24px;
+      grid-template-columns: 280px minmax(0, 1fr) 300px;
+      gap: 16px;
     }
     .card {
       background: var(--card);
@@ -115,6 +115,15 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+    }
+    .score-chips-single-line {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+    .score-chips-single-line .chip {
+      flex: 0 0 auto;
+      min-width: 52px;
+      justify-content: center;
     }
     .chip {
       border: 1px solid #e5e7eb;
@@ -218,7 +227,7 @@
   <header class="topbar">
     <div>
       <h1>CXR 报告匹配评分页面</h1>
-      <p>report 放在图像上方，二选一和分别打分同时保留，且都可选填</p>
+      <p>report 放在图像上方，二选一和分别打分同时保留，且都可选填；页面更铺满宽度</p>
     </div>
     <div class="muted">只针对 CXR 图片</div>
   </header>
@@ -334,7 +343,7 @@
         <div class="field">
           <label>图像 A 分数（-2 到 2，可不填）</label>
           <div class="score-row">
-            <div class="chips">
+            <div class="chips score-chips-single-line">
               <label class="chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
               <label class="chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
               <label class="chip"><input type="radio" name="scoreA" value="0" /> 0</label>
@@ -347,7 +356,7 @@
         <div class="field">
           <label>图像 B 分数（-2 到 2，可不填）</label>
           <div class="score-row">
-            <div class="chips">
+            <div class="chips score-chips-single-line">
               <label class="chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
               <label class="chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
               <label class="chip"><input type="radio" name="scoreB" value="0" /> 0</label>
