@@ -42,7 +42,7 @@
       margin: 0 auto;
       padding: 24px;
       display: grid;
-      grid-template-columns: 280px minmax(0, 1fr) 300px;
+      grid-template-columns: 260px minmax(0, 1fr) 340px;
       gap: 16px;
     }
     .card {
@@ -117,8 +117,13 @@
       flex-wrap: wrap;
     }
     .score-chips-single-line {
-      flex-wrap: nowrap;
-      overflow-x: auto;
+      flex-wrap: wrap;
+      overflow-x: visible;
+      width: 100%;
+    }
+    .score-chips-single-line .chip {
+      flex: initial;
+      min-width: 0;
     }
     .score-chips-single-line .chip {
       flex: 0 0 auto;
@@ -127,13 +132,27 @@
     }
     .chip {
       border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 8px 12px;
+      border-radius: 14px;
+      padding: 10px 14px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       background: white;
       cursor: pointer;
+      min-height: 44px;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .chip:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+    .chip input {
+      margin: 0;
+    }
+    .chip:has(input:checked) {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      box-shadow: inset 0 0 0 1px #93c5fd;
     }
     .viewer-grid {
       display: grid;
@@ -182,7 +201,18 @@
     .score-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
+    }
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+    .score-chip {
+      justify-content: center;
+      width: 100%;
+      font-weight: 600;
     }
     .path-box {
       font-family: monospace;
@@ -333,22 +363,22 @@
 
         <div class="field">
           <label>更匹配 report 的图像（二选一，可不填）</label>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="binaryChoice" value="A" /> 图像 A</label>
-            <label class="chip"><input type="radio" name="binaryChoice" value="B" /> 图像 B</label>
-            <label class="chip"><input type="radio" name="binaryChoice" value="tie" /> 两者接近</label>
+          <div class="score-grid">
+            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="A" /> 图像 A</label>
+            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="B" /> 图像 B</label>
+            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> 两者接近</label>
           </div>
         </div>
 
         <div class="field">
           <label>图像 A 分数（-2 到 2，可不填）</label>
           <div class="score-row">
-            <div class="chips score-chips-single-line">
-              <label class="chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
-              <label class="chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
-              <label class="chip"><input type="radio" name="scoreA" value="0" /> 0</label>
-              <label class="chip"><input type="radio" name="scoreA" value="1" /> 1</label>
-              <label class="chip"><input type="radio" name="scoreA" value="2" /> 2</label>
+            <div class="score-grid">
+              <label class="chip score-chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
+              <label class="chip score-chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
+              <label class="chip score-chip"><input type="radio" name="scoreA" value="0" /> 0</label>
+              <label class="chip score-chip"><input type="radio" name="scoreA" value="1" /> 1</label>
+              <label class="chip score-chip"><input type="radio" name="scoreA" value="2" /> 2</label>
             </div>
           </div>
         </div>
@@ -356,12 +386,12 @@
         <div class="field">
           <label>图像 B 分数（-2 到 2，可不填）</label>
           <div class="score-row">
-            <div class="chips score-chips-single-line">
-              <label class="chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
-              <label class="chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
-              <label class="chip"><input type="radio" name="scoreB" value="0" /> 0</label>
-              <label class="chip"><input type="radio" name="scoreB" value="1" /> 1</label>
-              <label class="chip"><input type="radio" name="scoreB" value="2" /> 2</label>
+            <div class="score-grid">
+              <label class="chip score-chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
+              <label class="chip score-chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
+              <label class="chip score-chip"><input type="radio" name="scoreB" value="0" /> 0</label>
+              <label class="chip score-chip"><input type="radio" name="scoreB" value="1" /> 1</label>
+              <label class="chip score-chip"><input type="radio" name="scoreB" value="2" /> 2</label>
             </div>
           </div>
         </div>
