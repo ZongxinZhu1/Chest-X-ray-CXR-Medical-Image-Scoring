@@ -278,7 +278,7 @@
           <button class="btn" id="bindImagesBtn" type="button">Load and randomize</button>
           <button class="btn" id="loadDemoBtn" type="button">Load demo</button>
         </div>
-        <div class="status ok">The reviewer only sees Image A and Image B. The real/synthetic identity is stored in the submission payload.</div>
+        <div class="status ok">The reviewer only sees Image A and Image B. The real/synthetic identity is stored in the submission fields.</div>
       </section>
     </aside>
 
@@ -394,7 +394,7 @@
   <iframe name="gas_submit_frame" id="gasSubmitFrame" class="hidden-frame"></iframe>
 
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxkaiAWFUecH29zblDFNAlaZfVcf2bW8mb_dDDpMjTIg3EvT9xmpyczwrMzAm-GG1At/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwFkAlCxGfrIyh1_ddFIM-ks0ICfEvwPgCCvp8RZpc-IUYh1AMeDT7kL3YTaAplvkEa/exec';
 
     const state = {
       zoom: { A: 1, B: 1 },
@@ -437,7 +437,7 @@
       els.gasSubmitFrame.addEventListener('load', () => {
         if (!state.submitInProgress) return;
         state.submitInProgress = false;
-        setMsg('Submission request sent to Google Apps Script. Check your Google Sheet for the new row.', 'ok');
+        setMsg('Form submitted. Please refresh Google Sheet and also check DebugLog.', 'ok');
       });
 
       syncReportDisplay();
@@ -620,25 +620,27 @@
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
         setMsg('Submitting...', 'warn');
 
-        submitViaHiddenForm(API_URL, result);
+        submitViaFormFields(API_URL, result);
       } catch (error) {
         state.submitInProgress = false;
         setMsg(error.message || String(error), 'warn');
       }
     }
 
-    function submitViaHiddenForm(url, payload) {
+    function submitViaFormFields(url, payload) {
       const form = document.createElement('form');
       form.method = 'POST';
       form.action = url;
       form.target = 'gas_submit_frame';
       form.style.display = 'none';
 
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'payload';
-      input.value = JSON.stringify(payload);
-      form.appendChild(input);
+      Object.entries(payload).forEach(([key, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value == null ? '' : String(value);
+        form.appendChild(input);
+      });
 
       document.body.appendChild(form);
       state.submitInProgress = true;
