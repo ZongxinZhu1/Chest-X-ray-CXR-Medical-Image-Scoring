@@ -443,6 +443,7 @@
       els.reportText.addEventListener('input', syncReportDisplay);
       syncReportDisplay();
       renderTypeLabels();
+      runSelfTests();
     }
 
     function syncReportDisplay() {
@@ -477,6 +478,7 @@
         renderImage('A', '');
         renderImage('B', '');
         renderTypeLabels();
+        clearBinaryChoice();
         setMsg('Please provide both real image URL and synthetic image URL.', 'warn');
         return;
       }
@@ -617,9 +619,6 @@
 
         const resp = await fetch(API_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
           body: JSON.stringify(result),
         });
 
@@ -667,9 +666,25 @@
 
     function escapeJs(s) {
       return String(s)
-        .replace(/\/g, '\\')
-        .replace(/'/g, "\'")
-        .replace(/"/g, '\"');
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '\\"');
+    }
+
+    function runSelfTests() {
+      console.assert(normalizeGitHubImageUrl('') === '', 'empty URL should stay empty');
+      console.assert(
+        normalizeGitHubImageUrl('https://github.com/user/repo/blob/main/a.jpg') === 'https://raw.githubusercontent.com/user/repo/main/a.jpg',
+        'blob URL should convert to raw URL'
+      );
+      console.assert(
+        extractSampleId('a/b/c/test.png') === 'test.png',
+        'extractSampleId should return filename'
+      );
+      console.assert(
+        escapeJs("a\\b'c\"d") === "a\\\\b\\'c\\\"d",
+        'escapeJs should escape backslash, single quote, and double quote'
+      );
     }
   </script>
 </body>
