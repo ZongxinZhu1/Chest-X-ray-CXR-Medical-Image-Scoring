@@ -551,31 +551,35 @@
 
     async function submitResult() {
       try {
-        if (!API_URL || API_URL.includes('YOUR_DEPLOYMENT_ID')) {
-          throw new Error('Please set your Apps Script Web App URL in API_URL first.');
+        if (!API_URL) {
+          throw new Error('API_URL is missing.');
         }
-
+    
         const result = buildResult();
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
         setMsg('Submitting...', 'warn');
-
+    
         const resp = await fetch(API_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
           body: JSON.stringify(result),
         });
-
-        const data = await resp.json();
-
+    
+        const text = await resp.text();
+    
+        let data = {};
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          throw new Error('Server returned non-JSON response: ' + text);
+        }
+    
         if (!data.ok) {
           throw new Error(data.error || 'Submission failed.');
         }
-
+    
         setMsg('Submitted successfully to Google Sheets.', 'ok');
       } catch (error) {
-        setMsg(error.message, 'warn');
+        setMsg(error.message || String(error), 'warn');
       }
     }
 
