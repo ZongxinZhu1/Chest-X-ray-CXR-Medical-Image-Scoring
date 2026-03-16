@@ -24,7 +24,7 @@
       background: var(--bg);
       color: var(--text);
     }
-    button, input, textarea { font: inherit; }
+    button, input, textarea, select { font: inherit; }
     .topbar {
       background: var(--card);
       border-bottom: 1px solid var(--line);
@@ -60,7 +60,7 @@
       font-size: 14px;
       font-weight: bold;
     }
-    input[type="text"], textarea {
+    input[type="text"], textarea, select {
       width: 100%;
       border: 1px solid #d1d5db;
       border-radius: 12px;
@@ -89,6 +89,11 @@
     .action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .action-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
     .toolbar {
@@ -214,6 +219,20 @@
       color: #111827;
       white-space: pre-wrap;
     }
+    .inline-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .meta-box {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
     iframe.hidden-frame {
       display: none;
       width: 0;
@@ -224,7 +243,7 @@
       .container { grid-template-columns: 1fr; }
     }
     @media (max-width: 900px) {
-      .viewer-grid, .action-grid { grid-template-columns: 1fr; }
+      .viewer-grid, .action-grid, .action-grid-3, .inline-meta { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -232,7 +251,7 @@
   <header class="topbar">
     <div>
       <h1>CXR Report Matching Blind Review</h1>
-      <p>Report is displayed above the images. Real and synthetic images are randomized into A/B for blind review.</p>
+      <p>Manifest-driven review. Report is displayed above the images. Real and synthetic images are randomized into A/B for blind review.</p>
     </div>
     <div class="muted">CXR only</div>
   </header>
@@ -243,36 +262,53 @@
         <h2>Sample Info</h2>
         <div class="field">
           <label>Image path format example</label>
-          <div class="path-box">p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6.jpg</div>
-        </div>
-        <div class="field">
-          <label>Case path / ID</label>
-          <input type="text" id="samplePath" value="p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6.jpg" />
+          <div class="path-box">p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6</div>
         </div>
         <div class="field">
           <label>Reviewer name</label>
           <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
         </div>
+        <div class="field">
+          <label>Current sample path / ID</label>
+          <input type="text" id="samplePath" readonly />
+        </div>
+        <div class="field">
+          <label>Current sample ID</label>
+          <input type="text" id="sampleId" readonly />
+        </div>
+        <div class="inline-meta">
+          <div class="meta-box"><strong>Index</strong><br/><span id="sampleIndexLabel">-</span></div>
+          <div class="meta-box"><strong>Total samples</strong><br/><span id="sampleTotalLabel">-</span></div>
+        </div>
       </section>
 
       <section class="card">
-        <h2>Report Editor</h2>
+        <h2>Manifest Loader</h2>
         <div class="field">
-          <label>Given report</label>
-          <textarea id="reportText">Portable AP chest radiograph. Mild bibasilar atelectatic change. No focal consolidation. No pleural effusion or pneumothorax. Cardiomediastinal silhouette is within normal limits.</textarea>
+          <label>Manifest path</label>
+          <input type="text" id="manifestPath" value="./manifest.json" />
         </div>
-        <div class="status ok">During review, the report shown to the reviewer appears above the image comparison area in a larger font.</div>
+        <div class="action-grid">
+          <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
+          <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
+        </div>
+        <div class="action-grid-3" style="margin-top:12px;">
+          <button class="btn" id="prevBtn" type="button">Previous</button>
+          <button class="btn" id="randomBtn" type="button">Random sample</button>
+          <button class="btn" id="nextBtn" type="button">Next</button>
+        </div>
+        <div class="status ok" style="margin-top:12px;">The page reads docs/manifest.json and fills report, sample path, and both image URLs automatically.</div>
       </section>
 
       <section class="card">
         <h2>Image Sources</h2>
         <div class="field">
           <label>Real image URL</label>
-          <input type="text" id="realImageUrl" placeholder="https://... or local relative path" />
+          <input type="text" id="realImageUrl" readonly />
         </div>
         <div class="field">
           <label>Synthetic image URL</label>
-          <input type="text" id="syntheticImageUrl" placeholder="https://... or local relative path" />
+          <input type="text" id="syntheticImageUrl" readonly />
         </div>
         <div class="action-grid">
           <button class="btn" id="bindImagesBtn" type="button">Load and randomize</button>
@@ -381,7 +417,7 @@
           <button class="btn" id="previewBtn" type="button">Preview</button>
           <button class="btn btn-primary" id="submitBtn" type="button">Submit</button>
         </div>
-        <div id="msg" class="status warn" style="margin-top: 14px;">Please load both CXR images first. Binary preference and scoring are optional, but at least one action is required.</div>
+        <div id="msg" class="status warn" style="margin-top: 14px;">Load the manifest first. Binary preference and scoring are optional, but at least one action is required.</div>
       </section>
 
       <section class="card">
@@ -394,23 +430,29 @@
   <iframe name="gas_submit_frame" id="gasSubmitFrame" class="hidden-frame"></iframe>
 
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbx8gc88KRZaOFfFn0rctjNr9RC7H0csA39gPoRx57sVWFzyKQ50j4zTe38_yLlmavAF/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbw0Dl6hxzRajFNWLNODjBoeSc8ktPoTHnmG5b0pKI8_LWDpmGE1L8mZViaWugbk2GfbSA/exec';
 
     const state = {
       zoom: { A: 1, B: 1 },
       images: { A: '', B: '' },
       pair: { real: '', synthetic: '' },
       mapping: { A_type: '', B_type: '', swapped: false },
+      manifest: [],
+      currentIndex: -1,
       submitInProgress: false,
     };
 
     const els = {
       samplePath: document.getElementById('samplePath'),
+      sampleId: document.getElementById('sampleId'),
       doctorName: document.getElementById('doctorName'),
       reportText: document.getElementById('reportText'),
       reportDisplay: document.getElementById('reportDisplay'),
       realImageUrl: document.getElementById('realImageUrl'),
       syntheticImageUrl: document.getElementById('syntheticImageUrl'),
+      manifestPath: document.getElementById('manifestPath'),
+      sampleIndexLabel: document.getElementById('sampleIndexLabel'),
+      sampleTotalLabel: document.getElementById('sampleTotalLabel'),
       wrapA: document.getElementById('wrapA'),
       wrapB: document.getElementById('wrapB'),
       labelAType: document.getElementById('labelAType'),
@@ -419,6 +461,11 @@
       resultPreview: document.getElementById('resultPreview'),
       bindImagesBtn: document.getElementById('bindImagesBtn'),
       loadDemoBtn: document.getElementById('loadDemoBtn'),
+      loadManifestBtn: document.getElementById('loadManifestBtn'),
+      reloadCurrentBtn: document.getElementById('reloadCurrentBtn'),
+      prevBtn: document.getElementById('prevBtn'),
+      nextBtn: document.getElementById('nextBtn'),
+      randomBtn: document.getElementById('randomBtn'),
       previewBtn: document.getElementById('previewBtn'),
       submitBtn: document.getElementById('submitBtn'),
       comment: document.getElementById('comment'),
@@ -430,23 +477,159 @@
     function init() {
       els.bindImagesBtn.addEventListener('click', bindImages);
       els.loadDemoBtn.addEventListener('click', loadDemo);
+      els.loadManifestBtn.addEventListener('click', loadManifest);
+      els.reloadCurrentBtn.addEventListener('click', reloadCurrentSample);
+      els.prevBtn.addEventListener('click', prevSample);
+      els.nextBtn.addEventListener('click', nextSample);
+      els.randomBtn.addEventListener('click', randomSample);
       els.previewBtn.addEventListener('click', previewResult);
       els.submitBtn.addEventListener('click', submitResult);
-      els.reportText.addEventListener('input', syncReportDisplay);
+      els.gasSubmitFrame.addEventListener('load', onIframeLoaded);
 
-      els.gasSubmitFrame.addEventListener('load', () => {
-        if (!state.submitInProgress) return;
-        state.submitInProgress = false;
-        setMsg('Form submitted. Please refresh Google Sheet and also check DebugLog.', 'ok');
-      });
-
+      ensureHiddenReportEditor();
       syncReportDisplay();
       renderTypeLabels();
+      updateSampleMeta();
+      hydrateFromQuery();
       runSelfTests();
+
+      if (els.manifestPath.value.trim()) {
+        loadManifest();
+      }
+    }
+
+    function ensureHiddenReportEditor() {
+      if (!document.getElementById('reportText')) {
+        const hidden = document.createElement('textarea');
+        hidden.id = 'reportText';
+        hidden.style.display = 'none';
+        document.body.appendChild(hidden);
+        els.reportText = hidden;
+      }
     }
 
     function syncReportDisplay() {
-      els.reportDisplay.textContent = els.reportText.value.trim() || 'No report provided';
+      els.reportDisplay.textContent = (els.reportText.value || '').trim() || 'No report provided';
+    }
+
+    function hydrateFromQuery() {
+      const q = new URLSearchParams(window.location.search);
+      const manifestPath = q.get('manifest');
+      const sampleId = q.get('sample_id');
+      const samplePath = q.get('sample_path');
+
+      if (manifestPath) {
+        els.manifestPath.value = manifestPath;
+      }
+
+      state.pendingTarget = sampleId || samplePath || '';
+    }
+
+    async function loadManifest() {
+      try {
+        const path = els.manifestPath.value.trim() || './manifest.json';
+        setMsg('Loading manifest...', 'warn');
+
+        const resp = await fetch(path, { cache: 'no-store' });
+        if (!resp.ok) {
+          throw new Error('Failed to load manifest: ' + resp.status + ' ' + resp.statusText);
+        }
+
+        const data = await resp.json();
+        if (!Array.isArray(data) || !data.length) {
+          throw new Error('Manifest is empty or invalid.');
+        }
+
+        state.manifest = data;
+        updateSampleMeta();
+
+        let targetIndex = 0;
+        if (state.pendingTarget) {
+          const pending = state.pendingTarget;
+          const foundIndex = state.manifest.findIndex((item) => item.sample_id === pending || item.sample_path === pending);
+          if (foundIndex >= 0) targetIndex = foundIndex;
+        }
+
+        loadSample(targetIndex);
+        setMsg('Manifest loaded successfully.', 'ok');
+      } catch (error) {
+        setMsg(error.message || String(error), 'warn');
+      }
+    }
+
+    function loadSample(index) {
+      if (!state.manifest.length) {
+        setMsg('Manifest is not loaded.', 'warn');
+        return;
+      }
+
+      if (index < 0 || index >= state.manifest.length) {
+        setMsg('Sample index out of range.', 'warn');
+        return;
+      }
+
+      const item = state.manifest[index];
+      state.currentIndex = index;
+
+      els.samplePath.value = item.sample_path || '';
+      els.sampleId.value = item.sample_id || extractSampleId(item.sample_path || '');
+      els.reportText.value = item.report_text || '';
+      els.realImageUrl.value = normalizeGitHubImageUrl(item.real_image_url || '');
+      els.syntheticImageUrl.value = normalizeGitHubImageUrl(item.synthetic_image_url || '');
+
+      syncReportDisplay();
+      bindImages();
+      updateSampleMeta();
+      updateQueryString(item);
+    }
+
+    function reloadCurrentSample() {
+      if (state.currentIndex >= 0) {
+        loadSample(state.currentIndex);
+        return;
+      }
+      bindImages();
+    }
+
+    function prevSample() {
+      if (!state.manifest.length) {
+        setMsg('Manifest is not loaded.', 'warn');
+        return;
+      }
+      const nextIndex = state.currentIndex <= 0 ? state.manifest.length - 1 : state.currentIndex - 1;
+      loadSample(nextIndex);
+    }
+
+    function nextSample() {
+      if (!state.manifest.length) {
+        setMsg('Manifest is not loaded.', 'warn');
+        return;
+      }
+      const nextIndex = state.currentIndex >= state.manifest.length - 1 ? 0 : state.currentIndex + 1;
+      loadSample(nextIndex);
+    }
+
+    function randomSample() {
+      if (!state.manifest.length) {
+        setMsg('Manifest is not loaded.', 'warn');
+        return;
+      }
+      const index = Math.floor(Math.random() * state.manifest.length);
+      loadSample(index);
+    }
+
+    function updateSampleMeta() {
+      els.sampleTotalLabel.textContent = state.manifest.length ? String(state.manifest.length) : '-';
+      els.sampleIndexLabel.textContent = state.currentIndex >= 0 ? String(state.currentIndex + 1) : '-';
+    }
+
+    function updateQueryString(item) {
+      const params = new URLSearchParams(window.location.search);
+      params.set('manifest', els.manifestPath.value.trim() || './manifest.json');
+      if (item.sample_id) params.set('sample_id', item.sample_id);
+      if (item.sample_path) params.set('sample_path', item.sample_path);
+      const newUrl = window.location.pathname + '?' + params.toString();
+      history.replaceState({}, '', newUrl);
     }
 
     function normalizeGitHubImageUrl(url) {
@@ -515,16 +698,12 @@
         wrap.innerHTML = '<div class="placeholder">No image loaded</div>';
         return;
       }
-      wrap.innerHTML =
-        '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot +
-        '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
+      wrap.innerHTML = '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot + '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
     }
 
     function handleImageError(slot, url) {
       const wrap = slot === 'A' ? els.wrapA : els.wrapB;
-      wrap.innerHTML =
-        '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' +
-        escapeHtml(url) + '</span></div>';
+      wrap.innerHTML = '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' + escapeHtml(url) + '</span></div>';
       setMsg('One or more images could not be loaded. Check whether the URL is a direct image link.', 'warn');
     }
 
@@ -575,7 +754,7 @@
 
       return {
         reviewer_name: els.doctorName.value.trim(),
-        sample_id: extractSampleId(els.samplePath.value.trim()),
+        sample_id: els.sampleId.value.trim() || extractSampleId(els.samplePath.value.trim()),
         sample_path: els.samplePath.value.trim(),
         report_text: els.reportText.value.trim(),
         real_image_url: state.pair.real,
@@ -596,8 +775,9 @@
 
     function extractSampleId(samplePath) {
       if (!samplePath) return '';
-      const parts = samplePath.split('/');
-      return parts[parts.length - 1] || samplePath;
+      const cleaned = samplePath.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+      const parts = cleaned.split('/');
+      return parts[parts.length - 1] || cleaned;
     }
 
     function previewResult() {
@@ -619,7 +799,6 @@
         const result = buildResult();
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
         setMsg('Submitting...', 'warn');
-
         submitViaFormFields(API_URL, result);
       } catch (error) {
         state.submitInProgress = false;
@@ -648,13 +827,24 @@
       form.remove();
     }
 
+    function onIframeLoaded() {
+      if (!state.submitInProgress) return;
+      state.submitInProgress = false;
+      setMsg('Form submitted. Check Google Sheet for the new row.', 'ok');
+    }
+
     function loadDemo() {
-      els.samplePath.value = 'p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg';
-      els.reportText.value = 'Lingular lobe pneumonia with possible right lower lobe pneumonia.';
-      els.realImageUrl.value = 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/medical-review/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg';
-      els.syntheticImageUrl.value = 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/medical-review/ddpo.png';
-      syncReportDisplay();
-      bindImages();
+      state.manifest = [
+        {
+          sample_id: '49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979',
+          sample_path: 'p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979',
+          report_text: 'Lingular lobe pneumonia with possible right lower lobe pneumonia.',
+          real_image_url: 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg',
+          synthetic_image_url: 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.png'
+        }
+      ];
+      updateSampleMeta();
+      loadSample(0);
     }
 
     function setMsg(text, type) {
@@ -685,14 +875,18 @@
         'blob URL should convert to raw URL'
       );
       console.assert(
-        extractSampleId('a/b/c/test.png') === 'test.png',
-        'extractSampleId should return filename'
+        extractSampleId('a/b/c/test.png') === 'test',
+        'extractSampleId should strip extension and return filename stem'
       );
       console.assert(
         escapeJs("a\\b'c\"d") === "a\\\\b\\'c\\\"d",
         'escapeJs should escape backslash, single quote, and double quote'
       );
     }
+
+    window.zoomImage = zoomImage;
+    window.resetZoom = resetZoom;
+    window.handleImageError = handleImageError;
   </script>
 </body>
 </html>
