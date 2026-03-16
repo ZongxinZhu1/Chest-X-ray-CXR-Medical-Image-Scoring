@@ -140,25 +140,11 @@
     "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17503612/s54960810/be87b73b-cf0436bd-22f2b0bc-23cfee7f-56ae3851.png"
   },
   {
-    "sample_id": "9c16a5fb-3d94b6a1-2c77d392-7e15c56e-d012d35f",
-    "sample_path": "p19/p19632593/s51569988/9c16a5fb-3d94b6a1-2c77d392-7e15c56e-d012d35f",
-    "report_text": "Bilateral small pleural effusions.",
-    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p19/p19632593/s51569988/9c16a5fb-3d94b6a1-2c77d392-7e15c56e-d012d35f.jpg",
-    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p19/p19632593/s51569988/9c16a5fb-3d94b6a1-2c77d392-7e15c56e-d012d35f.png"
-  },
-  {
     "sample_id": "34631a58-45609a52-3b2ddfa2-f1185db7-28fc085d",
     "sample_path": "p17/p17885958/s57120791/34631a58-45609a52-3b2ddfa2-f1185db7-28fc085d",
     "report_text": "Large right and moderate left pleural effusions.",
     "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17885958/s57120791/34631a58-45609a52-3b2ddfa2-f1185db7-28fc085d.jpg",
     "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17885958/s57120791/34631a58-45609a52-3b2ddfa2-f1185db7-28fc085d.png"
-  },
-  {
-    "sample_id": "a270a8f8-d51ac0a0-e0c6319e-85effa19-c73cfc72",
-    "sample_path": "p19/p19536313/s51149771/a270a8f8-d51ac0a0-e0c6319e-85effa19-c73cfc72",
-    "report_text": "No discrete lobar consoldiation. Small bilateral pleural effusions.",
-    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p19/p19536313/s51149771/a270a8f8-d51ac0a0-e0c6319e-85effa19-c73cfc72.jpg",
-    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p19/p19536313/s51149771/a270a8f8-d51ac0a0-e0c6319e-85effa19-c73cfc72.png"
   },
   {
     "sample_id": "1f2e061b-34d3a945-243a6114-48e19da2-af1a2d20",
@@ -182,20 +168,6 @@
     "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11321914/s50882875/24370ba3-45a361d5-209ac920-bcda7d6c-ca1f68b0.png"
   },
   {
-    "sample_id": "140f0530-a611e673-1b4864fe-f65b84ec-9a261bfb",
-    "sample_path": "p19/p19604613/s54536778/140f0530-a611e673-1b4864fe-f65b84ec-9a261bfb",
-    "report_text": "Right pleural effusion smaller than on the prior study.",
-    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p19/p19604613/s54536778/140f0530-a611e673-1b4864fe-f65b84ec-9a261bfb.jpg",
-    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p19/p19604613/s54536778/140f0530-a611e673-1b4864fe-f65b84ec-9a261bfb.png"
-  },
-  {
-    "sample_id": "a75d509c-df81c5cd-f5229522-bb1aad6e-ce9d6f10",
-    "sample_path": "p19/p19818243/s51874975/a75d509c-df81c5cd-f5229522-bb1aad6e-ce9d6f10",
-    "report_text": "Small bilateral pleural effusions.",
-    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p19/p19818243/s51874975/a75d509c-df81c5cd-f5229522-bb1aad6e-ce9d6f10.jpg",
-    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p19/p19818243/s51874975/a75d509c-df81c5cd-f5229522-bb1aad6e-ce9d6f10.png"
-  },
-  {
     "sample_id": "962be105-71af66c7-dbf542ec-2418dd9e-2d1bc4b9",
     "sample_path": "p12/p12494432/s58786954/962be105-71af66c7-dbf542ec-2418dd9e-2d1bc4b9",
     "report_text": "Enlarging right pleural effusion.",
@@ -217,31 +189,10 @@
     "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17980774/s59060173/fabcf8d7-fe7f2486-2b5509be-32e66ddc-d02244ec.png"
   },
   {
-    "sample_id": "6ab722b4-b1b9b7f6-c181582d-0f603619-4b86669b",
-    "sample_path": "p19/p19791178/s52269626/6ab722b4-b1b9b7f6-c181582d-0f603619-4b86669b",
-    "report_text": "Small left pleural effusion.",
-    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p19/p19791178/s52269626/6ab722b4-b1b9b7f6-c181582d-0f603619-4b86669b.jpg",
-    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p19/p19791178/s52269626/6ab722b4-b1b9b7f6-c181582d-0f603619-4b86669b.png"
-  },
-  {
     "sample_id": "18194b48-88a8b1bd-d681bdd2-9db31483-7034d13f",
     "sample_path": "p14/p14289517/s51627330/18194b48-88a8b1bd-d681bdd2-9db31483-7034d13f",
     "report_text": "Bilateral pleural effusions, left greater than right.",
     "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14289517/s51627330/18194b48-88a8b1bd-d681bdd2-9db31483-7034d13f.jpg",
     "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14289517/s51627330/18194b48-88a8b1bd-d681bdd2-9db31483-7034d13f.png"
-  },
-  {
-    "sample_id": "25ae3ba8-e876f1c1-76d9b5d0-7645bd3b-40a04a90",
-    "sample_path": "p19/p19680373/s51889628/25ae3ba8-e876f1c1-76d9b5d0-7645bd3b-40a04a90",
-    "report_text": "Moderate-sized loculated right pleural effusion.  Please refer to\n the most recent CT for further findings in the chest.",
-    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p19/p19680373/s51889628/25ae3ba8-e876f1c1-76d9b5d0-7645bd3b-40a04a90.jpg",
-    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p19/p19680373/s51889628/25ae3ba8-e876f1c1-76d9b5d0-7645bd3b-40a04a90.png"
-  },
-  {
-    "sample_id": "de5c8549-472158fe-c7cd785d-9a9e1cbc-d22c7c8c",
-    "sample_path": "p19/p19887933/s54999223/de5c8549-472158fe-c7cd785d-9a9e1cbc-d22c7c8c",
-    "report_text": "Chronic loculated pleural effusion in the left fissure that was already seen\n on the CT scan in ___.",
-    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p19/p19887933/s54999223/de5c8549-472158fe-c7cd785d-9a9e1cbc-d22c7c8c.jpg",
-    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p19/p19887933/s54999223/de5c8549-472158fe-c7cd785d-9a9e1cbc-d22c7c8c.png"
   }
 ]
