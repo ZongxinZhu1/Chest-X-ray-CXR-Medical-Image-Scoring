@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CXR 报告匹配评分页面</title>
+  <title>CXR Report Matching Review</title>
   <style>
     :root {
       --bg: #f3f4f6;
@@ -115,20 +115,6 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-    }
-    .score-chips-single-line {
-      flex-wrap: wrap;
-      overflow-x: visible;
-      width: 100%;
-    }
-    .score-chips-single-line .chip {
-      flex: initial;
-      min-width: 0;
-    }
-    .score-chips-single-line .chip {
-      flex: 0 0 auto;
-      min-width: 52px;
-      justify-content: center;
     }
     .chip {
       border: 1px solid #e5e7eb;
@@ -256,52 +242,52 @@
 <body>
   <header class="topbar">
     <div>
-      <h1>CXR 报告匹配评分页面</h1>
-      <p>report 放在图像上方，二选一和分别打分同时保留，且都可选填；页面更铺满宽度</p>
+      <h1>CXR Report Matching Review</h1>
+      <p>Report is displayed above the images. Binary preference and separate scoring are both optional.</p>
     </div>
-    <div class="muted">只针对 CXR 图片</div>
+    <div class="muted">CXR only</div>
   </header>
 
   <main class="container">
     <aside class="stack">
       <section class="card">
-        <h2>样本信息</h2>
+        <h2>Sample Info</h2>
         <div class="field">
-          <label>图片路径格式示例</label>
+          <label>Image path format example</label>
           <div class="path-box">p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6.jpg</div>
         </div>
         <div class="field">
-          <label>病例路径 / ID</label>
+          <label>Case path / ID</label>
           <input type="text" id="samplePath" value="p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6.jpg" />
         </div>
         <div class="field">
-          <label>医生姓名</label>
-          <input type="text" id="doctorName" placeholder="例如 Dr. Zhang" />
+          <label>Reviewer name</label>
+          <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
         </div>
       </section>
 
       <section class="card">
-        <h2>Report 编辑区</h2>
+        <h2>Report Editor</h2>
         <div class="field">
-          <label>给定 report</label>
+          <label>Given report</label>
           <textarea id="reportText">Portable AP chest radiograph. Mild bibasilar atelectatic change. No focal consolidation. No pleural effusion or pneumothorax. Cardiomediastinal silhouette is within normal limits.</textarea>
         </div>
-        <div class="status ok">评审时真正看的 report 会显示在中间图像区域的上方，且字号更大。</div>
+        <div class="status ok">During review, the report shown to the reviewer appears above the image comparison area in a larger font.</div>
       </section>
 
       <section class="card">
-        <h2>图像来源</h2>
+        <h2>Image Sources</h2>
         <div class="field">
-          <label>图像 A URL</label>
-          <input type="text" id="imageAUrl" placeholder="https://... 或本地相对路径" />
+          <label>Image A URL</label>
+          <input type="text" id="imageAUrl" placeholder="https://... or local relative path" />
         </div>
         <div class="field">
-          <label>图像 B URL</label>
-          <input type="text" id="imageBUrl" placeholder="https://... 或本地相对路径" />
+          <label>Image B URL</label>
+          <input type="text" id="imageBUrl" placeholder="https://... or local relative path" />
         </div>
         <div class="action-grid">
-          <button class="btn" id="bindImagesBtn">加载图片</button>
-          <button class="btn" id="loadDemoBtn">载入示例</button>
+          <button class="btn" id="bindImagesBtn">Load images</button>
+          <button class="btn" id="loadDemoBtn">Load demo</button>
         </div>
       </section>
     </aside>
@@ -309,8 +295,8 @@
     <section class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
         <div>
-          <h2 style="margin-bottom: 6px;">Report 与 CXR 图像对比</h2>
-          <div class="muted">先阅读 report，再查看 A/B 两张 CXR。支持放大、缩小、重置。</div>
+          <h2 style="margin-bottom: 6px;">Report and CXR Comparison</h2>
+          <div class="muted">Read the report first, then inspect images A and B. Zoom in, zoom out, and reset are supported.</div>
         </div>
       </div>
 
@@ -322,34 +308,34 @@
       <div class="viewer-grid">
         <div class="image-panel">
           <div class="panel-head">
-            <strong>图像 A</strong>
-            <span class="muted small">用于 report 匹配判断</span>
+            <strong>Image A</strong>
+            <span class="muted small">For report matching</span>
           </div>
           <div class="panel-body">
             <div class="image-wrap" id="wrapA">
-              <div class="placeholder">请先加载图像 A</div>
+              <div class="placeholder">Please load image A</div>
             </div>
             <div class="toolbar">
-              <button class="btn" onclick="zoomImage('A', 0.2)">A 放大</button>
-              <button class="btn" onclick="zoomImage('A', -0.2)">A 缩小</button>
-              <button class="btn" onclick="resetZoom('A')">A 重置</button>
+              <button class="btn" onclick="zoomImage('A', 0.2)">Zoom A in</button>
+              <button class="btn" onclick="zoomImage('A', -0.2)">Zoom A out</button>
+              <button class="btn" onclick="resetZoom('A')">Reset A</button>
             </div>
           </div>
         </div>
 
         <div class="image-panel">
           <div class="panel-head">
-            <strong>图像 B</strong>
-            <span class="muted small">用于 report 匹配判断</span>
+            <strong>Image B</strong>
+            <span class="muted small">For report matching</span>
           </div>
           <div class="panel-body">
             <div class="image-wrap" id="wrapB">
-              <div class="placeholder">请先加载图像 B</div>
+              <div class="placeholder">Please load image B</div>
             </div>
             <div class="toolbar">
-              <button class="btn" onclick="zoomImage('B', 0.2)">B 放大</button>
-              <button class="btn" onclick="zoomImage('B', -0.2)">B 缩小</button>
-              <button class="btn" onclick="resetZoom('B')">B 重置</button>
+              <button class="btn" onclick="zoomImage('B', 0.2)">Zoom B in</button>
+              <button class="btn" onclick="zoomImage('B', -0.2)">Zoom B out</button>
+              <button class="btn" onclick="resetZoom('B')">Reset B</button>
             </div>
           </div>
         </div>
@@ -358,20 +344,20 @@
 
     <aside class="stack">
       <section class="card">
-        <h2>评分</h2>
-        <div class="status ok" style="margin-bottom: 16px;">二选一和分别打分同时存在。你可以只做其中一个，也可以两个都填。</div>
+        <h2>Scoring</h2>
+        <div class="status ok" style="margin-bottom: 16px;">Binary preference and separate scoring both remain available. You can fill only one of them, or both.</div>
 
         <div class="field">
-          <label>更匹配 report 的图像（二选一，可不填）</label>
+          <label>Which image matches the report better? (optional)</label>
           <div class="score-grid">
-            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="A" /> 图像 A</label>
-            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="B" /> 图像 B</label>
-            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> 两者接近</label>
+            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="A" /> Image A</label>
+            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="B" /> Image B</label>
+            <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> Similar / Tie</label>
           </div>
         </div>
 
         <div class="field">
-          <label>图像 A 分数（-2 到 2，可不填）</label>
+          <label>Image A score (-2 to 2, optional)</label>
           <div class="score-row">
             <div class="score-grid">
               <label class="chip score-chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
@@ -384,7 +370,7 @@
         </div>
 
         <div class="field">
-          <label>图像 B 分数（-2 到 2，可不填）</label>
+          <label>Image B score (-2 to 2, optional)</label>
           <div class="score-row">
             <div class="score-grid">
               <label class="chip score-chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
@@ -397,20 +383,20 @@
         </div>
 
         <div class="field">
-          <label>备注</label>
-          <textarea id="comment" placeholder="例如：A 更符合 bibasilar atelectatic change，B 与 report 中 no pleural effusion 的描述不一致。"></textarea>
+          <label>Comment</label>
+          <textarea id="comment" placeholder="e.g. A better matches bibasilar atelectatic change, while B is less consistent with the report statement of no pleural effusion."></textarea>
         </div>
 
         <div class="action-grid">
-          <button class="btn" id="previewBtn">预览结果</button>
-          <button class="btn btn-primary" id="submitBtn">提交</button>
+          <button class="btn" id="previewBtn">Preview</button>
+          <button class="btn btn-primary" id="submitBtn">Submit</button>
         </div>
-        <div id="msg" class="status warn" style="margin-top: 14px;">请先加载两张 CXR。二选一和打分都不是必填，但至少要做一项操作。</div>
+        <div id="msg" class="status warn" style="margin-top: 14px;">Please load both CXR images first. Binary preference and scoring are optional, but at least one action is required.</div>
       </section>
 
       <section class="card">
-        <h3>当前结果预览</h3>
-        <pre id="resultPreview" style="margin:0; white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.5; color:#374151;">暂无</pre>
+        <h3>Current Result Preview</h3>
+        <pre id="resultPreview" style="margin:0; white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.5; color:#374151;">None</pre>
       </section>
     </aside>
   </main>
@@ -451,7 +437,7 @@
     }
 
     function syncReportDisplay() {
-      els.reportDisplay.textContent = els.reportText.value.trim() || '暂无 report';
+      els.reportDisplay.textContent = els.reportText.value.trim() || 'No report provided';
     }
 
     function bindImages() {
@@ -463,9 +449,9 @@
       renderImage('B', b);
 
       if (a && b) {
-        setMsg('两张 CXR 已加载。', 'ok');
+        setMsg('Both CXR images have been loaded.', 'ok');
       } else {
-        setMsg('请同时提供图像 A 和图像 B。', 'warn');
+        setMsg('Please provide both image A and image B.', 'warn');
       }
     }
 
@@ -473,7 +459,7 @@
       const wrap = slot === 'A' ? els.wrapA : els.wrapB;
       state.zoom[slot] = 1;
       if (!url) {
-        wrap.innerHTML = '<div class="placeholder">该位置暂无图像</div>';
+        wrap.innerHTML = '<div class="placeholder">No image loaded</div>';
         return;
       }
       wrap.innerHTML = '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot + '" style="transform: scale(1);" />';
@@ -500,7 +486,7 @@
 
     function buildResult() {
       if (!state.images.A || !state.images.B) {
-        throw new Error('请先加载图像 A 和图像 B。');
+        throw new Error('Please load both image A and image B first.');
       }
 
       const choice = getRadioValue('binaryChoice');
@@ -508,11 +494,11 @@
       const scoreB = getRadioValue('scoreB');
 
       if (!choice && scoreA === '' && scoreB === '') {
-        throw new Error('请至少完成一项：二选一，或 A/B 任意一个分数。');
+        throw new Error('Please complete at least one action: binary preference, image A score, or image B score.');
       }
 
       return {
-        doctor_name: els.doctorName.value.trim(),
+        reviewer_name: els.doctorName.value.trim(),
         sample_path: els.samplePath.value.trim(),
         report_text: els.reportText.value.trim(),
         image_A_url: els.imageAUrl.value.trim(),
@@ -529,7 +515,7 @@
       try {
         const result = buildResult();
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
-        setMsg('已生成当前结果预览。', 'ok');
+        setMsg('Preview generated.', 'ok');
       } catch (error) {
         setMsg(error.message, 'warn');
       }
@@ -539,7 +525,7 @@
       try {
         const result = buildResult();
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
-        setMsg('当前版本先完成你要求的画面与交互。后续可直接接 CSV 或 Google Sheets。', 'ok');
+        setMsg('This version currently focuses on the UI and interactions. Submission can be connected to CSV or Google Sheets next.', 'ok');
       } catch (error) {
         setMsg(error.message, 'warn');
       }
