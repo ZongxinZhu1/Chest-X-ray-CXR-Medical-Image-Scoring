@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>医学图像 A/B 二选一评分</title>
+  <title>CXR 报告匹配评分页面</title>
   <style>
     :root {
       --bg: #f3f4f6;
-      --card: #fff;
+      --card: #ffffff;
       --line: #e5e7eb;
       --text: #111827;
       --muted: #6b7280;
@@ -24,7 +24,7 @@
       background: var(--bg);
       color: var(--text);
     }
-    button, input, select, textarea { font: inherit; }
+    button, input, textarea { font: inherit; }
     .topbar {
       background: var(--card);
       border-bottom: 1px solid var(--line);
@@ -32,35 +32,46 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     .topbar h1 { margin: 0; font-size: 22px; }
     .topbar p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
     .container {
-      max-width: 1480px;
+      max-width: 1500px;
       margin: 0 auto;
       padding: 24px;
       display: grid;
-      grid-template-columns: 300px 1fr 360px;
+      grid-template-columns: 320px 1fr 360px;
       gap: 24px;
     }
     .card {
       background: var(--card);
       border-radius: 18px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
       padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
     }
+    .card h2, .card h3 { margin-top: 0; }
     .stack { display: grid; gap: 20px; }
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid #f1f5f9;
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      margin-bottom: 8px;
       font-size: 14px;
+      font-weight: bold;
     }
-    .muted { color: var(--muted); }
+    input[type="text"], textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: white;
+    }
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+      line-height: 1.5;
+    }
     .btn {
       border: 1px solid #d1d5db;
       background: white;
@@ -75,90 +86,31 @@
       border-color: var(--primary);
     }
     .btn-primary:hover { background: #1f2937; }
-    .btn-block { width: 100%; }
     .split {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    .field { margin-bottom: 16px; }
-    .field label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-    input[type="text"], input[type="file"], select, textarea {
-      width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      padding: 10px 12px;
-      background: white;
-    }
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-    .ab-grid {
+    .action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 12px;
     }
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-      background: #fff;
-    }
-    .panel.active {
-      outline: 3px solid #111827;
-    }
-    .panel-head {
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
+    .toolbar {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #fafafa;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
     }
-    .image-box {
-      background: #000;
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-    .placeholder {
-      color: #9ca3af;
-      text-align: center;
+    .status {
+      border-radius: 12px;
+      padding: 12px 14px;
       font-size: 14px;
-      line-height: 1.6;
-      padding: 24px;
     }
-    .panel-foot {
-      padding: 16px;
-    }
-    .select-btn {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: 1px solid #d1d5db;
-      background: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .select-btn.selected {
-      background: #111827;
-      color: white;
-      border-color: #111827;
-    }
+    .ok { background: var(--okbg); color: var(--ok); }
+    .warn { background: var(--warnbg); color: var(--warn); }
+    .muted { color: var(--muted); }
+    .small { font-size: 12px; }
     .chips {
       display: flex;
       gap: 8px;
@@ -168,496 +120,400 @@
       border: 1px solid #e5e7eb;
       border-radius: 12px;
       padding: 8px 12px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       background: white;
-      font-size: 14px;
+      cursor: pointer;
     }
-    .check-grid {
+    .viewer-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 18px;
+    }
+    .image-panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: white;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fafafa;
+    }
+    .panel-body { padding: 14px; }
+    .image-wrap {
+      width: 100%;
+      height: 520px;
+      border-radius: 14px;
+      background: black;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-wrap img {
+      max-width: none;
+      transform-origin: center center;
+      transition: transform 0.15s ease;
+      display: block;
+    }
+    .placeholder {
+      color: #9ca3af;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 24px;
+    }
+    .score-row {
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
     }
-    .status {
+    .path-box {
+      font-family: monospace;
+      font-size: 12px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
       border-radius: 12px;
-      padding: 12px 14px;
-      font-size: 14px;
+      padding: 10px 12px;
+      word-break: break-all;
+      line-height: 1.5;
     }
-    .ok { background: var(--okbg); color: var(--ok); }
-    .warn { background: var(--warnbg); color: var(--warn); }
-    .action-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    .report-box {
+      margin-top: 18px;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fafafa;
+      padding: 18px 20px;
     }
-    .small { font-size: 12px; }
-    @media (max-width: 1200px) {
+    .report-box .label {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    .report-box .content {
+      font-size: 20px;
+      line-height: 1.75;
+      font-weight: 600;
+      color: #111827;
+      white-space: pre-wrap;
+    }
+    @media (max-width: 1250px) {
       .container { grid-template-columns: 1fr; }
     }
     @media (max-width: 900px) {
-      .ab-grid, .split, .action-grid, .check-grid { grid-template-columns: 1fr; }
+      .viewer-grid, .split, .action-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div>
-      <h1>医学图像 A/B 二选一评分</h1>
-      <p>在线提交结果到 Google Sheets</p>
+      <h1>CXR 报告匹配评分页面</h1>
+      <p>report 放在图像上方，二选一和分别打分同时保留，且都可选填</p>
     </div>
-    <div class="muted">分享这个网页给评审即可</div>
+    <div class="muted">只针对 CXR 图片</div>
   </header>
 
   <main class="container">
     <aside class="stack">
       <section class="card">
-        <h2>配置</h2>
-
+        <h2>样本信息</h2>
+        <div class="field">
+          <label>图片路径格式示例</label>
+          <div class="path-box">p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6.jpg</div>
+        </div>
+        <div class="field">
+          <label>病例路径 / ID</label>
+          <input type="text" id="samplePath" value="p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6.jpg" />
+        </div>
         <div class="field">
           <label>医生姓名</label>
           <input type="text" id="doctorName" placeholder="例如 Dr. Zhang" />
         </div>
-
-        <div class="field split">
-          <div>
-            <label>病例编号</label>
-            <input type="text" id="caseId" value="CASE-001" />
-          </div>
-          <div>
-            <label>样本编号</label>
-            <input type="text" id="sampleId" value="SAMPLE-001" />
-          </div>
-        </div>
-
-        <div class="field split">
-          <div>
-            <label>模态</label>
-            <select id="modality">
-              <option>CT</option>
-              <option>MRI</option>
-              <option>X-ray</option>
-              <option>Ultrasound</option>
-            </select>
-          </div>
-          <div>
-            <label>检查部位</label>
-            <input type="text" id="bodyPart" value="Chest" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label>真实图 URL</label>
-          <input type="text" id="realImageUrl" placeholder="https://..." />
-        </div>
-
-        <div class="field">
-          <label>生成图 URL</label>
-          <input type="text" id="generatedImageUrl" placeholder="https://..." />
-        </div>
-
-        <div class="field">
-          <label>或上传真实图（仅当前浏览器预览，不会自动上传到表格）</label>
-          <input type="file" id="realFile" accept="image/*" />
-        </div>
-
-        <div class="field">
-          <label>或上传生成图（仅当前浏览器预览，不会自动上传到表格）</label>
-          <input type="file" id="generatedFile" accept="image/*" />
-        </div>
-
-        <div class="action-grid">
-          <button class="btn" id="bindBtn">绑定图片</button>
-          <button class="btn" id="shuffleBtn">重新随机 A/B</button>
-        </div>
-
-        <div class="status warn" style="margin-top:12px;">
-          最推荐做法是给评审发“图片 URL”，不要依赖本地上传。这样别人打开链接时能直接看到图片。
-        </div>
       </section>
 
       <section class="card">
-        <h2>分享</h2>
+        <h2>Report 编辑区</h2>
         <div class="field">
-          <label>可分享链接</label>
-          <textarea id="shareLink" readonly></textarea>
+          <label>给定 report</label>
+          <textarea id="reportText">Portable AP chest radiograph. Mild bibasilar atelectatic change. No focal consolidation. No pleural effusion or pneumothorax. Cardiomediastinal silhouette is within normal limits.</textarea>
+        </div>
+        <div class="status ok">评审时真正看的 report 会显示在中间图像区域的上方，且字号更大。</div>
+      </section>
+
+      <section class="card">
+        <h2>图像来源</h2>
+        <div class="field">
+          <label>图像 A URL</label>
+          <input type="text" id="imageAUrl" placeholder="https://... 或本地相对路径" />
+        </div>
+        <div class="field">
+          <label>图像 B URL</label>
+          <input type="text" id="imageBUrl" placeholder="https://... 或本地相对路径" />
         </div>
         <div class="action-grid">
-          <button class="btn" id="generateLinkBtn">生成链接</button>
-          <button class="btn" id="copyLinkBtn">复制链接</button>
+          <button class="btn" id="bindImagesBtn">加载图片</button>
+          <button class="btn" id="loadDemoBtn">载入示例</button>
         </div>
-        <p class="small muted" style="margin-top:10px;">
-          分享链接会带上病例编号、图片 URL 等参数，评审打开就能直接开始打分。
-        </p>
       </section>
     </aside>
 
-    <section class="stack">
-      <section class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-          <div>
-            <h2 style="margin:0 0 6px;">A / B 图像</h2>
-            <div class="muted">请选择你认为更优的一张</div>
-          </div>
-          <button class="btn" id="truthBtn">显示/隐藏真值映射</button>
+    <section class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div>
+          <h2 style="margin-bottom: 6px;">Report 与 CXR 图像对比</h2>
+          <div class="muted">先阅读 report，再查看 A/B 两张 CXR。支持放大、缩小、重置。</div>
         </div>
+      </div>
 
-        <div class="ab-grid" style="margin-top:18px;">
-          <div class="panel" id="panelA">
-            <div class="panel-head">
-              <strong>图像 A</strong>
-              <span class="muted small" id="truthA">真值：隐藏</span>
-            </div>
-            <div class="image-box" id="boxA">
-              <div class="placeholder">请先绑定图片</div>
-            </div>
-            <div class="panel-foot">
-              <button class="select-btn" data-choice="A">选择 A</button>
-            </div>
+      <div class="report-box">
+        <div class="label">Report</div>
+        <div id="reportDisplay" class="content"></div>
+      </div>
+
+      <div class="viewer-grid">
+        <div class="image-panel">
+          <div class="panel-head">
+            <strong>图像 A</strong>
+            <span class="muted small">用于 report 匹配判断</span>
           </div>
-
-          <div class="panel" id="panelB">
-            <div class="panel-head">
-              <strong>图像 B</strong>
-              <span class="muted small" id="truthB">真值：隐藏</span>
+          <div class="panel-body">
+            <div class="image-wrap" id="wrapA">
+              <div class="placeholder">请先加载图像 A</div>
             </div>
-            <div class="image-box" id="boxB">
-              <div class="placeholder">请先绑定图片</div>
-            </div>
-            <div class="panel-foot">
-              <button class="select-btn" data-choice="B">选择 B</button>
+            <div class="toolbar">
+              <button class="btn" onclick="zoomImage('A', 0.2)">A 放大</button>
+              <button class="btn" onclick="zoomImage('A', -0.2)">A 缩小</button>
+              <button class="btn" onclick="resetZoom('A')">A 重置</button>
             </div>
           </div>
         </div>
-      </section>
+
+        <div class="image-panel">
+          <div class="panel-head">
+            <strong>图像 B</strong>
+            <span class="muted small">用于 report 匹配判断</span>
+          </div>
+          <div class="panel-body">
+            <div class="image-wrap" id="wrapB">
+              <div class="placeholder">请先加载图像 B</div>
+            </div>
+            <div class="toolbar">
+              <button class="btn" onclick="zoomImage('B', 0.2)">B 放大</button>
+              <button class="btn" onclick="zoomImage('B', -0.2)">B 缩小</button>
+              <button class="btn" onclick="resetZoom('B')">B 重置</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <aside class="card">
-      <h2>评分表单</h2>
+    <aside class="stack">
+      <section class="card">
+        <h2>评分</h2>
+        <div class="status ok" style="margin-bottom: 16px;">二选一和分别打分同时存在。你可以只做其中一个，也可以两个都填。</div>
 
-      <div class="field">
-        <label>当前选择</label>
-        <div class="status warn" id="choiceStatus">尚未选择</div>
-      </div>
-
-      <div class="field">
-        <label>偏好强度</label>
-        <div class="chips">
-          <label class="chip"><input type="radio" name="preferenceStrength" value="1" />1 很弱</label>
-          <label class="chip"><input type="radio" name="preferenceStrength" value="2" />2</label>
-          <label class="chip"><input type="radio" name="preferenceStrength" value="3" />3 中等</label>
-          <label class="chip"><input type="radio" name="preferenceStrength" value="4" />4</label>
-          <label class="chip"><input type="radio" name="preferenceStrength" value="5" />5 很强</label>
+        <div class="field">
+          <label>更匹配 report 的图像（二选一，可不填）</label>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="binaryChoice" value="A" /> 图像 A</label>
+            <label class="chip"><input type="radio" name="binaryChoice" value="B" /> 图像 B</label>
+            <label class="chip"><input type="radio" name="binaryChoice" value="tie" /> 两者接近</label>
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label>总体评分</label>
-        <div class="chips">
-          <label class="chip"><input type="radio" name="overallScore" value="1" />1</label>
-          <label class="chip"><input type="radio" name="overallScore" value="2" />2</label>
-          <label class="chip"><input type="radio" name="overallScore" value="3" />3</label>
-          <label class="chip"><input type="radio" name="overallScore" value="4" />4</label>
-          <label class="chip"><input type="radio" name="overallScore" value="5" />5</label>
+        <div class="field">
+          <label>图像 A 分数（-2 到 3，可不填）</label>
+          <div class="score-row">
+            <div class="chips">
+              <label class="chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
+              <label class="chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
+              <label class="chip"><input type="radio" name="scoreA" value="0" /> 0</label>
+              <label class="chip"><input type="radio" name="scoreA" value="1" /> 1</label>
+              <label class="chip"><input type="radio" name="scoreA" value="2" /> 2</label>
+              <label class="chip"><input type="radio" name="scoreA" value="3" /> 3</label>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label>判断依据</label>
-        <div class="check-grid">
-          <label class="chip"><input type="checkbox" class="reasonCheck" value="清晰度更高" />清晰度更高</label>
-          <label class="chip"><input type="checkbox" class="reasonCheck" value="结构更完整" />结构更完整</label>
-          <label class="chip"><input type="checkbox" class="reasonCheck" value="病灶更自然" />病灶更自然</label>
-          <label class="chip"><input type="checkbox" class="reasonCheck" value="伪影更少" />伪影更少</label>
-          <label class="chip"><input type="checkbox" class="reasonCheck" value="噪声更低" />噪声更低</label>
-          <label class="chip"><input type="checkbox" class="reasonCheck" value="临床可用性更高" />临床可用性更高</label>
+        <div class="field">
+          <label>图像 B 分数（-2 到 3，可不填）</label>
+          <div class="score-row">
+            <div class="chips">
+              <label class="chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
+              <label class="chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
+              <label class="chip"><input type="radio" name="scoreB" value="0" /> 0</label>
+              <label class="chip"><input type="radio" name="scoreB" value="1" /> 1</label>
+              <label class="chip"><input type="radio" name="scoreB" value="2" /> 2</label>
+              <label class="chip"><input type="radio" name="scoreB" value="3" /> 3</label>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label>备注</label>
-        <textarea id="comment" placeholder="请输入备注"></textarea>
-      </div>
+        <div class="field">
+          <label>备注</label>
+          <textarea id="comment" placeholder="例如：A 更符合 bibasilar atelectatic change，B 与 report 中 no pleural effusion 的描述不一致。"></textarea>
+        </div>
 
-      <div class="field">
-        <label class="chip"><input type="checkbox" id="uncertain" />无法明确二选一</label>
-      </div>
+        <div class="action-grid">
+          <button class="btn" id="previewBtn">预览结果</button>
+          <button class="btn btn-primary" id="submitBtn">提交</button>
+        </div>
+        <div id="msg" class="status warn" style="margin-top: 14px;">请先加载两张 CXR。二选一和打分都不是必填，但至少要做一项操作。</div>
+      </section>
 
-      <div class="action-grid">
-        <button class="btn btn-primary" id="submitBtn">提交到 Google Sheets</button>
-        <button class="btn" id="loadDemoBtn">载入示例</button>
-      </div>
-
-      <div id="msg" class="status warn" style="margin-top:14px;">
-        请先绑定图片，再选择 A/B，然后提交。
-      </div>
+      <section class="card">
+        <h3>当前结果预览</h3>
+        <pre id="resultPreview" style="margin:0; white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.5; color:#374151;">暂无</pre>
+      </section>
     </aside>
   </main>
 
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbyw1Sfng-nlEMGCsegixnAwcTzFE_4nefMO1zrN1--7sBjojm6A5Bo1leSVzuuPELa_/exec';
-
     const state = {
-      selectedChoice: '',
-      showTruth: false,
-      mapping: { A: 'real', B: 'generated' },
-      images: { real: '', generated: '' },
+      zoom: { A: 1, B: 1 },
+      images: { A: '', B: '' },
     };
 
     const els = {
+      samplePath: document.getElementById('samplePath'),
       doctorName: document.getElementById('doctorName'),
-      caseId: document.getElementById('caseId'),
-      sampleId: document.getElementById('sampleId'),
-      modality: document.getElementById('modality'),
-      bodyPart: document.getElementById('bodyPart'),
-      realImageUrl: document.getElementById('realImageUrl'),
-      generatedImageUrl: document.getElementById('generatedImageUrl'),
-      realFile: document.getElementById('realFile'),
-      generatedFile: document.getElementById('generatedFile'),
-      bindBtn: document.getElementById('bindBtn'),
-      shuffleBtn: document.getElementById('shuffleBtn'),
-      truthBtn: document.getElementById('truthBtn'),
-      generateLinkBtn: document.getElementById('generateLinkBtn'),
-      copyLinkBtn: document.getElementById('copyLinkBtn'),
-      shareLink: document.getElementById('shareLink'),
-      boxA: document.getElementById('boxA'),
-      boxB: document.getElementById('boxB'),
-      truthA: document.getElementById('truthA'),
-      truthB: document.getElementById('truthB'),
-      panelA: document.getElementById('panelA'),
-      panelB: document.getElementById('panelB'),
-      choiceStatus: document.getElementById('choiceStatus'),
-      comment: document.getElementById('comment'),
-      uncertain: document.getElementById('uncertain'),
-      submitBtn: document.getElementById('submitBtn'),
+      reportText: document.getElementById('reportText'),
+      reportDisplay: document.getElementById('reportDisplay'),
+      imageAUrl: document.getElementById('imageAUrl'),
+      imageBUrl: document.getElementById('imageBUrl'),
+      wrapA: document.getElementById('wrapA'),
+      wrapB: document.getElementById('wrapB'),
       msg: document.getElementById('msg'),
+      resultPreview: document.getElementById('resultPreview'),
+      bindImagesBtn: document.getElementById('bindImagesBtn'),
       loadDemoBtn: document.getElementById('loadDemoBtn'),
+      previewBtn: document.getElementById('previewBtn'),
+      submitBtn: document.getElementById('submitBtn'),
+      comment: document.getElementById('comment'),
     };
 
     init();
 
     function init() {
-      hydrateFromQuery();
-      bindEvents();
-      renderTruth();
-      updateChoiceUI();
-    }
-
-    function bindEvents() {
-      els.bindBtn.addEventListener('click', bindImages);
-      els.shuffleBtn.addEventListener('click', () => {
-        randomizeMapping();
-        renderPanels();
-      });
-      els.truthBtn.addEventListener('click', () => {
-        state.showTruth = !state.showTruth;
-        renderTruth();
-        updateChoiceUI();
-      });
-      els.generateLinkBtn.addEventListener('click', generateShareLink);
-      els.copyLinkBtn.addEventListener('click', copyLink);
-      els.submitBtn.addEventListener('click', submitResult);
+      els.bindImagesBtn.addEventListener('click', bindImages);
       els.loadDemoBtn.addEventListener('click', loadDemo);
-
-      document.querySelectorAll('[data-choice]').forEach((btn) => {
-        btn.addEventListener('click', () => selectChoice(btn.dataset.choice));
-      });
+      els.previewBtn.addEventListener('click', previewResult);
+      els.submitBtn.addEventListener('click', submitResult);
+      els.reportText.addEventListener('input', syncReportDisplay);
+      syncReportDisplay();
     }
 
-    function randomizeMapping() {
-      if (Math.random() > 0.5) {
-        state.mapping = { A: 'real', B: 'generated' };
-      } else {
-        state.mapping = { A: 'generated', B: 'real' };
-      }
-      state.selectedChoice = '';
+    function syncReportDisplay() {
+      els.reportDisplay.textContent = els.reportText.value.trim() || '暂无 report';
     }
 
-    async function bindImages() {
-      const realFile = els.realFile.files[0];
-      const generatedFile = els.generatedFile.files[0];
+    function bindImages() {
+      const a = els.imageAUrl.value.trim();
+      const b = els.imageBUrl.value.trim();
+      state.images.A = a;
+      state.images.B = b;
+      renderImage('A', a);
+      renderImage('B', b);
 
-      if (realFile) state.images.real = await fileToDataUrl(realFile);
-      else state.images.real = els.realImageUrl.value.trim();
-
-      if (generatedFile) state.images.generated = await fileToDataUrl(generatedFile);
-      else state.images.generated = els.generatedImageUrl.value.trim();
-
-      renderPanels();
-
-      if (!state.images.real || !state.images.generated) {
-        setMsg('请提供真实图和生成图，两张都需要。', 'warn');
+      if (a && b) {
+        setMsg('两张 CXR 已加载。', 'ok');
       } else {
-        setMsg('图片已绑定。', 'ok');
+        setMsg('请同时提供图像 A 和图像 B。', 'warn');
       }
     }
 
-    function renderPanels() {
-      renderPanel('A');
-      renderPanel('B');
-      renderTruth();
-      updateChoiceUI();
-    }
-
-    function renderPanel(slot) {
-      const kind = state.mapping[slot];
-      const url = state.images[kind];
-      const box = slot === 'A' ? els.boxA : els.boxB;
-
+    function renderImage(slot, url) {
+      const wrap = slot === 'A' ? els.wrapA : els.wrapB;
+      state.zoom[slot] = 1;
       if (!url) {
-        box.innerHTML = '<div class=\"placeholder\">该位置暂无图片</div>';
+        wrap.innerHTML = '<div class="placeholder">该位置暂无图像</div>';
         return;
       }
-
-      box.innerHTML = '<img src=\"' + escapeHtml(url) + '\" alt=\"' + slot + '\" />';
+      wrap.innerHTML = '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot + '" style="transform: scale(1);" />';
     }
 
-    function renderTruth() {
-      els.truthA.textContent = state.showTruth ? ('真值：' + truthLabel(state.mapping.A)) : '真值：隐藏';
-      els.truthB.textContent = state.showTruth ? ('真值：' + truthLabel(state.mapping.B)) : '真值：隐藏';
+    function zoomImage(slot, delta) {
+      const img = document.getElementById('img' + slot);
+      if (!img) return;
+      state.zoom[slot] = Math.max(0.4, Math.min(4, state.zoom[slot] + delta));
+      img.style.transform = 'scale(' + state.zoom[slot] + ')';
     }
 
-    function truthLabel(kind) {
-      return kind === 'real' ? '真实图' : '生成图';
-    }
-
-    function selectChoice(choice) {
-      state.selectedChoice = choice;
-      updateChoiceUI();
-    }
-
-    function updateChoiceUI() {
-      document.querySelectorAll('[data-choice]').forEach((btn) => {
-        btn.classList.toggle('selected', btn.dataset.choice === state.selectedChoice);
-      });
-
-      els.panelA.classList.toggle('active', state.selectedChoice === 'A');
-      els.panelB.classList.toggle('active', state.selectedChoice === 'B');
-
-      if (!state.selectedChoice) {
-        els.choiceStatus.textContent = '尚未选择';
-        els.choiceStatus.className = 'status warn';
-        return;
-      }
-
-      const selectedKind = state.mapping[state.selectedChoice];
-      const desc = state.showTruth ? ('，对应' + truthLabel(selectedKind)) : '';
-      els.choiceStatus.textContent = '已选择 ' + state.selectedChoice + desc;
-      els.choiceStatus.className = 'status ok';
+    function resetZoom(slot) {
+      const img = document.getElementById('img' + slot);
+      if (!img) return;
+      state.zoom[slot] = 1;
+      img.style.transform = 'scale(1)';
     }
 
     function getRadioValue(name) {
-      const el = document.querySelector('input[name=\"' + name + '\"]:checked');
-      return el ? el.value : '';
+      const checked = document.querySelector('input[name="' + name + '"]:checked');
+      return checked ? checked.value : '';
     }
 
-    function getCheckedReasons() {
-      return Array.from(document.querySelectorAll('.reasonCheck:checked')).map((x) => x.value);
+    function buildResult() {
+      if (!state.images.A || !state.images.B) {
+        throw new Error('请先加载图像 A 和图像 B。');
+      }
+
+      const choice = getRadioValue('binaryChoice');
+      const scoreA = getRadioValue('scoreA');
+      const scoreB = getRadioValue('scoreB');
+
+      if (!choice && scoreA === '' && scoreB === '') {
+        throw new Error('请至少完成一项：二选一，或 A/B 任意一个分数。');
+      }
+
+      return {
+        doctor_name: els.doctorName.value.trim(),
+        sample_path: els.samplePath.value.trim(),
+        report_text: els.reportText.value.trim(),
+        image_A_url: els.imageAUrl.value.trim(),
+        image_B_url: els.imageBUrl.value.trim(),
+        binary_choice: choice,
+        score_A: scoreA,
+        score_B: scoreB,
+        comment: els.comment.value.trim(),
+        timestamp: new Date().toISOString(),
+      };
     }
 
-    async function submitResult() {
+    function previewResult() {
       try {
-        if (!API_URL || API_URL.includes('把你的')) {
-          throw new Error('请先把 API_URL 改成你的 Apps Script Web App 地址。');
-        }
-
-        if (!state.images.real || !state.images.generated) {
-          throw new Error('请先绑定真实图和生成图。');
-        }
-
-        if (!state.selectedChoice && !els.uncertain.checked) {
-          throw new Error('请先选择 A/B，或勾选无法明确二选一。');
-        }
-
-        const selectedTruth = state.selectedChoice ? state.mapping[state.selectedChoice] : '';
-
-        const payload = {
-          doctor_name: els.doctorName.value.trim(),
-          case_id: els.caseId.value.trim(),
-          sample_id: els.sampleId.value.trim(),
-          modality: els.modality.value.trim(),
-          body_part: els.bodyPart.value.trim(),
-          mapping_A: state.mapping.A,
-          mapping_B: state.mapping.B,
-          choice: state.selectedChoice || 'uncertain',
-          selected_truth: selectedTruth,
-          selected_is_real: selectedTruth ? (selectedTruth === 'real' ? 'yes' : 'no') : '',
-          preference_strength: getRadioValue('preferenceStrength'),
-          overall_score: getRadioValue('overallScore'),
-          reasons: getCheckedReasons(),
-          uncertain: els.uncertain.checked ? 'yes' : 'no',
-          comment: els.comment.value.trim(),
-          real_image_url: els.realImageUrl.value.trim(),
-          generated_image_url: els.generatedImageUrl.value.trim(),
-          user_agent: navigator.userAgent,
-        };
-
-        setMsg('正在提交...', 'warn');
-
-        const resp = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        });
-
-        const data = await resp.json();
-
-        if (!data.ok) {
-          throw new Error(data.error || '提交失败');
-        }
-
-        setMsg('提交成功，结果已写入 Google Sheets。', 'ok');
-      } catch (err) {
-        setMsg(err.message || String(err), 'warn');
+        const result = buildResult();
+        els.resultPreview.textContent = JSON.stringify(result, null, 2);
+        setMsg('已生成当前结果预览。', 'ok');
+      } catch (error) {
+        setMsg(error.message, 'warn');
       }
     }
 
-    function generateShareLink() {
-      const params = new URLSearchParams({
-        case_id: els.caseId.value.trim(),
-        sample_id: els.sampleId.value.trim(),
-        modality: els.modality.value.trim(),
-        body_part: els.bodyPart.value.trim(),
-        real_image_url: els.realImageUrl.value.trim(),
-        generated_image_url: els.generatedImageUrl.value.trim(),
-      });
-
-      const link = window.location.origin + window.location.pathname + '?' + params.toString();
-      els.shareLink.value = link;
-      setMsg('分享链接已生成。', 'ok');
-    }
-
-    async function copyLink() {
+    function submitResult() {
       try {
-        if (!els.shareLink.value.trim()) generateShareLink();
-        await navigator.clipboard.writeText(els.shareLink.value);
-        setMsg('链接已复制。', 'ok');
-      } catch (err) {
-        setMsg('复制失败，请手动复制。', 'warn');
+        const result = buildResult();
+        els.resultPreview.textContent = JSON.stringify(result, null, 2);
+        setMsg('当前版本先完成你要求的画面与交互。后续可直接接 CSV 或 Google Sheets。', 'ok');
+      } catch (error) {
+        setMsg(error.message, 'warn');
       }
-    }
-
-    function hydrateFromQuery() {
-      const q = new URLSearchParams(window.location.search);
-      if (q.get('case_id')) els.caseId.value = q.get('case_id');
-      if (q.get('sample_id')) els.sampleId.value = q.get('sample_id');
-      if (q.get('modality')) els.modality.value = q.get('modality');
-      if (q.get('body_part')) els.bodyPart.value = q.get('body_part');
-      if (q.get('real_image_url')) els.realImageUrl.value = q.get('real_image_url');
-      if (q.get('generated_image_url')) els.generatedImageUrl.value = q.get('generated_image_url');
     }
 
     function loadDemo() {
-      els.doctorName.value = 'Dr. Zhang';
-      els.caseId.value = 'CASE-2026-001';
-      els.sampleId.value = 'SAMPLE-AB-001';
-      els.modality.value = 'CT';
-      els.bodyPart.value = 'Chest';
-      els.realImageUrl.value = 'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1200&q=80';
-      els.generatedImageUrl.value = 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80';
-      randomizeMapping();
+      els.samplePath.value = 'p10/p10046166/s57379357/6e511483-c7e1601c-76890b2f-b0c6b55d-e53bcbf6.jpg';
+      els.reportText.value = 'Portable AP chest radiograph. Mild bibasilar atelectatic change. No focal consolidation. No pleural effusion or pneumothorax. Cardiomediastinal silhouette is within normal limits.';
+      els.imageAUrl.value = 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80';
+      els.imageBUrl.value = 'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1200&q=80';
+      syncReportDisplay();
       bindImages();
     }
 
@@ -666,21 +522,12 @@
       els.msg.className = 'status ' + (type === 'ok' ? 'ok' : 'warn');
     }
 
-    function fileToDataUrl(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
     function escapeHtml(s) {
       return String(s)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/\"/g, '&quot;')
+        .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
   </script>
