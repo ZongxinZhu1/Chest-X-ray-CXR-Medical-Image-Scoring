@@ -17,14 +17,18 @@
       --warn: #92400e;
       --warnbg: #fffbeb;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
+
     button, input, textarea, select { font: inherit; }
+
     .topbar {
       background: var(--card);
       border-bottom: 1px solid var(--line);
@@ -35,31 +39,54 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .topbar h1 { margin: 0; font-size: 22px; }
-    .topbar p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .topbar p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
     .container {
-      max-width: 1720px;
+      max-width: 1760px;
       margin: 0 auto;
       padding: 24px;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px;
+      grid-template-columns: minmax(0, 1fr) 340px;
       gap: 16px;
     }
+
     .card {
       background: var(--card);
       border-radius: 18px;
       padding: 20px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
     }
-    .card h2, .card h3 { margin-top: 0; }
-    .stack { display: grid; gap: 20px; }
-    .field { margin-bottom: 16px; }
+
+    .card h2, .card h3 {
+      margin-top: 0;
+    }
+
+    .stack {
+      display: grid;
+      gap: 20px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
     .field label {
       display: block;
       margin-bottom: 8px;
       font-size: 14px;
       font-weight: bold;
     }
+
     input[type="text"], textarea, select {
       width: 100%;
       border: 1px solid #d1d5db;
@@ -67,11 +94,13 @@
       padding: 10px 12px;
       background: white;
     }
+
     textarea {
       min-height: 130px;
       resize: vertical;
       line-height: 1.5;
     }
+
     .btn {
       border: 1px solid #d1d5db;
       background: white;
@@ -79,39 +108,64 @@
       padding: 10px 14px;
       cursor: pointer;
     }
-    .btn:hover { background: #f9fafb; }
+
+    .btn:hover {
+      background: #f9fafb;
+    }
+
     .btn-primary {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
     }
-    .btn-primary:hover { background: #1f2937; }
+
+    .btn-primary:hover {
+      background: #1f2937;
+    }
+
     .action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
+
     .action-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
+
     .toolbar {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       margin-top: 12px;
     }
+
     .status {
       border-radius: 12px;
       padding: 12px 14px;
       font-size: 14px;
     }
-    .ok { background: var(--okbg); color: var(--ok); }
-    .warn { background: var(--warnbg); color: var(--warn); }
-    .muted { color: var(--muted); }
-    .small { font-size: 12px; }
-    .hidden { display: none !important;}
+
+    .ok {
+      background: var(--okbg);
+      color: var(--ok);
+    }
+
+    .warn {
+      background: var(--warnbg);
+      color: var(--warn);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .small {
+      font-size: 12px;
+    }
+
     .chip {
       border: 1px solid #e5e7eb;
       border-radius: 14px;
@@ -124,23 +178,30 @@
       min-height: 44px;
       transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
+
     .chip:hover {
       background: #f8fafc;
       border-color: #cbd5e1;
     }
-    .chip input { margin: 0; }
+
+    .chip input {
+      margin: 0;
+    }
+
     .viewer-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
       margin-top: 18px;
     }
+
     .image-panel {
       border: 1px solid var(--line);
       border-radius: 18px;
       overflow: hidden;
       background: white;
     }
+
     .panel-head {
       display: flex;
       justify-content: space-between;
@@ -149,7 +210,11 @@
       border-bottom: 1px solid var(--line);
       background: #fafafa;
     }
-    .panel-body { padding: 14px; }
+
+    .panel-body {
+      padding: 14px;
+    }
+
     .image-wrap {
       width: 100%;
       height: 520px;
@@ -160,12 +225,14 @@
       align-items: center;
       justify-content: center;
     }
+
     .image-wrap img {
       max-width: none;
       transform-origin: center center;
       transition: transform 0.15s ease;
       display: block;
     }
+
     .placeholder {
       color: #9ca3af;
       text-align: center;
@@ -173,32 +240,26 @@
       line-height: 1.6;
       padding: 24px;
     }
+
     .score-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     .score-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
       width: 100%;
     }
+
     .score-chip {
       justify-content: center;
       width: 100%;
       font-weight: 600;
     }
-    .path-box {
-      font-family: monospace;
-      font-size: 12px;
-      background: #f8fafc;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 10px 12px;
-      word-break: break-all;
-      line-height: 1.5;
-    }
+
     .report-box {
       margin-top: 18px;
       margin-bottom: 18px;
@@ -207,12 +268,14 @@
       background: #fafafa;
       padding: 18px 20px;
     }
+
     .report-box .label {
       font-size: 15px;
       color: var(--muted);
       margin-bottom: 8px;
       font-weight: bold;
     }
+
     .report-box .content {
       font-size: 20px;
       line-height: 1.75;
@@ -220,31 +283,51 @@
       color: #111827;
       white-space: pre-wrap;
     }
-    .inline-meta {
+
+    .sample-info-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
     }
+
     .meta-box {
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 12px;
-      padding: 10px 12px;
+      padding: 12px 14px;
       font-size: 13px;
       line-height: 1.5;
     }
+
+    .preview-box {
+      margin-top: 18px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
     iframe.hidden-frame {
       display: none;
       width: 0;
       height: 0;
       border: 0;
     }
+
     @media (max-width: 1250px) {
-      .container { grid-template-columns: 1fr; }
+      .container {
+        grid-template-columns: 1fr;
+      }
     }
+
     @media (max-width: 900px) {
-      .viewer-grid, .action-grid, .action-grid-3, .inline-meta { grid-template-columns: 1fr; }
+      .viewer-grid,
+      .action-grid,
+      .action-grid-3,
+      .sample-info-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -256,89 +339,77 @@
     </div>
     <div class="muted">CXR only</div>
   </header>
-###############
+
   <main class="container">
-    <!-- CENTER -->
-    <section class="stack">
-      <section class="card">
-        <h2>Sample Info</h2>
-        <div class="field">
-          <label>Reviewer name</label>
-          <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
-        </div>
-  
-        <div class="field hidden">
-          <label>Current sample path / ID</label>
-          <input type="text" id="samplePath" readonly />
-        </div>
-  
-        <div class="field hidden">
-          <label>Current sample ID</label>
-          <input type="text" id="sampleId" readonly />
-        </div>
-  
-        <div class="inline-meta">
-          <div class="meta-box"><strong>Index</strong><br/><span id="sampleIndexLabel">-</span></div>
-          <div class="meta-box"><strong>Total samples</strong><br/><span id="sampleTotalLabel">-</span></div>
-        </div>
-      </section>
-  
-      <section class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-          <div>
-            <h2 style="margin-bottom: 6px;">Report and CXR Comparison</h2>
-            <div class="muted">Read the report first, then inspect images A and B. Zoom in, zoom out, and reset are supported.</div>
+    <!-- LEFT / MAIN -->
+    <section class="card">
+      <h2 style="margin-bottom: 6px;">Report and CXR Comparison</h2>
+      <div class="muted">Read the report first, then inspect images A and B. Zoom in, zoom out, and reset are supported.</div>
+
+      <div class="sample-info-grid" style="margin-top:18px;">
+        <div class="meta-box">
+          <strong>Reviewer name</strong>
+          <div style="margin-top:8px;">
+            <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
           </div>
         </div>
-  
-        <div class="report-box">
-          <div class="label">Report</div>
-          <div id="reportDisplay" class="content"></div>
+        <div class="meta-box">
+          <strong>Index</strong><br />
+          <span id="sampleIndexLabel">-</span>
         </div>
-  
-        <div class="viewer-grid">
-          <div class="image-panel">
-            <div class="panel-head">
-              <strong>Image A</strong>
-              <span class="muted small" id="labelAType">Blind review</span>
-            </div>
-            <div class="panel-body">
-              <div class="image-wrap" id="wrapA">
-                <div class="placeholder">Please load image A</div>
-              </div>
-              <div class="toolbar">
-                <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
-                <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
-                <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
-              </div>
-            </div>
+        <div class="meta-box">
+          <strong>Total samples</strong><br />
+          <span id="sampleTotalLabel">-</span>
+        </div>
+      </div>
+
+      <div class="report-box">
+        <div class="label">Report</div>
+        <div id="reportDisplay" class="content"></div>
+      </div>
+
+      <div class="viewer-grid">
+        <div class="image-panel">
+          <div class="panel-head">
+            <strong>Image A</strong>
+            <span class="muted small" id="labelAType">Blind review</span>
           </div>
-  
-          <div class="image-panel">
-            <div class="panel-head">
-              <strong>Image B</strong>
-              <span class="muted small" id="labelBType">Blind review</span>
+          <div class="panel-body">
+            <div class="image-wrap" id="wrapA">
+              <div class="placeholder">Please load image A</div>
             </div>
-            <div class="panel-body">
-              <div class="image-wrap" id="wrapB">
-                <div class="placeholder">Please load image B</div>
-              </div>
-              <div class="toolbar">
-                <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
-                <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
-                <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
-              </div>
+            <div class="toolbar">
+              <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
+              <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
+              <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
             </div>
           </div>
         </div>
-      </section>
-  
-      <section class="card">
-        <h3>Current Result Preview</h3>
+
+        <div class="image-panel">
+          <div class="panel-head">
+            <strong>Image B</strong>
+            <span class="muted small" id="labelBType">Blind review</span>
+          </div>
+          <div class="panel-body">
+            <div class="image-wrap" id="wrapB">
+              <div class="placeholder">Please load image B</div>
+            </div>
+            <div class="toolbar">
+              <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
+              <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
+              <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-box">
+        <h3 style="margin-top:0;">Current Result Preview</h3>
         <pre id="resultPreview" style="margin:0; white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.5; color:#374151;">None</pre>
-      </section>
+      </div>
     </section>
-  
+
     <!-- RIGHT -->
     <aside class="stack">
       <section class="card">
@@ -358,11 +429,11 @@
         </div>
         <div class="status ok" style="margin-top:12px;">The page reads docs/manifest.json and fills report and image URLs automatically.</div>
       </section>
-  
+
       <section class="card">
         <h2>Scoring</h2>
         <div class="status ok" style="margin-bottom: 16px;">Binary preference and separate scoring both remain available. You can fill only one of them, or both.</div>
-  
+
         <div class="field">
           <label>Which image matches the report better? (optional)</label>
           <div class="score-grid">
@@ -371,7 +442,7 @@
             <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> Similar / Tie</label>
           </div>
         </div>
-  
+
         <div class="field">
           <label>Image A score (-2 to 2, optional)</label>
           <div class="score-row">
@@ -384,7 +455,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="field">
           <label>Image B score (-2 to 2, optional)</label>
           <div class="score-row">
@@ -397,16 +468,17 @@
             </div>
           </div>
         </div>
-  
+
         <div class="field">
           <label>Comment</label>
           <textarea id="comment" placeholder="e.g. A better matches bibasilar atelectatic change, while B is less consistent with the report statement of no pleural effusion."></textarea>
         </div>
-  
+
         <div class="action-grid">
           <button class="btn" id="previewBtn" type="button">Preview</button>
           <button class="btn btn-primary" id="submitBtn" type="button">Submit</button>
         </div>
+
         <div id="msg" class="status warn" style="margin-top: 14px;">Load the manifest first. Binary preference and scoring are optional, but at least one action is required.</div>
       </section>
     </aside>
@@ -415,7 +487,7 @@
   <iframe name="gas_submit_frame" id="gasSubmitFrame" class="hidden-frame"></iframe>
 
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbzq-pYf4pJKozf1w9H-UxgyDUOayM6-TwQD7pZJ-Iyfcp3tgwDbdvOHrPdj1A6afGfR/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxYm35LYnfcQ7XmiE3dd_B-47kC53OqyWNUl_ouvoS0Z-c6S4rYZrWV67pusKJ4dB0E/exec';
 
     const state = {
       zoom: { A: 1, B: 1 },
@@ -425,16 +497,12 @@
       manifest: [],
       currentIndex: -1,
       submitInProgress: false,
+      pendingTarget: ''
     };
 
     const els = {
-      samplePath: document.getElementById('samplePath'),
-      sampleId: document.getElementById('sampleId'),
       doctorName: document.getElementById('doctorName'),
-      reportText: document.getElementById('reportText'),
       reportDisplay: document.getElementById('reportDisplay'),
-      realImageUrl: document.getElementById('realImageUrl'),
-      syntheticImageUrl: document.getElementById('syntheticImageUrl'),
       manifestPath: document.getElementById('manifestPath'),
       sampleIndexLabel: document.getElementById('sampleIndexLabel'),
       sampleTotalLabel: document.getElementById('sampleTotalLabel'),
@@ -444,8 +512,6 @@
       labelBType: document.getElementById('labelBType'),
       msg: document.getElementById('msg'),
       resultPreview: document.getElementById('resultPreview'),
-      bindImagesBtn: document.getElementById('bindImagesBtn'),
-      loadDemoBtn: document.getElementById('loadDemoBtn'),
       loadManifestBtn: document.getElementById('loadManifestBtn'),
       reloadCurrentBtn: document.getElementById('reloadCurrentBtn'),
       prevBtn: document.getElementById('prevBtn'),
@@ -457,11 +523,15 @@
       gasSubmitFrame: document.getElementById('gasSubmitFrame'),
     };
 
+    let reportTextStore = '';
+    let samplePathStore = '';
+    let sampleIdStore = '';
+    let realImageUrlStore = '';
+    let syntheticImageUrlStore = '';
+
     init();
 
     function init() {
-      els.bindImagesBtn.addEventListener('click', bindImages);
-      els.loadDemoBtn.addEventListener('click', loadDemo);
       els.loadManifestBtn.addEventListener('click', loadManifest);
       els.reloadCurrentBtn.addEventListener('click', reloadCurrentSample);
       els.prevBtn.addEventListener('click', prevSample);
@@ -471,30 +541,18 @@
       els.submitBtn.addEventListener('click', submitResult);
       els.gasSubmitFrame.addEventListener('load', onIframeLoaded);
 
-      ensureHiddenReportEditor();
       syncReportDisplay();
       renderTypeLabels();
       updateSampleMeta();
       hydrateFromQuery();
-      runSelfTests();
 
       if (els.manifestPath.value.trim()) {
         loadManifest();
       }
     }
 
-    function ensureHiddenReportEditor() {
-      if (!document.getElementById('reportText')) {
-        const hidden = document.createElement('textarea');
-        hidden.id = 'reportText';
-        hidden.style.display = 'none';
-        document.body.appendChild(hidden);
-        els.reportText = hidden;
-      }
-    }
-
     function syncReportDisplay() {
-      els.reportDisplay.textContent = (els.reportText.value || '').trim() || 'No report provided';
+      els.reportDisplay.textContent = reportTextStore.trim() || 'No report provided';
     }
 
     function hydrateFromQuery() {
@@ -503,10 +561,7 @@
       const sampleId = q.get('sample_id');
       const samplePath = q.get('sample_path');
 
-      if (manifestPath) {
-        els.manifestPath.value = manifestPath;
-      }
-
+      if (manifestPath) els.manifestPath.value = manifestPath;
       state.pendingTarget = sampleId || samplePath || '';
     }
 
@@ -556,11 +611,11 @@
       const item = state.manifest[index];
       state.currentIndex = index;
 
-      els.samplePath.value = item.sample_path || '';
-      els.sampleId.value = item.sample_id || extractSampleId(item.sample_path || '');
-      els.reportText.value = item.report_text || '';
-      els.realImageUrl.value = normalizeGitHubImageUrl(item.real_image_url || '');
-      els.syntheticImageUrl.value = normalizeGitHubImageUrl(item.synthetic_image_url || '');
+      samplePathStore = item.sample_path || '';
+      sampleIdStore = item.sample_id || extractSampleId(item.sample_path || '');
+      reportTextStore = item.report_text || '';
+      realImageUrlStore = normalizeGitHubImageUrl(item.real_image_url || '');
+      syntheticImageUrlStore = normalizeGitHubImageUrl(item.synthetic_image_url || '');
 
       syncReportDisplay();
       bindImages();
@@ -571,34 +626,23 @@
     function reloadCurrentSample() {
       if (state.currentIndex >= 0) {
         loadSample(state.currentIndex);
-        return;
       }
-      bindImages();
     }
 
     function prevSample() {
-      if (!state.manifest.length) {
-        setMsg('Manifest is not loaded.', 'warn');
-        return;
-      }
+      if (!state.manifest.length) return setMsg('Manifest is not loaded.', 'warn');
       const nextIndex = state.currentIndex <= 0 ? state.manifest.length - 1 : state.currentIndex - 1;
       loadSample(nextIndex);
     }
 
     function nextSample() {
-      if (!state.manifest.length) {
-        setMsg('Manifest is not loaded.', 'warn');
-        return;
-      }
+      if (!state.manifest.length) return setMsg('Manifest is not loaded.', 'warn');
       const nextIndex = state.currentIndex >= state.manifest.length - 1 ? 0 : state.currentIndex + 1;
       loadSample(nextIndex);
     }
 
     function randomSample() {
-      if (!state.manifest.length) {
-        setMsg('Manifest is not loaded.', 'warn');
-        return;
-      }
+      if (!state.manifest.length) return setMsg('Manifest is not loaded.', 'warn');
       const index = Math.floor(Math.random() * state.manifest.length);
       loadSample(index);
     }
@@ -613,8 +657,7 @@
       params.set('manifest', els.manifestPath.value.trim() || './manifest.json');
       if (item.sample_id) params.set('sample_id', item.sample_id);
       if (item.sample_path) params.set('sample_path', item.sample_path);
-      const newUrl = window.location.pathname + '?' + params.toString();
-      history.replaceState({}, '', newUrl);
+      history.replaceState({}, '', window.location.pathname + '?' + params.toString());
     }
 
     function normalizeGitHubImageUrl(url) {
@@ -629,11 +672,8 @@
     }
 
     function bindImages() {
-      const real = normalizeGitHubImageUrl(els.realImageUrl.value.trim());
-      const synthetic = normalizeGitHubImageUrl(els.syntheticImageUrl.value.trim());
-
-      els.realImageUrl.value = real;
-      els.syntheticImageUrl.value = synthetic;
+      const real = normalizeGitHubImageUrl(realImageUrlStore.trim());
+      const synthetic = normalizeGitHubImageUrl(syntheticImageUrlStore.trim());
 
       state.pair.real = real;
       state.pair.synthetic = synthetic;
@@ -646,8 +686,7 @@
         renderImage('B', '');
         renderTypeLabels();
         clearBinaryChoice();
-        setMsg('Please provide both real image URL and synthetic image URL.', 'warn');
-        return;
+        return setMsg('Missing real or synthetic image URL in manifest.', 'warn');
       }
 
       if (Math.random() > 0.5) {
@@ -683,13 +722,17 @@
         wrap.innerHTML = '<div class="placeholder">No image loaded</div>';
         return;
       }
-      wrap.innerHTML = '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot + '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
+      wrap.innerHTML =
+        '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot +
+        '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
     }
 
     function handleImageError(slot, url) {
       const wrap = slot === 'A' ? els.wrapA : els.wrapB;
-      wrap.innerHTML = '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' + escapeHtml(url) + '</span></div>';
-      setMsg('One or more images could not be loaded. Check whether the URL is a direct image link.', 'warn');
+      wrap.innerHTML =
+        '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' +
+        escapeHtml(url) + '</span></div>';
+      setMsg('One or more images could not be loaded. Check the raw image URL in manifest.', 'warn');
     }
 
     function zoomImage(slot, delta) {
@@ -739,9 +782,9 @@
 
       return {
         reviewer_name: els.doctorName.value.trim(),
-        sample_id: els.sampleId.value.trim() || extractSampleId(els.samplePath.value.trim()),
-        sample_path: els.samplePath.value.trim(),
-        report_text: els.reportText.value.trim(),
+        sample_id: sampleIdStore || extractSampleId(samplePathStore),
+        sample_path: samplePathStore,
+        report_text: reportTextStore.trim(),
         real_image_url: state.pair.real,
         synthetic_image_url: state.pair.synthetic,
         image_A_url: state.images.A,
@@ -777,10 +820,7 @@
 
     function submitResult() {
       try {
-        if (!API_URL) {
-          throw new Error('API_URL is missing.');
-        }
-
+        if (!API_URL) throw new Error('API_URL is missing.');
         const result = buildResult();
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
         setMsg('Submitting...', 'warn');
@@ -818,20 +858,6 @@
       setMsg('Form submitted. Check Google Sheet for the new row.', 'ok');
     }
 
-    function loadDemo() {
-      state.manifest = [
-        {
-          sample_id: '49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979',
-          sample_path: 'p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979',
-          report_text: 'Lingular lobe pneumonia with possible right lower lobe pneumonia.',
-          real_image_url: 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg',
-          synthetic_image_url: 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.png'
-        }
-      ];
-      updateSampleMeta();
-      loadSample(0);
-    }
-
     function setMsg(text, type) {
       els.msg.textContent = text;
       els.msg.className = 'status ' + (type === 'ok' ? 'ok' : 'warn');
@@ -851,22 +877,6 @@
         .replace(/\\/g, '\\\\')
         .replace(/'/g, "\\'")
         .replace(/"/g, '\\"');
-    }
-
-    function runSelfTests() {
-      console.assert(normalizeGitHubImageUrl('') === '', 'empty URL should stay empty');
-      console.assert(
-        normalizeGitHubImageUrl('https://github.com/user/repo/blob/main/a.jpg') === 'https://raw.githubusercontent.com/user/repo/main/a.jpg',
-        'blob URL should convert to raw URL'
-      );
-      console.assert(
-        extractSampleId('a/b/c/test.png') === 'test',
-        'extractSampleId should strip extension and return filename stem'
-      );
-      console.assert(
-        escapeJs("a\\b'c\"d") === "a\\\\b\\'c\\\"d",
-        'escapeJs should escape backslash, single quote, and double quote'
-      );
     }
 
     window.zoomImage = zoomImage;
