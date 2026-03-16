@@ -402,6 +402,8 @@
   </main>
 
   <script>
+    const API_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+
     const state = {
       zoom: { A: 1, B: 1 },
       images: { A: '', B: '' },
@@ -441,10 +443,15 @@
     }
 
     function bindImages() {
-      const a = els.imageAUrl.value.trim();
-      const b = els.imageBUrl.value.trim();
+      const a = normalizeGitHubImageUrl(els.imageAUrl.value.trim());
+      const b = normalizeGitHubImageUrl(els.imageBUrl.value.trim());
+
+      els.imageAUrl.value = a;
+      els.imageBUrl.value = b;
+
       state.images.A = a;
       state.images.B = b;
+
       renderImage('A', a);
       renderImage('B', b);
 
@@ -455,6 +462,21 @@
       }
     }
 
+    function normalizeGitHubImageUrl(url) {
+      if (!url) return '';
+      if (url.includes('github.com') && url.includes('/blob/')) {
+        return url
+          .replace('https://github.com/', 'https://raw.githubusercontent.com/')
+          .replace('/blob/', '/');
+      }
+      if (url.includes('github.com') && url.includes('/raw/')) {
+        return url
+          .replace('https://github.com/', 'https://raw.githubusercontent.com/')
+          .replace('/raw/', '/');
+      }
+      return url;
+    }
+
     function renderImage(slot, url) {
       const wrap = slot === 'A' ? els.wrapA : els.wrapB;
       state.zoom[slot] = 1;
@@ -462,7 +484,13 @@
         wrap.innerHTML = '<div class="placeholder">No image loaded</div>';
         return;
       }
-      wrap.innerHTML = '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot + '" style="transform: scale(1);" />';
+      wrap.innerHTML = '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot + '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
+    }
+
+    function handleImageError(slot, url) {
+      const wrap = slot === 'A' ? els.wrapA : els.wrapB;
+      wrap.innerHTML = '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' + escapeHtml(url) + '</span></div>';
+      setMsg('One or more images could not be loaded. Check whether the URL is a direct image link.', 'warn');
     }
 
     function zoomImage(slot, delta) {
@@ -521,11 +549,31 @@
       }
     }
 
-    function submitResult() {
+    async function submitResult() {
       try {
+        if (!API_URL || API_URL.includes('YOUR_DEPLOYMENT_ID')) {
+          throw new Error('Please set your Apps Script Web App URL in API_URL first.');
+        }
+
         const result = buildResult();
         els.resultPreview.textContent = JSON.stringify(result, null, 2);
-        setMsg('This version currently focuses on the UI and interactions. Submission can be connected to CSV or Google Sheets next.', 'ok');
+        setMsg('Submitting...', 'warn');
+
+        const resp = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(result),
+        });
+
+        const data = await resp.json();
+
+        if (!data.ok) {
+          throw new Error(data.error || 'Submission failed.');
+        }
+
+        setMsg('Submitted successfully to Google Sheets.', 'ok');
       } catch (error) {
         setMsg(error.message, 'warn');
       }
@@ -534,8 +582,8 @@
     function loadDemo() {
       els.samplePath.value = 'p10/p10046166/s57379357/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg';
       els.reportText.value = 'Lingular lobe pneumonia with possible right lower lobe pneumonia.';
-      els.imageAUrl.value = 'https://github.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/raw/main/medical-review/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg';
-      els.imageBUrl.value = 'https://github.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/raw/main/medical-review/ddpo.png';
+      els.imageAUrl.value = 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/medical-review/49daca78-2477bc3f-91c2d8b7-8031ef6c-94f9f979.jpg';
+      els.imageBUrl.value = 'https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/medical-review/ddpo.png';
       syncReportDisplay();
       bindImages();
     }
@@ -552,6 +600,13 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    function escapeJs(s) {
+      return String(s)
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '\\"');
     }
   </script>
 </body>
