@@ -307,11 +307,60 @@
       font-weight: 700;
     }
 
+    .collapsible-block {
+      margin: 0;
+    }
+
+    .collapsible-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .collapsible-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .collapsible-summary h2 {
+      margin: 0 0 6px;
+    }
+
+    .summary-icon {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .collapsible-block[open] .summary-icon {
+      transform: rotate(180deg);
+      background: #f8fafc;
+    }
+
+    .collapsible-body {
+      margin-top: 18px;
+    }
+
     .sample-overview {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr 0.8fr;
       gap: 14px;
       margin-bottom: 18px;
+    }
+
+    .side-meta {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
 
     .meta-box {
@@ -340,7 +389,7 @@
     }
 
     .report-box {
-      margin-top: 18px;
+      margin-top: 0;
       margin-bottom: 20px;
       border: 1px solid var(--line);
       border-radius: 18px;
@@ -444,6 +493,10 @@
       font-size: 14px;
       line-height: 1.65;
       color: #374151;
+    }
+
+    .comment-field {
+      margin-top: 16px;
     }
 
     .rubric-card {
@@ -579,21 +632,6 @@
             </div>
           </div>
 
-          <div class="sample-overview">
-            <div class="meta-box">
-              <strong>Reviewer Name</strong>
-              <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
-            </div>
-            <div class="meta-box">
-              <strong>Current Index</strong>
-              <div id="sampleIndexLabel" class="meta-value">-</div>
-            </div>
-            <div class="meta-box">
-              <strong>Total Samples</strong>
-              <div id="sampleTotalLabel" class="meta-value">-</div>
-            </div>
-          </div>
-
           <div class="report-box">
             <div class="label">Report</div>
             <div id="reportDisplay" class="content"></div>
@@ -692,25 +730,55 @@
       <!-- RIGHT -->
       <aside class="stack sticky-side">
         <section class="card">
-          <h2>Manifest Loader</h2>
-          <div class="field">
-            <label>Manifest path</label>
-            <input type="text" id="manifestPath" value="./manifest.json" />
-          </div>
+          <details class="collapsible-block" open>
+            <summary class="collapsible-summary">
+              <div>
+                <h2>Manifest Loader</h2>
+                <div class="card-subtext">
+                  Load the manifest and switch samples when needed.
+                </div>
+              </div>
+              <span class="summary-icon" aria-hidden="true">▾</span>
+            </summary>
 
-          <div class="action-grid">
-            <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
-            <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
-          </div>
+            <div class="collapsible-body">
+              <div class="field">
+                <label>Manifest path</label>
+                <input type="text" id="manifestPath" value="./manifest.json" />
+              </div>
 
-          <div class="action-grid-3" style="margin-top:12px;">
-            <button class="btn" id="prevBtn" type="button">Previous</button>
-            <button class="btn" id="randomBtn" type="button">Random sample</button>
-            <button class="btn" id="nextBtn" type="button">Next</button>
-          </div>
+              <div class="action-grid">
+                <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
+                <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
+              </div>
 
-          <div class="helper-note" style="margin-top: 14px;">
-            The page reads the manifest file and automatically fills the report and image URLs for blind review.
+              <div class="action-grid-3" style="margin-top:12px;">
+                <button class="btn" id="prevBtn" type="button">Previous</button>
+                <button class="btn" id="randomBtn" type="button">Random sample</button>
+                <button class="btn" id="nextBtn" type="button">Next</button>
+              </div>
+
+              <div class="helper-note" style="margin-top: 14px;">
+                The page reads the manifest file and automatically fills the report and image URLs for blind review.
+              </div>
+            </div>
+          </details>
+
+          <div class="section-divider"></div>
+
+          <div class="side-meta">
+            <div class="meta-box">
+              <strong>Reviewer Name</strong>
+              <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
+            </div>
+            <div class="meta-box">
+              <strong>Current Index</strong>
+              <div id="sampleIndexLabel" class="meta-value">-</div>
+            </div>
+            <div class="meta-box">
+              <strong>Total Samples</strong>
+              <div id="sampleTotalLabel" class="meta-value">-</div>
+            </div>
           </div>
         </section>
 
@@ -753,17 +821,17 @@
             </div>
           </div>
 
-          <div class="field">
+          <div class="action-grid">
+            <button class="btn btn-primary" id="submitBtn" type="button">Submit</button>
+            <button class="btn" id="clearBtn" type="button">Clear current form</button>
+          </div>
+
+          <div class="field comment-field">
             <label>Comment</label>
             <textarea
               id="comment"
               placeholder="e.g. A better matches bibasilar atelectatic change, while B is less consistent with the report statement of no pleural effusion."
             ></textarea>
-          </div>
-
-          <div class="action-grid">
-            <button class="btn btn-primary" id="submitBtn" type="button">Submit</button>
-            <button class="btn" id="clearBtn" type="button">Clear current form</button>
           </div>
 
           <div id="msg" class="status warn" style="margin-top: 14px;">
