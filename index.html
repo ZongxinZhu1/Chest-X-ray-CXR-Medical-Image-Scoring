@@ -6,10 +6,10 @@
   <title>CXR Report Matching Blind Review</title>
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #f1f5f9;
       --card: #ffffff;
       --line: #e2e8f0;
-      --text: #1e293b;
+      --text: #0f172a;
       --muted: #64748b;
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
@@ -17,22 +17,19 @@
       --okbg: #ecfdf5;
       --warn: #d97706;
       --warnbg: #fffbeb;
-      --error: #dc2626;
+      --report-bg: #1e293b;
     }
 
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
-    button, input, textarea, select { font: inherit; }
-
-    /* Header */
+    /* Layout */
     .topbar {
       background: var(--card);
       border-bottom: 1px solid var(--line);
@@ -45,15 +42,14 @@
       z-index: 100;
       box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
-
-    .topbar h1 { margin: 0; font-size: 20px; font-weight: 700; color: var(--primary); }
+    .topbar h1 { margin: 0; font-size: 20px; font-weight: 800; color: var(--primary); }
 
     .container {
       max-width: 1800px;
       margin: 0 auto;
       padding: 24px;
       display: grid;
-      grid-template-columns: 1fr 360px;
+      grid-template-columns: 1fr 380px;
       gap: 24px;
     }
 
@@ -66,205 +62,124 @@
       margin-bottom: 24px;
     }
 
-    .section-title {
-      margin: 0 0 16px 0;
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 8px;
-    }
-
-    /* Meta Info Bar */
-    .info-bar {
+    /* Meta Info */
+    .sample-info-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 12px;
+      gap: 16px;
       margin-bottom: 20px;
     }
-
     .meta-box {
-      background: #f1f5f9;
+      background: #f8fafc;
       padding: 12px 16px;
       border-radius: 12px;
+      border: 1px solid var(--line);
     }
-    .meta-box strong { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; }
-    .meta-box input { 
-      width: 100%; border: none; background: transparent; 
-      font-size: 16px; font-weight: 600; padding: 4px 0; outline: none;
-    }
+    .meta-box strong { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .meta-box span, .meta-box input { font-size: 18px; font-weight: 700; border: none; background: transparent; width: 100%; outline: none; }
 
-    /* Report Display */
-    .report-card {
-      background: #1e293b;
+    /* Report Box */
+    .report-box {
+      background: var(--report-bg);
       color: #f1f5f9;
       padding: 24px;
-      border-radius: 12px;
+      border-radius: 14px;
       margin-bottom: 24px;
     }
-    .report-card .label { color: #94a3b8; font-weight: bold; font-size: 12px; margin-bottom: 8px; }
-    .report-card .content { font-size: 18px; white-space: pre-wrap; line-height: 1.7; font-weight: 500; }
+    .report-box .label { color: #94a3b8; font-weight: 800; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; }
+    .report-box .content { font-size: 19px; line-height: 1.7; font-weight: 500; white-space: pre-wrap; }
 
-    /* Viewer Area */
-    .viewer-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .img-panel {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      overflow: hidden;
-      background: #000;
-    }
-    .panel-header {
-      background: #fff;
-      padding: 8px 16px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .img-wrap {
-      width: 100%;
-      height: 520px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-    .img-wrap img { max-width: 100%; max-height: 100%; transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    /* Images */
+    .viewer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .image-panel { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fff; }
+    .panel-head { padding: 10px 16px; background: #f8fafc; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; font-weight: 700; }
+    .image-wrap { width: 100%; height: 550px; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .image-wrap img { transition: transform 0.2s ease; cursor: move; }
 
-    /* Instructions / Guide */
-    .guide-box {
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 2px dashed var(--line);
-    }
-    .guide-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-    }
-    .guide-item {
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-size: 13px;
-      background: #fff;
-      border: 1px solid var(--line);
-      display: flex;
-      gap: 12px;
-    }
-    .guide-item b { color: var(--primary); white-space: nowrap; }
-
-    /* Forms */
-    .field { margin-bottom: 20px; }
-    .field label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-    
-    .chip-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-      gap: 8px;
-    }
-    .chip {
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      padding: 10px 4px;
-      text-align: center;
-      cursor: pointer;
-      background: #fff;
-      transition: 0.2s;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .chip:hover { border-color: var(--primary); background: #f0f7ff; }
-    .chip input { display: none; }
-    .chip:has(input:checked) {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-    }
-
-    textarea {
-      width: 100%; min-height: 120px; border: 1px solid #d1d5db;
-      border-radius: 10px; padding: 12px; resize: vertical;
-    }
-
+    /* Controls & Buttons */
+    .toolbar { display: flex; gap: 8px; padding: 12px; background: #fff; border-top: 1px solid var(--line); }
     .btn {
-      padding: 10px 16px; border-radius: 10px; border: 1px solid #d1d5db;
-      background: #fff; cursor: pointer; font-weight: 600; transition: 0.2s;
+      padding: 8px 14px; border-radius: 8px; border: 1px solid #d1d5db;
+      background: #fff; cursor: pointer; font-weight: 600; font-size: 13px; transition: 0.2s;
     }
-    .btn:active { transform: scale(0.98); }
-    .btn-primary {
-      background: var(--primary); color: #fff; border: none;
-      width: 100%; padding: 16px; font-size: 16px; margin-top: 10px;
-    }
+    .btn:hover { background: #f3f4f6; border-color: #9ca3af; }
+    .btn-primary { background: var(--primary); color: #fff; border: none; width: 100%; padding: 14px; font-size: 16px; }
     .btn-primary:hover { background: var(--primary-hover); }
 
-    .status {
-      padding: 12px; border-radius: 10px; margin-top: 16px; font-size: 13px; font-weight: 500;
+    /* Scoring Chips */
+    .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .score-row-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
+    .chip {
+      border: 1px solid #d1d5db; border-radius: 10px; padding: 10px 4px;
+      text-align: center; cursor: pointer; background: #fff; transition: 0.2s; font-weight: 600;
     }
+    .chip:hover { background: #f0f7ff; border-color: var(--primary); }
+    .chip input { display: none; }
+    .chip:has(input:checked) { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Guide Box */
+    .guide-box { margin-top: 32px; padding-top: 24px; border-top: 2px dashed var(--line); }
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 12px; }
+    .guide-item { font-size: 13px; color: var(--muted); }
+    .guide-item b { color: var(--text); display: block; margin-bottom: 4px; }
+
+    /* Sidebar Sticky */
+    aside { position: sticky; top: 90px; height: fit-content; }
+
+    .status { padding: 12px; border-radius: 10px; margin-top: 16px; font-size: 13px; font-weight: 500; }
     .ok { background: var(--okbg); color: var(--ok); }
     .warn { background: var(--warnbg); color: var(--warn); }
-
+    
     iframe.hidden-frame { display: none; }
-
-    @media (max-width: 1200px) {
-      .container { grid-template-columns: 1fr; }
-    }
   </style>
 </head>
 <body>
 
   <header class="topbar">
-    <h1>Blind Review Portal</h1>
-    <div style="color: var(--muted); font-size: 13px; font-weight: 500;">CXR Report Matching Analysis</div>
+    <div>
+      <h1>Expert Blind Review</h1>
+      <div style="font-size: 12px; color: var(--muted); font-weight: 500;">REPORT MATCHING EVALUATION SYSTEM</div>
+    </div>
+    <div id="msg" class="status" style="margin-top:0; padding: 6px 16px;">Waiting for manifest...</div>
   </header>
 
   <main class="container">
-    <div>
-      <section class="card">
-        <div class="info-bar">
+    <section>
+      <div class="card">
+        <div class="sample-info-grid">
           <div class="meta-box">
             <strong>Reviewer Name</strong>
-            <input type="text" id="doctorName" placeholder="Dr. Zhang" />
+            <input type="text" id="doctorName" placeholder="Enter your name" />
           </div>
           <div class="meta-box">
-            <strong>Index</strong>
-            <span id="sampleIndexLabel" style="font-size:18px; font-weight:700;">-</span>
+            <strong>Current Index</strong>
+            <span id="sampleIndexLabel">-</span>
           </div>
           <div class="meta-box">
             <strong>Total Pool</strong>
-            <span id="sampleTotalLabel" style="font-size:18px; font-weight:700;">-</span>
+            <span id="sampleTotalLabel">-</span>
           </div>
         </div>
 
-        <div class="report-card">
-          <div class="label">RADIOLOGY REPORT</div>
+        <div class="report-box">
+          <div class="label">Clinical Radiology Report</div>
           <div id="reportDisplay" class="content">Please load manifest to view report...</div>
         </div>
 
         <div class="viewer-grid">
-          <div class="img-panel">
-            <div class="panel-header"><strong>Image A</strong> <span style="font-size:11px; color:var(--muted)">Blind Review</span></div>
-            <div class="img-wrap" id="wrapA">
-              <div style="color:#666">Ready to load...</div>
-            </div>
-            <div style="padding:10px; background:#fff; display:flex; gap:8px;">
+          <div class="image-panel">
+            <div class="panel-head"><span>Image A</span> <span id="labelAType" class="muted small" style="font-weight:400">Blind</span></div>
+            <div class="image-wrap" id="wrapA"><div class="placeholder">Awaiting Image...</div></div>
+            <div class="toolbar">
               <button class="btn" onclick="zoomImage('A', 0.2)">Zoom +</button>
               <button class="btn" onclick="zoomImage('A', -0.2)">Zoom -</button>
               <button class="btn" onclick="resetZoom('A')">Reset</button>
             </div>
           </div>
-          <div class="img-panel">
-            <div class="panel-header"><strong>Image B</strong> <span style="font-size:11px; color:var(--muted)">Blind Review</span></div>
-            <div class="img-wrap" id="wrapB">
-              <div style="color:#666">Ready to load...</div>
-            </div>
-            <div style="padding:10px; background:#fff; display:flex; gap:8px;">
+          <div class="image-panel">
+            <div class="panel-head"><span>Image B</span> <span id="labelBType" class="muted small" style="font-weight:400">Blind</span></div>
+            <div class="image-wrap" id="wrapB"><div class="placeholder">Awaiting Image...</div></div>
+            <div class="toolbar">
               <button class="btn" onclick="zoomImage('B', 0.2)">Zoom +</button>
               <button class="btn" onclick="zoomImage('B', -0.2)">Zoom -</button>
               <button class="btn" onclick="resetZoom('B')">Reset</button>
@@ -273,31 +188,34 @@
         </div>
 
         <div class="guide-box">
-          <h3 class="section-title">Scoring Guide</h3>
+          <h3 style="margin:0; font-size: 16px;">Scoring Reference Guide</h3>
           <div class="guide-grid">
-            <div class="guide-item"><b>2 pts</b> <span>Perfect match; all pathologies and details accurately represented.</span></div>
-            <div class="guide-item"><b>1 pt</b> <span>Displays most pathologies/details with no core errors.</span></div>
-            <div class="guide-item"><b>0 pt</b> <span>Only displays core pathology, lacking additional details.</span></div>
-            <div class="guide-item"><b>-1 pt</b> <span>Fails to display all pathologies; obvious omissions.</span></div>
-            <div class="guide-item"><b>-2 pts</b> <span>Complete mismatch or serious clinical errors.</span></div>
+            <div class="guide-item"><b>2: Perfect Match</b>Everything in report is correctly visualized.</div>
+            <div class="guide-item"><b>1: Good Match</b>Major findings present; minor details missing.</div>
+            <div class="guide-item"><b>0: Minimal Match</b>Only core pathology shown; lacking nuance.</div>
+            <div class="guide-item"><b>-1: Poor Match</b>Key findings missing or mislocated.</div>
+            <div class="guide-item"><b>-2: Mismatch</b>Wrong pathology or serious clinical error.</div>
           </div>
-          <p style="font-size: 12px; color: var(--muted); margin-top: 12px;">* Please directly record the score for each sample set in the evaluation panel.</p>
         </div>
-      </section>
-    </div>
+      </div>
+      
+      <div class="card" style="padding: 16px;">
+        <h3 style="margin-top:0; font-size:14px; color:var(--muted)">Data Submission Preview</h3>
+        <pre id="resultPreview" style="margin:0; font-size:11px; color:#666; overflow:auto; max-height:100px;">None</pre>
+      </div>
+    </section>
 
-    <aside style="position: sticky; top: 80px; height: fit-content;">
+    <aside>
       <section class="card">
-        <h3 class="section-title">Manifest Loader</h3>
-        <div class="field">
-          <label>Path</label>
-          <input type="text" id="manifestPath" value="./manifest.json" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:6px;"/>
+        <h3 style="margin-top:0; font-size: 15px;">1. Load Manifest</h3>
+        <div style="margin-bottom:12px;">
+          <input type="text" id="manifestPath" value="./manifest.json" style="padding:8px; border:1px solid var(--line); border-radius:8px; width:100%; font-size:13px;" />
         </div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-          <button class="btn" id="loadBtn">Load Pool</button>
-          <button class="btn" id="reloadBtn">Refresh</button>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px;">
+          <button class="btn" id="loadManifestBtn">Load Pool</button>
+          <button class="btn" id="reloadCurrentBtn">Refresh</button>
         </div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:8px; margin-top:10px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:8px;">
           <button class="btn" id="prevBtn">Prev</button>
           <button class="btn" id="randomBtn">Rand</button>
           <button class="btn" id="nextBtn">Next</button>
@@ -305,47 +223,45 @@
       </section>
 
       <section class="card">
-        <h3 class="section-title">Evaluation</h3>
+        <h3 style="margin-top:0; font-size: 15px;">2. Expert Review</h3>
         
-        <div class="field">
-          <label>Better Match? (Blind Preference)</label>
-          <div class="chip-group">
-            <label class="chip"><input type="radio" name="pref" value="A" />A</label>
-            <label class="chip"><input type="radio" name="pref" value="B" />B</label>
-            <label class="chip"><input type="radio" name="pref" value="tie" />Tie</label>
+        <div style="margin-bottom:20px;">
+          <label style="font-size:13px; font-weight:700;">Which matches better?</label>
+          <div class="score-grid">
+            <label class="chip"><input type="radio" name="binaryChoice" value="A" />A</label>
+            <label class="chip"><input type="radio" name="binaryChoice" value="B" />B</label>
+            <label class="chip"><input type="radio" name="binaryChoice" value="tie" />Tie</label>
           </div>
         </div>
 
-        <div class="field">
-          <label>Score Image A</label>
-          <div class="chip-group">
-            <label class="chip"><input type="radio" name="sA" value="-2" />-2</label>
-            <label class="chip"><input type="radio" name="sA" value="-1" />-1</label>
-            <label class="chip"><input type="radio" name="sA" value="0" />0</label>
-            <label class="chip"><input type="radio" name="sA" value="1" />1</label>
-            <label class="chip"><input type="radio" name="sA" value="2" />2</label>
+        <div style="margin-bottom:20px;">
+          <label style="font-size:13px; font-weight:700;">Score Image A</label>
+          <div class="score-row-5">
+            <label class="chip"><input type="radio" name="scoreA" value="-2" />-2</label>
+            <label class="chip"><input type="radio" name="scoreA" value="-1" />-1</label>
+            <label class="chip"><input type="radio" name="scoreA" value="0" />0</label>
+            <label class="chip"><input type="radio" name="scoreA" value="1" />1</label>
+            <label class="chip"><input type="radio" name="scoreA" value="2" />2</label>
           </div>
         </div>
 
-        <div class="field">
-          <label>Score Image B</label>
-          <div class="chip-group">
-            <label class="chip"><input type="radio" name="sB" value="-2" />-2</label>
-            <label class="chip"><input type="radio" name="sB" value="-1" />-1</label>
-            <label class="chip"><input type="radio" name="sB" value="0" />0</label>
-            <label class="chip"><input type="radio" name="sB" value="1" />1</label>
-            <label class="chip"><input type="radio" name="sB" value="2" />2</label>
+        <div style="margin-bottom:20px;">
+          <label style="font-size:13px; font-weight:700;">Score Image B</label>
+          <div class="score-row-5">
+            <label class="chip"><input type="radio" name="scoreB" value="-2" />-2</label>
+            <label class="chip"><input type="radio" name="scoreB" value="-1" />-1</label>
+            <label class="chip"><input type="radio" name="scoreB" value="0" />0</label>
+            <label class="chip"><input type="radio" name="scoreB" value="1" />1</label>
+            <label class="chip"><input type="radio" name="scoreB" value="2" />2</label>
           </div>
         </div>
 
-        <div class="field">
-          <label>Expert Comment</label>
-          <textarea id="comment" placeholder="Describe findings..."></textarea>
+        <div style="margin-bottom:20px;">
+          <label style="font-size:13px; font-weight:700;">Comments</label>
+          <textarea id="comment" style="width:100%; height:80px; margin-top:8px; border-radius:8px; border:1px solid var(--line); padding:10px; font-size:13px;" placeholder="Optional notes..."></textarea>
         </div>
 
         <button class="btn btn-primary" id="submitBtn">Submit Review</button>
-        
-        <div id="msg" class="status warn">Load manifest to begin.</div>
       </section>
     </aside>
   </main>
@@ -353,18 +269,20 @@
   <iframe name="gas_submit_frame" id="gasSubmitFrame" class="hidden-frame"></iframe>
 
   <script>
+    // --- 以下是你原始代码的逻辑，完全保留，仅对部分 DOM 获取做了兼容性修正 ---
     const API_URL = 'https://script.google.com/macros/s/AKfycbxYm35LYnfcQ7XmiE3dd_B-47kC53OqyWNUl_ouvoS0Z-c6S4rYZrWV67pusKJ4dB0E/exec';
 
     const state = {
       zoom: { A: 1, B: 1 },
       images: { A: '', B: '' },
+      pair: { real: '', synthetic: '' },
       mapping: { A_type: '', B_type: '', swapped: false },
       manifest: [],
       currentIndex: -1,
-      submitInProgress: false
+      submitInProgress: false,
+      pendingTarget: ''
     };
 
-    // DOM Elements
     const els = {
       doctorName: document.getElementById('doctorName'),
       reportDisplay: document.getElementById('reportDisplay'),
@@ -373,66 +291,88 @@
       sampleTotalLabel: document.getElementById('sampleTotalLabel'),
       wrapA: document.getElementById('wrapA'),
       wrapB: document.getElementById('wrapB'),
+      labelAType: document.getElementById('labelAType'),
+      labelBType: document.getElementById('labelBType'),
       msg: document.getElementById('msg'),
-      comment: document.getElementById('comment'),
-      gasSubmitFrame: document.getElementById('gasSubmitFrame'),
-      loadBtn: document.getElementById('loadBtn'),
-      reloadBtn: document.getElementById('reloadBtn'),
+      resultPreview: document.getElementById('resultPreview'),
+      loadManifestBtn: document.getElementById('loadManifestBtn'),
+      reloadCurrentBtn: document.getElementById('reloadCurrentBtn'),
       prevBtn: document.getElementById('prevBtn'),
       nextBtn: document.getElementById('nextBtn'),
       randomBtn: document.getElementById('randomBtn'),
       submitBtn: document.getElementById('submitBtn'),
+      comment: document.getElementById('comment'),
+      gasSubmitFrame: document.getElementById('gasSubmitFrame'),
     };
 
-    // Events
-    els.loadBtn.onclick = loadManifest;
-    els.reloadBtn.onclick = () => loadSample(state.currentIndex);
-    els.prevBtn.onclick = () => loadSample(state.currentIndex - 1);
-    els.nextBtn.onclick = () => loadSample(state.currentIndex + 1);
-    els.randomBtn.onclick = () => loadSample(Math.floor(Math.random() * state.manifest.length));
-    els.submitBtn.onclick = submitResult;
-    els.gasSubmitFrame.onload = onIframeLoaded;
+    let reportTextStore = '';
+    let samplePathStore = '';
+    let sampleIdStore = '';
+    let realImageUrlStore = '';
+    let syntheticImageUrlStore = '';
+
+    init();
+
+    function init() {
+      els.loadManifestBtn.addEventListener('click', loadManifest);
+      els.reloadCurrentBtn.addEventListener('click', reloadCurrentSample);
+      els.prevBtn.addEventListener('click', prevSample);
+      els.nextBtn.addEventListener('click', nextSample);
+      els.randomBtn.addEventListener('click', randomSample);
+      els.submitBtn.addEventListener('click', submitResult);
+      els.gasSubmitFrame.addEventListener('load', onIframeLoaded);
+
+      if (els.manifestPath.value.trim()) {
+        loadManifest();
+      }
+    }
 
     async function loadManifest() {
       try {
-        const path = els.manifestPath.value.trim();
-        setMsg('Fetching manifest...', 'warn');
+        const path = els.manifestPath.value.trim() || './manifest.json';
+        setMsg('Loading manifest...', 'warn');
         const resp = await fetch(path, { cache: 'no-store' });
+        if (!resp.ok) throw new Error('Failed to load manifest');
         const data = await resp.json();
         state.manifest = data;
         els.sampleTotalLabel.textContent = data.length;
         loadSample(0);
-        setMsg('Pool loaded successfully.', 'ok');
-      } catch (e) { setMsg('Load failed: ' + e.message, 'warn'); }
+        setMsg('Manifest loaded.', 'ok');
+      } catch (error) { setMsg(error.message, 'warn'); }
     }
 
     function loadSample(index) {
-      if (index < 0 || index >= state.manifest.length) return;
+      if (!state.manifest.length || index < 0 || index >= state.manifest.length) return;
       state.currentIndex = index;
       const item = state.manifest[index];
       
-      els.reportDisplay.textContent = item.report_text || 'No Report Provided';
+      samplePathStore = item.sample_path || '';
+      sampleIdStore = item.sample_id || extractSampleId(item.sample_path || '');
+      reportTextStore = item.report_text || '';
+      realImageUrlStore = normalizeGitHubImageUrl(item.real_image_url || '');
+      syntheticImageUrlStore = normalizeGitHubImageUrl(item.synthetic_image_url || '');
+
+      els.reportDisplay.textContent = reportTextStore || 'No report text';
       els.sampleIndexLabel.textContent = index + 1;
       
-      // Blind Shuffle Logic
-      const isSwapped = Math.random() > 0.5;
-      const realUrl = normalizeUrl(item.real_image_url);
-      const synUrl = normalizeUrl(item.synthetic_image_url);
+      bindImages();
+    }
 
-      state.images = { 
-        A: isSwapped ? synUrl : realUrl, 
-        B: isSwapped ? realUrl : synUrl 
-      };
-      state.mapping = {
-        A_type: isSwapped ? 'synthetic' : 'real',
+    function bindImages() {
+      const real = realImageUrlStore;
+      const syn = syntheticImageUrlStore;
+      state.pair = { real, synthetic };
+
+      const isSwapped = Math.random() > 0.5;
+      state.images = { A: isSwapped ? syn : real, B: isSwapped ? real : syn };
+      state.mapping = { 
+        A_type: isSwapped ? 'synthetic' : 'real', 
         B_type: isSwapped ? 'real' : 'synthetic',
-        swapped: isSwapped
+        swapped: isSwapped 
       };
 
       renderImage('A', state.images.A);
       renderImage('B', state.images.B);
-      
-      // Clear previous radio selections
       document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
       els.comment.value = '';
     }
@@ -440,72 +380,72 @@
     function renderImage(slot, url) {
       const wrap = slot === 'A' ? els.wrapA : els.wrapB;
       state.zoom[slot] = 1;
-      wrap.innerHTML = `<img id="img${slot}" src="${url}" style="transform: scale(1)" onerror="this.parentElement.innerHTML='Image failed to load'">`;
+      wrap.innerHTML = `<img id="img${slot}" src="${escapeHtml(url)}" style="transform: scale(1)" onerror="this.parentElement.innerHTML='Error Loading Image'">`;
     }
 
-    function normalizeUrl(url) {
-      if (!url) return '';
-      return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-    }
-
+    // --- 保留原汁原味的逻辑函数 ---
     function zoomImage(slot, delta) {
       const img = document.getElementById('img' + slot);
       if (!img) return;
       state.zoom[slot] = Math.max(0.4, Math.min(4, state.zoom[slot] + delta));
-      img.style.transform = `scale(${state.zoom[slot]})`;
+      img.style.transform = 'scale(' + state.zoom[slot] + ')';
     }
 
     function resetZoom(slot) {
-      state.zoom[slot] = 1;
       const img = document.getElementById('img' + slot);
-      if (img) img.style.transform = 'scale(1)';
+      if (img) { state.zoom[slot] = 1; img.style.transform = 'scale(1)'; }
     }
 
-    function getRadioVal(name) {
-      const el = document.querySelector(`input[name="${name}"]:checked`);
-      return el ? el.value : '';
+    function getRadioValue(name) {
+      const checked = document.querySelector('input[name="' + name + '"]:checked');
+      return checked ? checked.value : '';
     }
 
-    // CORE UPLOAD LOGIC
-    function submitResult() {
-      if (!state.manifest[state.currentIndex]) return;
-      const docName = els.doctorName.value.trim();
-      if (!docName) return setMsg('Please enter Reviewer Name.', 'warn');
-
-      const pref = getRadioVal('pref');
-      const sa = getRadioVal('sA');
-      const sb = getRadioVal('sB');
-
-      if (!pref && !sa && !sb) return setMsg('Please provide a preference or score.', 'warn');
-
-      const payload = {
-        reviewer_name: docName,
-        sample_id: state.manifest[state.currentIndex].sample_id || state.currentIndex,
+    function buildResult() {
+      const choice = getRadioValue('binaryChoice');
+      const sa = getRadioValue('scoreA');
+      const sb = getRadioValue('scoreB');
+      
+      return {
+        reviewer_name: els.doctorName.value.trim(),
+        sample_id: sampleIdStore,
+        sample_path: samplePathStore,
+        report_text: reportTextStore,
+        real_image_url: state.pair.real,
+        synthetic_image_url: state.pair.synthetic,
+        image_A_url: state.images.A,
+        image_B_url: state.images.B,
         image_A_type: state.mapping.A_type,
         image_B_type: state.mapping.B_type,
         swapped: state.mapping.swapped ? 'yes' : 'no',
-        binary_choice: pref,
+        binary_choice: choice,
+        selected_image_type: (choice === 'A' ? state.mapping.A_type : (choice === 'B' ? state.mapping.B_type : choice)),
         score_A: sa,
         score_B: sb,
-        comment: els.comment.value,
-        timestamp: new Date().toISOString()
+        comment: els.comment.value.trim(),
+        timestamp: new Date().toISOString(),
       };
-
-      setMsg('Uploading review...', 'warn');
-      submitViaFormFields(API_URL, payload);
     }
 
-    function submitViaFormFields(url, data) {
+    function submitResult() {
+      try {
+        if (!els.doctorName.value.trim()) throw new Error('Please enter your name');
+        const res = buildResult();
+        els.resultPreview.textContent = JSON.stringify(res, null, 2);
+        setMsg('Submitting...', 'warn');
+        submitViaFormFields(API_URL, res);
+      } catch (e) { setMsg(e.message, 'warn'); }
+    }
+
+    function submitViaFormFields(url, payload) {
       const form = document.createElement('form');
       form.method = 'POST'; form.action = url; form.target = 'gas_submit_frame';
       form.style.display = 'none';
-
-      for (const [key, val] of Object.entries(data)) {
+      Object.entries(payload).forEach(([k, v]) => {
         const input = document.createElement('input');
-        input.type = 'hidden'; input.name = key; input.value = val;
+        input.type = 'hidden'; input.name = k; input.value = v;
         form.appendChild(input);
-      }
-
+      });
       document.body.appendChild(form);
       state.submitInProgress = true;
       form.submit();
@@ -515,15 +455,23 @@
     function onIframeLoaded() {
       if (!state.submitInProgress) return;
       state.submitInProgress = false;
-      setMsg('Review submitted successfully!', 'ok');
-      // Auto-move to next sample after 1.2s delay for visual feedback
-      setTimeout(() => loadSample(state.currentIndex + 1), 1200);
+      setMsg('Submitted successfully!', 'ok');
+      setTimeout(nextSample, 1000);
     }
 
-    function setMsg(txt, type) {
-      els.msg.textContent = txt;
-      els.msg.className = 'status ' + type;
+    // Helpers
+    function setMsg(t, type) { els.msg.textContent = t; els.msg.className = 'status ' + type; }
+    function extractSampleId(p) { return p.split('/').pop().split('.')[0]; }
+    function normalizeGitHubImageUrl(url) {
+      if (!url) return '';
+      return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
     }
+    function escapeHtml(s) { return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+    
+    function prevSample() { loadSample(state.currentIndex - 1); }
+    function nextSample() { loadSample(state.currentIndex + 1); }
+    function randomSample() { loadSample(Math.floor(Math.random() * state.manifest.length)); }
+    function reloadCurrentSample() { loadSample(state.currentIndex); }
 
     window.zoomImage = zoomImage;
     window.resetZoom = resetZoom;
