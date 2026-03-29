@@ -3,1176 +3,573 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CXR Report Matching Blind Review</title>
+  <title>CXR Blind Review - Professional View</title>
   <style>
     :root {
-      --bg: #f3f4f6;
+      --bg: #f0f2f5;
       --card: #ffffff;
-      --card-soft: #f8fafc;
-      --line: #e5e7eb;
-      --text: #111827;
-      --muted: #6b7280;
-      --primary: #111827;
-      --primary-soft: #1f2937;
-      --ok: #065f46;
-      --okbg: #ecfdf5;
-      --warn: #92400e;
-      --warnbg: #fffbeb;
-      --accent: #2563eb;
-      --accent-soft: #eff6ff;
-      --shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-      --radius: 18px;
+      --text: #1a1a1b;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --line: #e2e8f0;
+      --accent-bg: #f8fafc;
+      --radius: 12px;
     }
 
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; }
+    body, html { 
+      margin: 0; padding: 0; height: 100vh; overflow: hidden; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #f8fafc 0%, #f3f4f6 100%);
-      color: var(--text);
-    }
-
-    body {
-      min-height: 100vh;
-    }
-
-    button, input, textarea, select {
-      font: inherit;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-      padding: 14px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .topbar-left {
-      min-width: 0;
-    }
-
-    .topbar h1 {
-      margin: 0;
-      font-size: 22px;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
-
-    .topbar p {
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .topbar-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid #dbeafe;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .page {
-      max-width: 1840px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.55fr) 390px;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .stack {
-      display: grid;
-      gap: 16px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid rgba(229, 231, 235, 0.9);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .compact-card {
-      padding: 16px;
-    }
-
-    .card h2,
-    .card h3 {
-      margin: 0 0 8px;
-      letter-spacing: -0.01em;
-    }
-
-    .card-subtext {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .field {
-      margin-bottom: 14px;
-    }
-
-    .field:last-child {
-      margin-bottom: 0;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    input[type="text"],
-    textarea,
-    select {
-      width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 14px;
-      padding: 11px 13px;
-      background: white;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    input[type="text"]:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #93c5fd;
-      box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.18);
-    }
-
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-      line-height: 1.55;
-    }
-
-    .btn {
-      border: 1px solid #d1d5db;
-      background: white;
-      border-radius: 14px;
-      padding: 11px 14px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .btn:hover {
-      background: #f9fafb;
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
-    }
-
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-soft);
-      border-color: var(--primary-soft);
-    }
-
-    .btn-strong {
-      min-height: 48px;
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .action-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .action-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .toolbar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .status {
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 13px;
-      line-height: 1.5;
-      border: 1px solid transparent;
-    }
-
-    .ok {
-      background: var(--okbg);
-      color: var(--ok);
-      border-color: #bbf7d0;
-    }
-
-    .warn {
-      background: var(--warnbg);
-      color: var(--warn);
-      border-color: #fde68a;
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    .small {
-      font-size: 12px;
-    }
-
-    .chip {
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 11px 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: white;
-      cursor: pointer;
-      min-height: 46px;
-      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
-      user-select: none;
-    }
-
-    .chip:hover {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
-    }
-
-    .chip:active {
-      transform: translateY(1px);
-    }
-
-    .chip input {
-      margin: 0;
-    }
-
-    .score-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      width: 100%;
-    }
-
-    .score-grid.five-col {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
-
-    .score-chip {
-      justify-content: center;
-      width: 100%;
-      font-weight: 700;
-    }
-
-    .main-top-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.75fr;
-      gap: 14px;
-      align-items: stretch;
-    }
-
-    .report-box {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-      padding: 16px 18px;
-      min-height: 148px;
+    /* 全屏布局 */
+    .app-container {
       display: flex;
       flex-direction: column;
+      height: 100vh;
     }
 
-    .report-box .label {
+    /* 顶部精简导航 */
+    .topbar {
+      height: 50px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      justify-content: space-between;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .topbar h1 { font-size: 16px; margin: 0; color: var(--text); }
+    .topbar-meta { display: flex; gap: 20px; align-items: center; font-size: 13px; }
+    .status-badge { background: #dbeafe; color: #2563eb; padding: 2px 10px; border-radius: 20px; font-weight: 700; }
+
+    /* 配置区：默认折叠，不占空间 */
+    details.config-panel {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
       font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    summary { padding: 8px 20px; cursor: pointer; color: var(--muted); font-weight: 600; outline: none; }
+    .config-content { padding: 10px 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+
+    /* 主体区 */
+    .main-content {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
     }
 
-    .report-box .content {
-      font-size: 18px;
-      line-height: 1.65;
-      font-weight: 600;
-      color: #111827;
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow: auto;
-      max-height: 210px;
-      padding-right: 4px;
-    }
-
-    .meta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      height: 100%;
-    }
-
-    .meta-box {
-      background: var(--card-soft);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .meta-box strong {
-      display: block;
-      font-size: 12px;
-      margin-bottom: 8px;
-      color: #374151;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    .meta-value {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-
-    .reviewer-box {
-      grid-column: 1 / -1;
+    /* 左侧阅片：禁止页面滚动，图片自带滚动 */
+    .viewer-area {
+      flex: 1;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      overflow: hidden;
+      background: #f8fafc;
     }
 
     .viewer-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 15px;
+      flex: 1;
+      min-height: 0;
     }
 
-    .image-panel {
+    .image-card {
+      background: #fff;
+      border-radius: var(--radius);
       border: 1px solid var(--line);
-      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
-      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
-    .panel-head {
+    .image-header {
+      padding: 8px 15px;
+      background: #fafafa;
+      border-bottom: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--line);
-      background: #fafafa;
+      font-weight: 700;
+      font-size: 13px;
     }
 
-    .panel-head strong {
-      font-size: 16px;
-    }
-
-    .panel-body {
-      padding: 12px;
-    }
-
-    .image-wrap {
-      width: 100%;
-      height: calc(100vh - 360px);
-      min-height: 430px;
-      max-height: 720px;
-      border-radius: 14px;
+    .image-container {
+      flex: 1;
       background: #000;
-      overflow: auto;
+      position: relative;
+      overflow: auto; /* 仅图片溢出时滚动 */
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .image-wrap img {
+    .image-container img {
       max-width: none;
       transform-origin: center center;
       transition: transform 0.15s ease;
-      display: block;
     }
 
-    .placeholder {
-      color: #9ca3af;
-      text-align: center;
-      font-size: 14px;
-      line-height: 1.7;
-      padding: 24px;
+    .zoom-ctrl {
+      padding: 6px;
+      background: #eee;
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+    }
+    .zoom-ctrl button {
+      padding: 2px 8px;
+      cursor: pointer;
+      font-size: 12px;
     }
 
-    .sticky-side {
-      position: sticky;
-      top: 78px;
-      max-height: calc(100vh - 94px);
-      overflow: auto;
-      padding-right: 2px;
-    }
-
-    .section-divider {
-      height: 1px;
-      background: var(--line);
-      margin: 14px 0;
-    }
-
-    .helper-note {
-      border-radius: 14px;
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      padding: 12px 14px;
-      font-size: 13px;
-      line-height: 1.55;
-      color: #374151;
-    }
-
-    .submit-area {
-      display: grid;
-      gap: 10px;
-      margin-top: 4px;
-      margin-bottom: 14px;
-    }
-
-    .rubric-box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      overflow: hidden;
+    /* 右侧侧边栏：评分与提交 */
+    .sidebar {
+      width: 380px;
       background: #fff;
-      margin-top: 10px;
+      border-left: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
     }
 
-    .rubric-row {
-      display: grid;
-      grid-template-columns: 64px 1fr;
+    .sidebar-section {
+      padding: 18px;
       border-bottom: 1px solid var(--line);
     }
 
-    .rubric-row:last-child {
-      border-bottom: none;
-    }
-
-    .rubric-score {
-      background: #f8fafc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
       font-weight: 800;
-      font-size: 16px;
-      padding: 12px 8px;
+      letter-spacing: 0.05em;
     }
 
-    .rubric-desc {
-      padding: 12px 12px;
-      font-size: 12.5px;
-      line-height: 1.55;
-      color: #374151;
+    .report-content {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 500;
+      border-left: 4px solid var(--primary);
+      max-height: 150px;
+      overflow-y: auto;
     }
 
-    .rubric-footer {
-      margin-top: 10px;
-      padding: 12px 13px;
-      border-radius: 14px;
-      background: var(--accent-soft);
-      border: 1px solid #bfdbfe;
-      color: #1d4ed8;
-      font-size: 13px;
-      line-height: 1.55;
+    /* 打分样式 */
+    .control-group { margin-bottom: 16px; }
+    .control-label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 8px; color: #334155; }
+
+    .btn-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .score-group { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+
+    .chip {
+      border: 1px solid var(--line);
+      padding: 10px 4px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      background: #fff;
+    }
+    .chip:hover { background: #f8fafc; }
+    .chip input { display: none; }
+    .chip:has(input:checked) {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
+
+    /* 提交区：重点优化，放在评分后 */
+    .submit-zone {
+      padding: 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
       font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 15px;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--primary-hover); }
+
+    textarea {
+      width: 100%;
+      height: 70px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      resize: none;
+      font-size: 13px;
+      margin-top: 5px;
     }
 
-    iframe.hidden-frame {
-      display: none;
-      width: 0;
-      height: 0;
-      border: 0;
-    }
-
-    @media (max-width: 1450px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sticky-side {
-        position: static;
-        max-height: none;
-        overflow: visible;
-      }
-
-      .image-wrap {
-        height: 520px;
-        max-height: none;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .main-top-grid,
-      .viewer-grid,
-      .action-grid,
-      .action-grid-3,
-      .score-grid,
-      .score-grid.five-col,
-      .meta-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .image-wrap {
-        height: 420px;
-        min-height: 420px;
-      }
-
-      .report-box .content {
-        max-height: 240px;
-        font-size: 17px;
-      }
-    }
+    .placeholder { color: #94a3b8; font-size: 13px; text-align: center; padding: 20px; }
+    .hidden-frame { display: none; }
+    #msg { font-size: 12px; margin-top: 8px; text-align: center; font-weight: 500; }
+    .ok { color: #059669; }
+    .warn { color: #dc2626; }
   </style>
 </head>
 <body>
+
+<div class="app-container">
   <header class="topbar">
-    <div class="topbar-left">
-      <h1>CXR Report Matching Blind Review</h1>
-      <p>Read the report first, then compare blinded Image A and Image B. Real and synthetic images are randomized into A/B.</p>
+    <h1>CXR Blind Review Portal</h1>
+    <div class="topbar-meta">
+      <div>Reviewer: <input type="text" id="doctorName" placeholder="Dr. Name" style="border:none; border-bottom:1px solid #ccc; outline:none; font-weight:bold; width:100px; padding:2px;"></div>
+      <div>Progress: <span id="sampleIndexLabel" class="status-badge">-</span> / <span id="sampleTotalLabel">-</span></div>
     </div>
-    <div class="topbar-badge">CXR Only</div>
   </header>
 
-  <main class="page">
-    <div class="layout">
-      <!-- LEFT -->
-      <section class="stack">
-        <section class="card compact-card">
-          <div class="main-top-grid">
-            <div class="report-box">
-              <div class="label">Report</div>
-              <div id="reportDisplay" class="content"></div>
-            </div>
-
-            <div class="meta-grid">
-              <div class="meta-box reviewer-box">
-                <strong>Reviewer Name</strong>
-                <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
-              </div>
-              <div class="meta-box">
-                <strong>Current Index</strong>
-                <div id="sampleIndexLabel" class="meta-value">-</div>
-              </div>
-              <div class="meta-box">
-                <strong>Total Samples</strong>
-                <div id="sampleTotalLabel" class="meta-value">-</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="card compact-card">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px;">
-            <div>
-              <h2 style="margin-bottom:4px;">Image Comparison</h2>
-              <div class="card-subtext">Use zoom controls for detailed inspection.</div>
-            </div>
-          </div>
-
-          <div class="viewer-grid">
-            <div class="image-panel">
-              <div class="panel-head">
-                <strong>Image A</strong>
-                <span class="muted small" id="labelAType">Blind review</span>
-              </div>
-              <div class="panel-body">
-                <div class="image-wrap" id="wrapA">
-                  <div class="placeholder">Please load image A</div>
-                </div>
-                <div class="toolbar">
-                  <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
-                  <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
-                  <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="image-panel">
-              <div class="panel-head">
-                <strong>Image B</strong>
-                <span class="muted small" id="labelBType">Blind review</span>
-              </div>
-              <div class="panel-body">
-                <div class="image-wrap" id="wrapB">
-                  <div class="placeholder">Please load image B</div>
-                </div>
-                <div class="toolbar">
-                  <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
-                  <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
-                  <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
-
-      <!-- RIGHT -->
-      <aside class="sticky-side">
-        <div class="stack">
-          <section class="card">
-            <h2>Manifest Loader</h2>
-            <div class="field">
-              <label>Manifest path</label>
-              <input type="text" id="manifestPath" value="./manifest.json" />
-            </div>
-
-            <div class="action-grid">
-              <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
-              <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
-            </div>
-
-            <div class="action-grid-3" style="margin-top:10px;">
-              <button class="btn" id="prevBtn" type="button">Previous</button>
-              <button class="btn" id="randomBtn" type="button">Random sample</button>
-              <button class="btn" id="nextBtn" type="button">Next</button>
-            </div>
-
-            <div class="helper-note" style="margin-top: 12px;">
-              The page reads the manifest and fills report and image URLs automatically.
-            </div>
-          </section>
-
-          <section class="card">
-            <h2>Scoring Panel</h2>
-            <div class="status ok" style="margin-bottom: 14px;">
-              Binary preference and separate scoring are both supported. You may fill in either one, or both.
-            </div>
-
-            <div class="field">
-              <label>Which image matches the report better? (optional)</label>
-              <div class="score-grid">
-                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="A" /> Image A</label>
-                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="B" /> Image B</label>
-                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> Tie</label>
-              </div>
-            </div>
-
-            <div class="section-divider"></div>
-
-            <div class="field">
-              <label>Image A score (-2 to 2, optional)</label>
-              <div class="score-grid five-col">
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="0" /> 0</label>
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="1" /> 1</label>
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="2" /> 2</label>
-              </div>
-            </div>
-
-            <div class="field">
-              <label>Image B score (-2 to 2, optional)</label>
-              <div class="score-grid five-col">
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="0" /> 0</label>
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="1" /> 1</label>
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="2" /> 2</label>
-              </div>
-            </div>
-
-            <div class="submit-area">
-              <button class="btn btn-primary btn-strong" id="submitBtn" type="button">Submit</button>
-              <button class="btn" id="clearBtn" type="button">Clear current form</button>
-            </div>
-
-            <div class="field">
-              <label>Comment</label>
-              <textarea
-                id="comment"
-                placeholder="Optional notes for this sample..."
-              ></textarea>
-            </div>
-
-            <div id="msg" class="status warn">
-              Load the manifest first. Binary preference and scoring are optional, but at least one action is required.
-            </div>
-
-            <div class="section-divider"></div>
-
-            <h3 style="margin-bottom:8px;">Scoring Guide</h3>
-            <div class="rubric-box">
-              <div class="rubric-row">
-                <div class="rubric-score">2</div>
-                <div class="rubric-desc">The synthetic image is a perfect match for the text prompt, with all pathologies and details accurately represented.</div>
-              </div>
-              <div class="rubric-row">
-                <div class="rubric-score">1</div>
-                <div class="rubric-desc">The synthetic image displays most of the pathologies/details mentioned in the text prompt, with no core errors.</div>
-              </div>
-              <div class="rubric-row">
-                <div class="rubric-score">0</div>
-                <div class="rubric-desc">The synthetic image only displays the core pathology of the text prompt, without all details reflected.</div>
-              </div>
-              <div class="rubric-row">
-                <div class="rubric-score">-1</div>
-                <div class="rubric-desc">The synthetic image fails to display all pathologies mentioned in the text prompt, with obvious omissions.</div>
-              </div>
-              <div class="rubric-row">
-                <div class="rubric-score">-2</div>
-                <div class="rubric-desc">The synthetic image is completely mismatched with the text prompt, with no corresponding pathologies or serious errors.</div>
-              </div>
-            </div>
-
-            <div class="rubric-footer">
-              Please directly record the score for each sample set.
-            </div>
-          </section>
-        </div>
-      </aside>
+  <details class="config-panel">
+    <summary>⚙️ Manifest Loader & Navigation</summary>
+    <div class="config-content">
+      <div style="display:flex; gap:10px;">
+        <input type="text" id="manifestPath" value="./manifest.json" style="flex:1; padding:8px; border:1px solid #ddd; border-radius:4px;">
+        <button id="loadManifestBtn" style="padding:0 15px;">Load</button>
+        <button id="reloadCurrentBtn" style="padding:0 15px;">Reload</button>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:8px;">
+        <button id="prevBtn">← Previous</button>
+        <button id="randomBtn">Random</button>
+        <button id="nextBtn">Next →</button>
+      </div>
     </div>
-  </main>
+  </details>
 
-  <iframe name="gas_submit_frame" id="gasSubmitFrame" class="hidden-frame"></iframe>
+  <div class="main-content">
+    <section class="viewer-area">
+      <div class="viewer-grid">
+        <div class="image-card">
+          <div class="image-header">IMAGE A <span>[BLINDED]</span></div>
+          <div class="image-container" id="wrapA">
+            <div class="placeholder">Waiting for manifest...</div>
+          </div>
+          <div class="zoom-ctrl">
+            <button onclick="zoomImage('A', 0.2)">Zoom In</button>
+            <button onclick="zoomImage('A', -0.2)">Zoom Out</button>
+            <button onclick="resetZoom('A')">Reset</button>
+          </div>
+        </div>
 
-  <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxYm35LYnfcQ7XmiE3dd_B-47kC53OqyWNUl_ouvoS0Z-c6S4rYZrWV67pusKJ4dB0E/exec';
+        <div class="image-card">
+          <div class="image-header">IMAGE B <span>[BLINDED]</span></div>
+          <div class="image-container" id="wrapB">
+            <div class="placeholder">Waiting for manifest...</div>
+          </div>
+          <div class="zoom-ctrl">
+            <button onclick="zoomImage('B', 0.2)">Zoom In</button>
+            <button onclick="zoomImage('B', -0.2)">Zoom Out</button>
+            <button onclick="resetZoom('B')">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    const state = {
-      zoom: { A: 1, B: 1 },
-      images: { A: '', B: '' },
-      pair: { real: '', synthetic: '' },
-      mapping: { A_type: '', B_type: '', swapped: false },
-      manifest: [],
-      currentIndex: -1,
-      submitInProgress: false,
-      pendingTarget: ''
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="section-title">Reference Report</div>
+        <div id="reportDisplay" class="report-content">No sample loaded.</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-title">Evaluation</div>
+        
+        <div class="control-group">
+          <label class="control-label">Better Matching Image?</label>
+          <div class="btn-group">
+            <label class="chip"><input type="radio" name="binaryChoice" value="A">Image A</label>
+            <label class="chip"><input type="radio" name="binaryChoice" value="B">Image B</label>
+            <label class="chip"><input type="radio" name="binaryChoice" value="tie">Tie</label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Score for Image A (-2 to 2)</label>
+          <div class="score-group">
+            <label class="chip"><input type="radio" name="scoreA" value="-2">-2</label>
+            <label class="chip"><input type="radio" name="scoreA" value="-1">-1</label>
+            <label class="chip"><input type="radio" name="scoreA" value="0">0</label>
+            <label class="chip"><input type="radio" name="scoreA" value="1">1</label>
+            <label class="chip"><input type="radio" name="scoreA" value="2">2</label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Score for Image B (-2 to 2)</label>
+          <div class="score-group">
+            <label class="chip"><input type="radio" name="scoreB" value="-2">-2</label>
+            <label class="chip"><input type="radio" name="scoreB" value="-1">-1</label>
+            <label class="chip"><input type="radio" name="scoreB" value="0">0</label>
+            <label class="chip"><input type="radio" name="scoreB" value="1">1</label>
+            <label class="chip"><input type="radio" name="scoreB" value="2">2</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-zone">
+        <button class="btn-submit" id="submitBtn">Submit & Next Sample</button>
+        <div class="control-group">
+          <label class="control-label">Notes (Optional)</label>
+          <textarea id="comment" placeholder="Optional comments..."></textarea>
+        </div>
+        <div id="msg">Status: Ready</div>
+      </div>
+
+      <div class="sidebar-section" style="background:#f1f5f9; border:none; margin:15px; border-radius:8px;">
+        <div class="section-title" style="margin-bottom:5px;">Rubric</div>
+        <div style="font-size:11px; color:#475569; line-height:1.4">
+          <b>2</b>: Perfect match, all details accurate.<br>
+          <b>0</b>: Core pathology only, lacks details.<br>
+          <b>-2</b>: Complete mismatch / Serious error.
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<iframe name="gas_submit_frame" id="gasSubmitFrame" class="hidden-frame"></iframe>
+
+<script>
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxYm35LYnfcQ7XmiE3dd_B-47kC53OqyWNUl_ouvoS0Z-c6S4rYZrWV67pusKJ4dB0E/exec';
+
+  const state = {
+    zoom: { A: 1, B: 1 },
+    images: { A: '', B: '' },
+    pair: { real: '', synthetic: '' },
+    mapping: { A_type: '', B_type: '', swapped: false },
+    manifest: [],
+    currentIndex: -1,
+    submitInProgress: false,
+    pendingTarget: ''
+  };
+
+  const els = {
+    doctorName: document.getElementById('doctorName'),
+    reportDisplay: document.getElementById('reportDisplay'),
+    manifestPath: document.getElementById('manifestPath'),
+    sampleIndexLabel: document.getElementById('sampleIndexLabel'),
+    sampleTotalLabel: document.getElementById('sampleTotalLabel'),
+    wrapA: document.getElementById('wrapA'),
+    wrapB: document.getElementById('wrapB'),
+    msg: document.getElementById('msg'),
+    loadManifestBtn: document.getElementById('loadManifestBtn'),
+    reloadCurrentBtn: document.getElementById('reloadCurrentBtn'),
+    prevBtn: document.getElementById('prevBtn'),
+    nextBtn: document.getElementById('nextBtn'),
+    randomBtn: document.getElementById('randomBtn'),
+    submitBtn: document.getElementById('submitBtn'),
+    comment: document.getElementById('comment'),
+    gasSubmitFrame: document.getElementById('gasSubmitFrame'),
+  };
+
+  let reportTextStore = '';
+  let samplePathStore = '';
+  let sampleIdStore = '';
+  let realImageUrlStore = '';
+  let syntheticImageUrlStore = '';
+
+  // Initialize
+  els.loadManifestBtn.onclick = loadManifest;
+  els.reloadCurrentBtn.onclick = reloadCurrentSample;
+  els.prevBtn.onclick = prevSample;
+  els.nextBtn.onclick = nextSample;
+  els.randomBtn.onclick = randomSample;
+  els.submitBtn.onclick = submitResult;
+  els.gasSubmitFrame.onload = onIframeLoaded;
+
+  // Hydrate from URL
+  const q = new URLSearchParams(window.location.search);
+  if (q.get('manifest')) els.manifestPath.value = q.get('manifest');
+  state.pendingTarget = q.get('sample_id') || q.get('sample_path') || '';
+
+  if (els.manifestPath.value) loadManifest();
+
+  async function loadManifest() {
+    try {
+      setMsg('Loading...', 'warn');
+      const resp = await fetch(els.manifestPath.value.trim(), { cache: 'no-store' });
+      const data = await resp.json();
+      state.manifest = data;
+      els.sampleTotalLabel.textContent = data.length;
+      
+      let targetIndex = 0;
+      if (state.pendingTarget) {
+        const found = data.findIndex(i => i.sample_id === state.pendingTarget || i.sample_path === state.pendingTarget);
+        if (found >= 0) targetIndex = found;
+      }
+      loadSample(targetIndex);
+      setMsg('Manifest Loaded', 'ok');
+    } catch (e) { setMsg('Load Failed: ' + e.message, 'warn'); }
+  }
+
+  function loadSample(index) {
+    if (!state.manifest[index]) return;
+    state.currentIndex = index;
+    const item = state.manifest[index];
+    
+    sampleIdStore = item.sample_id || '';
+    samplePathStore = item.sample_path || '';
+    reportTextStore = item.report_text || '';
+    realImageUrlStore = normalizeUrl(item.real_image_url);
+    syntheticImageUrlStore = normalizeUrl(item.synthetic_image_url);
+
+    els.reportDisplay.textContent = reportTextStore || 'No report text.';
+    els.sampleIndexLabel.textContent = index + 1;
+    
+    // Randomize A/B
+    const isSwapped = Math.random() > 0.5;
+    state.mapping = {
+      A_type: isSwapped ? 'synthetic' : 'real',
+      B_type: isSwapped ? 'real' : 'synthetic',
+      swapped: isSwapped
     };
+    state.images.A = isSwapped ? syntheticImageUrlStore : realImageUrlStore;
+    state.images.B = isSwapped ? realImageUrlStore : syntheticImageUrlStore;
+    state.pair = { real: realImageUrlStore, synthetic: syntheticImageUrlStore };
 
-    const els = {
-      doctorName: document.getElementById('doctorName'),
-      reportDisplay: document.getElementById('reportDisplay'),
-      manifestPath: document.getElementById('manifestPath'),
-      sampleIndexLabel: document.getElementById('sampleIndexLabel'),
-      sampleTotalLabel: document.getElementById('sampleTotalLabel'),
-      wrapA: document.getElementById('wrapA'),
-      wrapB: document.getElementById('wrapB'),
-      labelAType: document.getElementById('labelAType'),
-      labelBType: document.getElementById('labelBType'),
-      msg: document.getElementById('msg'),
-      loadManifestBtn: document.getElementById('loadManifestBtn'),
-      reloadCurrentBtn: document.getElementById('reloadCurrentBtn'),
-      prevBtn: document.getElementById('prevBtn'),
-      nextBtn: document.getElementById('nextBtn'),
-      randomBtn: document.getElementById('randomBtn'),
-      submitBtn: document.getElementById('submitBtn'),
-      clearBtn: document.getElementById('clearBtn'),
-      comment: document.getElementById('comment'),
-      gasSubmitFrame: document.getElementById('gasSubmitFrame'),
-    };
+    renderImage('A', state.images.A);
+    renderImage('B', state.images.B);
+    clearForm();
+    updateUrl(item);
+  }
 
-    let reportTextStore = '';
-    let samplePathStore = '';
-    let sampleIdStore = '';
-    let realImageUrlStore = '';
-    let syntheticImageUrlStore = '';
+  function renderImage(slot, url) {
+    const wrap = slot === 'A' ? els.wrapA : els.wrapB;
+    state.zoom[slot] = 1;
+    wrap.innerHTML = `<img id="img${slot}" src="${url}" style="transform:scale(1)" onerror="this.parentElement.innerHTML='<div class=placeholder>Image Load Error</div>'">`;
+  }
 
-    init();
+  function zoomImage(slot, delta) {
+    const img = document.getElementById('img' + slot);
+    if (!img) return;
+    state.zoom[slot] = Math.max(0.4, Math.min(4, state.zoom[slot] + delta));
+    img.style.transform = `scale(${state.zoom[slot]})`;
+  }
 
-    function init() {
-      els.loadManifestBtn.addEventListener('click', loadManifest);
-      els.reloadCurrentBtn.addEventListener('click', reloadCurrentSample);
-      els.prevBtn.addEventListener('click', prevSample);
-      els.nextBtn.addEventListener('click', nextSample);
-      els.randomBtn.addEventListener('click', randomSample);
-      els.submitBtn.addEventListener('click', submitResult);
-      els.clearBtn.addEventListener('click', clearCurrentForm);
-      els.gasSubmitFrame.addEventListener('load', onIframeLoaded);
+  function resetZoom(slot) {
+    const img = document.getElementById('img' + slot);
+    if (img) { state.zoom[slot] = 1; img.style.transform = 'scale(1)'; }
+  }
 
-      syncReportDisplay();
-      renderTypeLabels();
-      updateSampleMeta();
-      hydrateFromQuery();
-
-      if (els.manifestPath.value.trim()) {
-        loadManifest();
+  function submitResult() {
+    if (state.submitInProgress) return;
+    try {
+      const res = buildResult();
+      if (!res.binary_choice && !res.score_A && !res.score_B) {
+        alert("Please provide at least one rating.");
+        return;
       }
-    }
-
-    function syncReportDisplay() {
-      els.reportDisplay.textContent = reportTextStore.trim() || 'No report provided';
-    }
-
-    function hydrateFromQuery() {
-      const q = new URLSearchParams(window.location.search);
-      const manifestPath = q.get('manifest');
-      const sampleId = q.get('sample_id');
-      const samplePath = q.get('sample_path');
-
-      if (manifestPath) els.manifestPath.value = manifestPath;
-      state.pendingTarget = sampleId || samplePath || '';
-    }
-
-    async function loadManifest() {
-      try {
-        const path = els.manifestPath.value.trim() || './manifest.json';
-        setMsg('Loading manifest...', 'warn');
-
-        const resp = await fetch(path, { cache: 'no-store' });
-        if (!resp.ok) {
-          throw new Error('Failed to load manifest: ' + resp.status + ' ' + resp.statusText);
-        }
-
-        const data = await resp.json();
-        if (!Array.isArray(data) || !data.length) {
-          throw new Error('Manifest is empty or invalid.');
-        }
-
-        state.manifest = data;
-        updateSampleMeta();
-
-        let targetIndex = 0;
-        if (state.pendingTarget) {
-          const pending = state.pendingTarget;
-          const foundIndex = state.manifest.findIndex(
-            (item) => item.sample_id === pending || item.sample_path === pending
-          );
-          if (foundIndex >= 0) targetIndex = foundIndex;
-        }
-
-        loadSample(targetIndex);
-        setMsg('Manifest loaded successfully.', 'ok');
-      } catch (error) {
-        setMsg(error.message || String(error), 'warn');
-      }
-    }
-
-    function loadSample(index) {
-      if (!state.manifest.length) {
-        setMsg('Manifest is not loaded.', 'warn');
+      if (!res.reviewer_name) {
+        alert("Please enter your name.");
         return;
       }
 
-      if (index < 0 || index >= state.manifest.length) {
-        setMsg('Sample index out of range.', 'warn');
-        return;
-      }
+      state.submitInProgress = true;
+      setMsg('Submitting...', 'warn');
 
-      const item = state.manifest[index];
-      state.currentIndex = index;
-
-      samplePathStore = item.sample_path || '';
-      sampleIdStore = item.sample_id || extractSampleId(item.sample_path || '');
-      reportTextStore = item.report_text || '';
-      realImageUrlStore = normalizeGitHubImageUrl(item.real_image_url || '');
-      syntheticImageUrlStore = normalizeGitHubImageUrl(item.synthetic_image_url || '');
-
-      syncReportDisplay();
-      bindImages();
-      updateSampleMeta();
-      updateQueryString(item);
-      clearCurrentForm(false);
-    }
-
-    function reloadCurrentSample() {
-      if (state.currentIndex >= 0) {
-        loadSample(state.currentIndex);
-      }
-    }
-
-    function prevSample() {
-      if (!state.manifest.length) {
-        return setMsg('Manifest is not loaded.', 'warn');
-      }
-      const nextIndex = state.currentIndex <= 0 ? state.manifest.length - 1 : state.currentIndex - 1;
-      loadSample(nextIndex);
-    }
-
-    function nextSample() {
-      if (!state.manifest.length) {
-        return setMsg('Manifest is not loaded.', 'warn');
-      }
-      const nextIndex = state.currentIndex >= state.manifest.length - 1 ? 0 : state.currentIndex + 1;
-      loadSample(nextIndex);
-    }
-
-    function randomSample() {
-      if (!state.manifest.length) {
-        return setMsg('Manifest is not loaded.', 'warn');
-      }
-      const index = Math.floor(Math.random() * state.manifest.length);
-      loadSample(index);
-    }
-
-    function updateSampleMeta() {
-      els.sampleTotalLabel.textContent = state.manifest.length ? String(state.manifest.length) : '-';
-      els.sampleIndexLabel.textContent = state.currentIndex >= 0 ? String(state.currentIndex + 1) : '-';
-    }
-
-    function updateQueryString(item) {
-      const params = new URLSearchParams(window.location.search);
-      params.set('manifest', els.manifestPath.value.trim() || './manifest.json');
-      if (item.sample_id) params.set('sample_id', item.sample_id);
-      if (item.sample_path) params.set('sample_path', item.sample_path);
-      history.replaceState({}, '', window.location.pathname + '?' + params.toString());
-    }
-
-    function normalizeGitHubImageUrl(url) {
-      if (!url) return '';
-      if (url.includes('github.com') && url.includes('/blob/')) {
-        return url
-          .replace('https://github.com/', 'https://raw.githubusercontent.com/')
-          .replace('/blob/', '/');
-      }
-      if (url.includes('github.com') && url.includes('/raw/')) {
-        return url
-          .replace('https://github.com/', 'https://raw.githubusercontent.com/')
-          .replace('/raw/', '/');
-      }
-      return url;
-    }
-
-    function bindImages() {
-      const real = normalizeGitHubImageUrl(realImageUrlStore.trim());
-      const synthetic = normalizeGitHubImageUrl(syntheticImageUrlStore.trim());
-
-      state.pair.real = real;
-      state.pair.synthetic = synthetic;
-
-      if (!real || !synthetic) {
-        state.images.A = '';
-        state.images.B = '';
-        state.mapping = { A_type: '', B_type: '', swapped: false };
-        renderImage('A', '');
-        renderImage('B', '');
-        renderTypeLabels();
-        clearAllSelections();
-        return setMsg('Missing real or synthetic image URL in manifest.', 'warn');
-      }
-
-      if (Math.random() > 0.5) {
-        state.images.A = real;
-        state.images.B = synthetic;
-        state.mapping.A_type = 'real';
-        state.mapping.B_type = 'synthetic';
-        state.mapping.swapped = false;
-      } else {
-        state.images.A = synthetic;
-        state.images.B = real;
-        state.mapping.A_type = 'synthetic';
-        state.mapping.B_type = 'real';
-        state.mapping.swapped = true;
-      }
-
-      renderImage('A', state.images.A);
-      renderImage('B', state.images.B);
-      renderTypeLabels();
-      clearAllSelections();
-      setMsg('Real and synthetic images have been loaded and randomized into A/B.', 'ok');
-    }
-
-    function renderTypeLabels() {
-      els.labelAType.textContent = 'Blind review';
-      els.labelBType.textContent = 'Blind review';
-    }
-
-    function renderImage(slot, url) {
-      const wrap = slot === 'A' ? els.wrapA : els.wrapB;
-      state.zoom[slot] = 1;
-
-      if (!url) {
-        wrap.innerHTML = '<div class="placeholder">No image loaded</div>';
-        return;
-      }
-
-      wrap.innerHTML =
-        '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot +
-        '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
-    }
-
-    function handleImageError(slot, url) {
-      const wrap = slot === 'A' ? els.wrapA : els.wrapB;
-      wrap.innerHTML =
-        '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' +
-        escapeHtml(url) + '</span></div>';
-      setMsg('One or more images could not be loaded. Check the raw image URL in manifest.', 'warn');
-    }
-
-    function zoomImage(slot, delta) {
-      const img = document.getElementById('img' + slot);
-      if (!img) return;
-      state.zoom[slot] = Math.max(0.4, Math.min(4, state.zoom[slot] + delta));
-      img.style.transform = 'scale(' + state.zoom[slot] + ')';
-    }
-
-    function resetZoom(slot) {
-      const img = document.getElementById('img' + slot);
-      if (!img) return;
-      state.zoom[slot] = 1;
-      img.style.transform = 'scale(1)';
-    }
-
-    function getRadioValue(name) {
-      const checked = document.querySelector('input[name="' + name + '"]:checked');
-      return checked ? checked.value : '';
-    }
-
-    function clearAllSelections() {
-      ['binaryChoice', 'scoreA', 'scoreB'].forEach((groupName) => {
-        document.querySelectorAll('input[name="' + groupName + '"]').forEach((el) => {
-          el.checked = false;
-        });
-      });
-    }
-
-    function clearCurrentForm(showMessage = true) {
-      clearAllSelections();
-      els.comment.value = '';
-      if (showMessage) {
-        setMsg('Current form has been cleared.', 'ok');
-      }
-    }
-
-    function selectedImageType(choice) {
-      if (choice === 'A') return state.mapping.A_type;
-      if (choice === 'B') return state.mapping.B_type;
-      if (choice === 'tie') return 'tie';
-      return '';
-    }
-
-    function buildResult() {
-      if (!state.images.A || !state.images.B) {
-        throw new Error('Please load both real and synthetic images first.');
-      }
-
-      const choice = getRadioValue('binaryChoice');
-      const scoreA = getRadioValue('scoreA');
-      const scoreB = getRadioValue('scoreB');
-
-      if (!choice && scoreA === '' && scoreB === '') {
-        throw new Error('Please complete at least one action: binary preference, image A score, or image B score.');
-      }
-
-      return {
-        reviewer_name: els.doctorName.value.trim(),
-        sample_id: sampleIdStore || extractSampleId(samplePathStore),
-        sample_path: samplePathStore,
-        report_text: reportTextStore.trim(),
-        real_image_url: state.pair.real,
-        synthetic_image_url: state.pair.synthetic,
-        image_A_url: state.images.A,
-        image_B_url: state.images.B,
-        image_A_type: state.mapping.A_type,
-        image_B_type: state.mapping.B_type,
-        swapped: state.mapping.swapped ? 'yes' : 'no',
-        binary_choice: choice,
-        selected_image_type: selectedImageType(choice),
-        score_A: scoreA,
-        score_B: scoreB,
-        comment: els.comment.value.trim(),
-        timestamp: new Date().toISOString(),
-      };
-    }
-
-    function extractSampleId(samplePath) {
-      if (!samplePath) return '';
-      const cleaned = samplePath.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-      const parts = cleaned.split('/');
-      return parts[parts.length - 1] || cleaned;
-    }
-
-    function submitResult() {
-      try {
-        if (!API_URL) throw new Error('API_URL is missing.');
-        const result = buildResult();
-        setMsg('Submitting...', 'warn');
-        submitViaFormFields(API_URL, result);
-      } catch (error) {
-        state.submitInProgress = false;
-        setMsg(error.message || String(error), 'warn');
-      }
-    }
-
-    function submitViaFormFields(url, payload) {
       const form = document.createElement('form');
       form.method = 'POST';
-      form.action = url;
+      form.action = API_URL;
       form.target = 'gas_submit_frame';
-      form.style.display = 'none';
 
-      Object.entries(payload).forEach(([key, value]) => {
+      for (const key in res) {
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = key;
-        input.value = value == null ? '' : String(value);
+        input.value = res[key];
         form.appendChild(input);
-      });
+      }
 
       document.body.appendChild(form);
-      state.submitInProgress = true;
       form.submit();
-      form.remove();
-    }
+      document.body.removeChild(form);
 
-    function onIframeLoaded() {
-      if (!state.submitInProgress) return;
+    } catch (e) { alert(e.message); }
+  }
+
+  function onIframeLoaded() {
+    if (state.submitInProgress) {
       state.submitInProgress = false;
-      setMsg('Form submitted. Check Google Sheet for the new row.', 'ok');
+      setMsg('Submitted successfully!', 'ok');
+      setTimeout(nextSample, 500);
     }
+  }
 
-    function setMsg(text, type) {
-      els.msg.textContent = text;
-      els.msg.className = 'status ' + (type === 'ok' ? 'ok' : 'warn');
-    }
+  function buildResult() {
+    const choice = document.querySelector('input[name="binaryChoice"]:checked')?.value || '';
+    return {
+      reviewer_name: els.doctorName.value.trim(),
+      sample_id: sampleIdStore,
+      sample_path: samplePathStore,
+      report_text: reportTextStore,
+      real_image_url: state.pair.real,
+      synthetic_image_url: state.pair.synthetic,
+      image_A_type: state.mapping.A_type,
+      image_B_type: state.mapping.B_type,
+      swapped: state.mapping.swapped ? 'yes' : 'no',
+      binary_choice: choice,
+      selected_image_type: choice === 'A' ? state.mapping.A_type : (choice === 'B' ? state.mapping.B_type : choice),
+      score_A: document.querySelector('input[name="scoreA"]:checked')?.value || '',
+      score_B: document.querySelector('input[name="scoreB"]:checked')?.value || '',
+      comment: els.comment.value.trim(),
+      timestamp: new Date().toISOString()
+    };
+  }
 
-    function escapeHtml(s) {
-      return String(s)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
+  function clearForm() {
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    els.comment.value = '';
+  }
 
-    function escapeJs(s) {
-      return String(s)
-        .replace(/\\/g, '\\\\')
-        .replace(/'/g, "\\'")
-        .replace(/"/g, '\\"');
-    }
+  function nextSample() { if(state.currentIndex < state.manifest.length-1) loadSample(state.currentIndex + 1); }
+  function prevSample() { if(state.currentIndex > 0) loadSample(state.currentIndex - 1); }
+  function randomSample() { loadSample(Math.floor(Math.random()*state.manifest.length)); }
+  function reloadCurrentSample() { loadSample(state.currentIndex); }
 
-    window.zoomImage = zoomImage;
-    window.resetZoom = resetZoom;
-    window.handleImageError = handleImageError;
-  </script>
+  function normalizeUrl(url) {
+    if (!url) return '';
+    return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/').replace('/raw/', '/');
+  }
+
+  function updateUrl(item) {
+    const p = new URLSearchParams(window.location.search);
+    p.set('manifest', els.manifestPath.value);
+    if (item.sample_id) p.set('sample_id', item.sample_id);
+    history.replaceState({}, '', '?' + p.toString());
+  }
+
+  function setMsg(txt, cls) {
+    els.msg.textContent = txt;
+    els.msg.className = cls;
+  }
+</script>
+
 </body>
 </html>
