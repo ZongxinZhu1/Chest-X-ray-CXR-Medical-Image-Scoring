@@ -6,22 +6,29 @@
   <title>CXR Report Matching Blind Review</title>
   <style>
     :root {
-      --bg: #f3f4f6;
-      --card: #ffffff;
-      --card-soft: #f8fafc;
-      --line: #e5e7eb;
-      --text: #111827;
-      --muted: #6b7280;
-      --primary: #0f172a;
-      --primary-soft: #1e293b;
-      --ok: #065f46;
-      --okbg: #ecfdf5;
-      --warn: #92400e;
-      --warnbg: #fffbeb;
-      --accent: #2563eb;
-      --accent-soft: #eff6ff;
-      --shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-      --radius: 16px;
+      --bg: #eef2f7;
+      --bg-2: #f7f9fc;
+      --card: rgba(255, 255, 255, 0.96);
+      --card-strong: #ffffff;
+      --line: #dbe3ee;
+      --line-soft: #e8eef5;
+      --text: #162033;
+      --muted: #6b778c;
+      --primary: #173a63;
+      --primary-hover: #204a7c;
+      --primary-soft: #eaf2ff;
+      --accent: #2f6fed;
+      --accent-soft: #edf4ff;
+      --ok: #0f766e;
+      --okbg: #ebfffb;
+      --warn: #9a6700;
+      --warnbg: #fff7db;
+      --shadow: 0 10px 30px rgba(22, 32, 51, 0.08);
+      --shadow-soft: 0 4px 14px rgba(22, 32, 51, 0.05);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 12px;
     }
 
     * {
@@ -31,8 +38,9 @@
     html, body {
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #f8fafc 0%, #f3f4f6 100%);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, #f8fbff 0%, #eef2f7 42%, #e9eef5 100%);
       color: var(--text);
     }
 
@@ -48,94 +56,323 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-      padding: 10px 16px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      align-items: center;
+      gap: 16px;
       flex-wrap: wrap;
+      padding: 14px 22px;
+      background: rgba(248, 251, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(219, 227, 238, 0.85);
     }
 
-    .topbar-left {
-      min-width: 0;
-    }
-
-    .topbar h1 {
+    .topbar-left h1 {
       margin: 0;
-      font-size: 18px;
+      font-size: 22px;
       line-height: 1.2;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: #162033;
     }
 
-    .topbar p {
-      margin: 3px 0 0;
+    .topbar-left p {
+      margin: 5px 0 0;
+      font-size: 13px;
       color: var(--muted);
-      font-size: 12px;
-      line-height: 1.35;
+      line-height: 1.45;
     }
 
     .topbar-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 32px;
-      padding: 0 12px;
+      min-height: 38px;
+      padding: 0 14px;
       border-radius: 999px;
-      border: 1px solid #dbeafe;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 700;
+      background: linear-gradient(180deg, #edf4ff 0%, #e3efff 100%);
+      border: 1px solid #cfe0ff;
+      color: #245bc8;
       font-size: 12px;
-      white-space: nowrap;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
     }
 
     .page {
       max-width: 1840px;
       margin: 0 auto;
-      padding: 12px;
+      padding: 18px;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.66fr) 360px;
-      gap: 14px;
+      grid-template-columns: minmax(0, 1.72fr) 380px;
+      gap: 18px;
       align-items: start;
     }
 
     .stack {
       display: grid;
-      gap: 14px;
+      gap: 18px;
     }
 
     .card {
       background: var(--card);
-      border: 1px solid rgba(229, 231, 235, 0.95);
-      border-radius: var(--radius);
-      padding: 14px;
+      border: 1px solid rgba(219, 227, 238, 0.95);
+      border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
     }
 
-    .compact-card {
+    .card-inner {
+      padding: 18px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtext {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .report-card {
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(248,250,253,0.98) 100%);
+    }
+
+    .report-head {
+      padding: 16px 20px 10px;
+      border-bottom: 1px solid var(--line-soft);
+      background: linear-gradient(180deg, #fbfdff 0%, #f6f9fd 100%);
+    }
+
+    .report-head-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .report-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid #d8e6ff;
+    }
+
+    .report-title {
+      text-align: center;
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .report-body {
+      padding: 20px 26px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .report-frame {
+      width: min(100%, 1080px);
+      min-height: 118px;
+      max-height: 190px;
+      overflow: auto;
+      padding: 8px 4px;
+    }
+
+    .report-text {
+      margin: 0;
+      text-align: center;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 25px;
+      line-height: 1.65;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: #132238;
+    }
+
+    .viewer-card .card-inner {
+      padding: 16px;
+    }
+
+    .viewer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .image-panel {
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 15px;
+      border-bottom: 1px solid var(--line-soft);
+      background: linear-gradient(180deg, #fcfdff 0%, #f7f9fc 100%);
+    }
+
+    .panel-head strong {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .panel-body {
       padding: 12px;
     }
 
-    .card h2,
-    .card h3 {
-      margin: 0 0 6px;
-      letter-spacing: -0.01em;
+    .image-wrap {
+      width: 100%;
+      height: calc(100vh - 295px);
+      min-height: 520px;
+      max-height: 780px;
+      border-radius: 14px;
+      background: #020406;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
     }
 
-    .card-subtext {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.4;
+    .image-wrap img {
+      max-width: none;
+      transform-origin: center center;
+      transition: transform 0.15s ease;
+      display: block;
+    }
+
+    .placeholder {
+      padding: 24px;
+      text-align: center;
+      color: #98a3b6;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      border: 1px solid #d6deea;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 13px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.16s ease;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .btn:hover {
+      background: #ffffff;
+      border-color: #bfd0e7;
+      box-shadow: 0 5px 16px rgba(22, 32, 51, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #173a63 0%, #143355 100%);
+      color: white;
+      border-color: #173a63;
+      box-shadow: 0 10px 20px rgba(23, 58, 99, 0.18);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(180deg, #204a7c 0%, #173a63 100%);
+      border-color: #204a7c;
+      box-shadow: 0 12px 24px rgba(23, 58, 99, 0.24);
+    }
+
+    .btn-strong {
+      min-height: 46px;
+      font-size: 15px;
+      font-weight: 800;
+      border-radius: 14px;
+    }
+
+    .sticky-side {
+      position: sticky;
+      top: 76px;
+      max-height: calc(100vh - 92px);
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    .side-card {
+      padding: 16px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(247,250,253,0.98) 100%);
+    }
+
+    .side-block {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,0.75);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .side-title {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
     }
 
     .field {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .field:last-child {
@@ -146,71 +383,227 @@
       display: block;
       margin-bottom: 6px;
       font-size: 12.5px;
-      font-weight: 700;
-      color: var(--text);
+      font-weight: 800;
+      color: #2d3b52;
     }
 
     input[type="text"],
-    textarea,
-    select {
+    textarea {
       width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      padding: 10px 12px;
-      background: white;
+      border: 1px solid #d5deea;
+      border-radius: 14px;
+      padding: 11px 12px;
+      background: rgba(255,255,255,0.96);
       color: var(--text);
       outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: 0.15s ease;
     }
 
     input[type="text"]:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #93c5fd;
-      box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.18);
+    textarea:focus {
+      border-color: #97bbff;
+      box-shadow: 0 0 0 4px rgba(110, 156, 255, 0.16);
     }
 
     textarea {
-      min-height: 92px;
+      min-height: 110px;
       resize: vertical;
+      line-height: 1.55;
+    }
+
+    .reviewer-progress {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .reviewer-name-box {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .reviewer-name-box input {
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 14px 14px 14px 14px;
+      background: transparent;
+    }
+
+    .reviewer-name-box input:focus {
+      box-shadow: inset 0 0 0 1px #97bbff, 0 0 0 4px rgba(110, 156, 255, 0.12);
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .meta-chip {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .meta-chip .label {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .meta-chip .value {
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #162033;
+    }
+
+    .status {
+      border-radius: 14px;
+      padding: 12px 13px;
+      font-size: 12.5px;
       line-height: 1.5;
+      border: 1px solid transparent;
     }
 
-    .btn {
-      border: 1px solid #d1d5db;
-      background: white;
-      border-radius: 12px;
-      padding: 10px 12px;
+    .ok {
+      background: var(--okbg);
+      color: var(--ok);
+      border-color: #bceee7;
+    }
+
+    .warn {
+      background: var(--warnbg);
+      color: var(--warn);
+      border-color: #f0d98f;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--line) 14%, var(--line) 86%, transparent 100%);
+      margin: 14px 0;
+    }
+
+    .score-grid {
+      display: grid;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .score-grid.choice-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .score-grid.choice-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .chip {
+      border: 1px solid #d6deea;
+      border-radius: 14px;
+      padding: 11px 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
       cursor: pointer;
-      font-weight: 600;
-      transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .btn:hover {
-      background: #f9fafb;
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
-    }
-
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-soft);
-      border-color: var(--primary-soft);
-    }
-
-    .btn-strong {
       min-height: 44px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
+      transition: 0.15s ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.95);
+      user-select: none;
+    }
+
+    .chip:hover {
+      border-color: #bcd0ea;
+      box-shadow: 0 6px 14px rgba(22, 32, 51, 0.07);
+      transform: translateY(-1px);
+    }
+
+    .chip input {
+      margin: 0;
+    }
+
+    .submit-area {
+      display: grid;
+      gap: 8px;
+      margin-top: 4px;
+      margin-bottom: 14px;
+    }
+
+    .collapsible-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .collapse-toggle {
+      width: 100%;
+      border: none;
+      background: transparent;
+      text-align: left;
+      padding: 15px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 14px;
+      color: #1d2a40;
+    }
+
+    .collapse-toggle:hover {
+      background: rgba(248, 251, 255, 0.7);
+    }
+
+    .collapse-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .collapse-subtitle {
+      font-size: 11.5px;
+      color: var(--muted);
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .collapse-icon {
+      color: var(--muted);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .collapsible-card.open .collapse-icon {
+      transform: rotate(180deg);
+    }
+
+    .manifest-mini-status {
+      padding: 0 16px 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .collapse-content {
+      display: none;
+      padding: 0 16px 16px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .collapsible-card.open .collapse-content {
+      display: block;
     }
 
     .action-grid {
@@ -225,264 +618,28 @@
       gap: 8px;
     }
 
-    .toolbar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .status {
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 12.5px;
-      line-height: 1.45;
-      border: 1px solid transparent;
-    }
-
-    .ok {
-      background: var(--okbg);
-      color: var(--ok);
-      border-color: #bbf7d0;
-    }
-
-    .warn {
-      background: var(--warnbg);
-      color: var(--warn);
-      border-color: #fde68a;
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    .small {
-      font-size: 11.5px;
-    }
-
-    .chip {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 10px 10px;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: white;
-      cursor: pointer;
-      min-height: 42px;
-      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
-      user-select: none;
-    }
-
-    .chip:hover {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
-    }
-
-    .chip:active {
-      transform: translateY(1px);
-    }
-
-    .chip input {
-      margin: 0;
-    }
-
-    .score-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      width: 100%;
-    }
-
-    .score-grid.five-col {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
-
-    .score-chip {
-      justify-content: center;
-      width: 100%;
-      font-weight: 700;
-    }
-
-    .main-top-grid {
-      display: grid;
-      grid-template-columns: 1.45fr 1fr;
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .report-box {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-      padding: 12px 14px;
-      min-height: 88px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-
-    .report-box .label {
-      font-size: 11.5px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .report-box .content {
-      font-size: 14px;
-      line-height: 1.42;
-      font-weight: 600;
-      color: #111827;
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow: auto;
-      max-height: 62px;
-      padding-right: 2px;
-    }
-
-    .meta-line {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--card-soft);
-      padding: 10px 12px;
-      display: grid;
-      grid-template-columns: minmax(180px, 1.45fr) 0.8fr 0.8fr;
-      gap: 10px;
-      align-items: end;
-      min-height: 88px;
-    }
-
-    .meta-item {
-      min-width: 0;
-    }
-
-    .meta-item .meta-label {
-      display: block;
-      font-size: 11px;
-      margin-bottom: 6px;
-      color: #374151;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .meta-value {
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      line-height: 1.1;
-    }
-
-    .meta-inline-input {
-      width: 100%;
-    }
-
-    .viewer-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .image-panel {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      overflow: hidden;
-      background: white;
-    }
-
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--line);
-      background: #fafafa;
-    }
-
-    .panel-head strong {
-      font-size: 15px;
-    }
-
-    .panel-body {
-      padding: 10px;
-    }
-
-    .image-wrap {
-      width: 100%;
-      height: calc(100vh - 255px);
-      min-height: 500px;
-      max-height: 780px;
-      border-radius: 12px;
-      background: #000;
-      overflow: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .image-wrap img {
-      max-width: none;
-      transform-origin: center center;
-      transition: transform 0.15s ease;
-      display: block;
-    }
-
-    .placeholder {
-      color: #9ca3af;
-      text-align: center;
-      font-size: 13px;
-      line-height: 1.6;
-      padding: 24px;
-    }
-
-    .sticky-side {
-      position: sticky;
-      top: 62px;
-      max-height: calc(100vh - 74px);
-      overflow: auto;
-      padding-right: 2px;
-    }
-
-    .section-divider {
-      height: 1px;
-      background: var(--line);
-      margin: 12px 0;
-    }
-
     .helper-note {
-      border-radius: 12px;
-      background: #f8fafc;
-      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f8fbff 0%, #f2f7ff 100%);
+      border: 1px solid #dbe8ff;
       padding: 10px 12px;
       font-size: 12px;
-      line-height: 1.45;
-      color: #374151;
-    }
-
-    .submit-area {
-      display: grid;
-      gap: 8px;
-      margin-top: 2px;
-      margin-bottom: 12px;
+      line-height: 1.5;
+      color: #4a607f;
     }
 
     .rubric-box {
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 18px;
       overflow: hidden;
-      background: #fff;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
       margin-top: 8px;
     }
 
     .rubric-row {
       display: grid;
-      grid-template-columns: 56px 1fr;
-      border-bottom: 1px solid var(--line);
+      grid-template-columns: 58px 1fr;
+      border-bottom: 1px solid var(--line-soft);
     }
 
     .rubric-row:last-child {
@@ -490,98 +647,37 @@
     }
 
     .rubric-score {
-      background: #f8fafc;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
+      background: #f5f8fc;
       font-size: 15px;
-      padding: 10px 6px;
+      font-weight: 900;
+      color: #22344f;
+      padding: 12px 8px;
     }
 
     .rubric-desc {
-      padding: 10px 10px;
+      padding: 12px 12px;
       font-size: 12px;
-      line-height: 1.45;
-      color: #374151;
+      line-height: 1.5;
+      color: #4c5b72;
     }
 
     .rubric-footer {
-      margin-top: 8px;
-      padding: 10px 11px;
-      border-radius: 12px;
-      background: var(--accent-soft);
-      border: 1px solid #bfdbfe;
-      color: #1d4ed8;
+      margin-top: 10px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #eef5ff 0%, #e8f2ff 100%);
+      border: 1px solid #d5e5ff;
+      color: #2958ad;
       font-size: 12.5px;
-      line-height: 1.45;
-      font-weight: 700;
+      line-height: 1.5;
+      font-weight: 800;
     }
 
-    .collapsible-card {
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .collapse-toggle {
-      width: 100%;
-      border: 0;
-      background: transparent;
-      text-align: left;
-      padding: 13px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .collapse-toggle:hover {
-      background: #fafafa;
-    }
-
-    .collapse-title-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 0;
-    }
-
-    .collapse-subtitle {
-      font-size: 11.5px;
+    .muted {
       color: var(--muted);
-      font-weight: 500;
-      line-height: 1.35;
-    }
-
-    .collapse-icon {
-      font-size: 14px;
-      color: var(--muted);
-      transition: transform 0.2s ease;
-      flex-shrink: 0;
-    }
-
-    .collapsible-card.open .collapse-icon {
-      transform: rotate(180deg);
-    }
-
-    .collapse-content {
-      display: none;
-      padding: 0 14px 14px;
-      border-top: 1px solid var(--line);
-    }
-
-    .collapsible-card.open .collapse-content {
-      display: block;
-    }
-
-    .manifest-mini-status {
-      padding: 0 14px 14px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.4;
     }
 
     iframe.hidden-frame {
@@ -591,7 +687,7 @@
       border: 0;
     }
 
-    @media (max-width: 1450px) {
+    @media (max-width: 1480px) {
       .layout {
         grid-template-columns: 1fr;
       }
@@ -608,28 +704,23 @@
       }
     }
 
-    @media (max-width: 1100px) {
-      .main-top-grid,
+    @media (max-width: 1024px) {
       .viewer-grid,
+      .score-grid.choice-3,
+      .score-grid.choice-5,
       .action-grid,
       .action-grid-3,
-      .score-grid,
-      .score-grid.five-col {
+      .meta-row {
         grid-template-columns: 1fr;
       }
 
-      .meta-line {
-        grid-template-columns: 1fr;
-        min-height: auto;
+      .report-text {
+        font-size: 20px;
       }
 
       .image-wrap {
-        height: 440px;
-        min-height: 440px;
-      }
-
-      .report-box .content {
-        max-height: 120px;
+        height: 430px;
+        min-height: 430px;
       }
     }
   </style>
@@ -645,70 +736,65 @@
 
   <main class="page">
     <div class="layout">
+      <!-- LEFT MAIN -->
       <section class="stack">
-        <section class="card compact-card">
-          <div class="main-top-grid">
-            <div class="report-box">
-              <div class="label">Report</div>
-              <div id="reportDisplay" class="content"></div>
+        <!-- REPORT CENTERED -->
+        <section class="card report-card">
+          <div class="report-head">
+            <div class="report-head-top">
+              <span class="report-pill">Report</span>
             </div>
-
-            <div class="meta-line">
-              <div class="meta-item">
-                <span class="meta-label">Reviewer Name</span>
-                <input class="meta-inline-input" type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Current Index</span>
-                <div id="sampleIndexLabel" class="meta-value">-</div>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Total Samples</span>
-                <div id="sampleTotalLabel" class="meta-value">-</div>
-              </div>
+            <p class="report-title">Read the text carefully before comparing the images</p>
+          </div>
+          <div class="report-body">
+            <div class="report-frame">
+              <div id="reportDisplay" class="report-text">No report provided</div>
             </div>
           </div>
         </section>
 
-        <section class="card compact-card">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px;">
-            <div>
-              <h2 style="margin-bottom:2px;">Image Comparison</h2>
-              <div class="card-subtext">Use zoom controls for detailed inspection.</div>
-            </div>
-          </div>
-
-          <div class="viewer-grid">
-            <div class="image-panel">
-              <div class="panel-head">
-                <strong>Image A</strong>
-                <span class="muted small" id="labelAType">Blind review</span>
-              </div>
-              <div class="panel-body">
-                <div class="image-wrap" id="wrapA">
-                  <div class="placeholder">Please load image A</div>
-                </div>
-                <div class="toolbar">
-                  <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
-                  <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
-                  <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
-                </div>
+        <!-- IMAGE COMPARISON -->
+        <section class="card viewer-card">
+          <div class="card-inner">
+            <div class="section-header">
+              <div>
+                <h2 class="section-title">Image Comparison</h2>
+                <div class="section-subtext">Use zoom controls for detailed inspection.</div>
               </div>
             </div>
 
-            <div class="image-panel">
-              <div class="panel-head">
-                <strong>Image B</strong>
-                <span class="muted small" id="labelBType">Blind review</span>
-              </div>
-              <div class="panel-body">
-                <div class="image-wrap" id="wrapB">
-                  <div class="placeholder">Please load image B</div>
+            <div class="viewer-grid">
+              <div class="image-panel">
+                <div class="panel-head">
+                  <strong>Image A</strong>
+                  <span class="panel-label" id="labelAType">Blind review</span>
                 </div>
-                <div class="toolbar">
-                  <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
-                  <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
-                  <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
+                <div class="panel-body">
+                  <div class="image-wrap" id="wrapA">
+                    <div class="placeholder">Please load image A</div>
+                  </div>
+                  <div class="toolbar">
+                    <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
+                    <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
+                    <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="image-panel">
+                <div class="panel-head">
+                  <strong>Image B</strong>
+                  <span class="panel-label" id="labelBType">Blind review</span>
+                </div>
+                <div class="panel-body">
+                  <div class="image-wrap" id="wrapB">
+                    <div class="placeholder">Please load image B</div>
+                  </div>
+                  <div class="toolbar">
+                    <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
+                    <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
+                    <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -716,56 +802,41 @@
         </section>
       </section>
 
+      <!-- RIGHT SIDE -->
       <aside class="sticky-side">
         <div class="stack">
-          <section class="card collapsible-card" id="manifestCard">
-            <button class="collapse-toggle" type="button" id="manifestToggleBtn" aria-expanded="false">
-              <span class="collapse-title-wrap">
-                <span>Manifest Loader</span>
-                <span class="collapse-subtitle">Collapsed by default. Expand only when needed.</span>
-              </span>
-              <span class="collapse-icon">▼</span>
-            </button>
+          <!-- SCORING PANEL -->
+          <section class="card side-card">
+            <h2 class="side-title">Scoring Panel</h2>
 
-            <div class="manifest-mini-status">
-              Current path: <span id="manifestPathMini">./manifest.json</span>
-            </div>
-
-            <div class="collapse-content" id="manifestCollapseContent">
-              <div class="field" style="margin-top:12px;">
-                <label>Manifest path</label>
-                <input type="text" id="manifestPath" value="./manifest.json" />
+            <div class="reviewer-progress">
+              <div class="side-block reviewer-name-box">
+                <label style="display:block; padding: 12px 14px 0; font-size:12px; font-weight:800; color:#41516a;">Reviewer Name</label>
+                <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
               </div>
 
-              <div class="action-grid">
-                <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
-                <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
-              </div>
-
-              <div class="action-grid-3" style="margin-top:8px;">
-                <button class="btn" id="prevBtn" type="button">Previous</button>
-                <button class="btn" id="randomBtn" type="button">Random sample</button>
-                <button class="btn" id="nextBtn" type="button">Next</button>
-              </div>
-
-              <div class="helper-note" style="margin-top:10px;">
-                The page reads the manifest and fills report and image URLs automatically.
+              <div class="meta-row">
+                <div class="meta-chip">
+                  <span class="label">Current Index</span>
+                  <div id="sampleIndexLabel" class="value">-</div>
+                </div>
+                <div class="meta-chip">
+                  <span class="label">Total Samples</span>
+                  <div id="sampleTotalLabel" class="value">-</div>
+                </div>
               </div>
             </div>
-          </section>
 
-          <section class="card">
-            <h2>Scoring Panel</h2>
-            <div class="status ok" style="margin-bottom: 12px;">
+            <div class="status ok" style="margin-bottom: 14px;">
               Binary preference and separate scoring are both supported. You may fill in either one, or both.
             </div>
 
             <div class="field">
               <label>Which image matches the report better? (optional)</label>
-              <div class="score-grid">
-                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="A" /> Image A</label>
-                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="B" /> Image B</label>
-                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> Tie</label>
+              <div class="score-grid choice-3">
+                <label class="chip"><input type="radio" name="binaryChoice" value="A" /> Image A</label>
+                <label class="chip"><input type="radio" name="binaryChoice" value="B" /> Image B</label>
+                <label class="chip"><input type="radio" name="binaryChoice" value="tie" /> Tie</label>
               </div>
             </div>
 
@@ -773,23 +844,23 @@
 
             <div class="field">
               <label>Image A score (-2 to 2, optional)</label>
-              <div class="score-grid five-col">
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="0" /> 0</label>
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="1" /> 1</label>
-                <label class="chip score-chip"><input type="radio" name="scoreA" value="2" /> 2</label>
+              <div class="score-grid choice-5">
+                <label class="chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
+                <label class="chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
+                <label class="chip"><input type="radio" name="scoreA" value="0" /> 0</label>
+                <label class="chip"><input type="radio" name="scoreA" value="1" /> 1</label>
+                <label class="chip"><input type="radio" name="scoreA" value="2" /> 2</label>
               </div>
             </div>
 
             <div class="field">
               <label>Image B score (-2 to 2, optional)</label>
-              <div class="score-grid five-col">
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="0" /> 0</label>
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="1" /> 1</label>
-                <label class="chip score-chip"><input type="radio" name="scoreB" value="2" /> 2</label>
+              <div class="score-grid choice-5">
+                <label class="chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
+                <label class="chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
+                <label class="chip"><input type="radio" name="scoreB" value="0" /> 0</label>
+                <label class="chip"><input type="radio" name="scoreB" value="1" /> 1</label>
+                <label class="chip"><input type="radio" name="scoreB" value="2" /> 2</label>
               </div>
             </div>
 
@@ -809,7 +880,46 @@
 
             <div class="section-divider"></div>
 
-            <h3 style="margin-bottom:8px;">Scoring Guide</h3>
+            <!-- COLLAPSIBLE MANIFEST -->
+            <div class="card collapsible-card" id="manifestCard" style="border-radius: 18px; box-shadow:none; background:rgba(255,255,255,0.6);">
+              <button class="collapse-toggle" type="button" id="manifestToggleBtn" aria-expanded="false">
+                <span class="collapse-title-wrap">
+                  <span>Manifest Loader</span>
+                  <span class="collapse-subtitle">Collapsed by default. Expand only when needed.</span>
+                </span>
+                <span class="collapse-icon">▼</span>
+              </button>
+
+              <div class="manifest-mini-status">
+                Current path: <span id="manifestPathMini">./manifest.json</span>
+              </div>
+
+              <div class="collapse-content" id="manifestCollapseContent">
+                <div class="field" style="margin-top:12px;">
+                  <label>Manifest path</label>
+                  <input type="text" id="manifestPath" value="./manifest.json" />
+                </div>
+
+                <div class="action-grid">
+                  <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
+                  <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
+                </div>
+
+                <div class="action-grid-3" style="margin-top:8px;">
+                  <button class="btn" id="prevBtn" type="button">Previous</button>
+                  <button class="btn" id="randomBtn" type="button">Random sample</button>
+                  <button class="btn" id="nextBtn" type="button">Next</button>
+                </div>
+
+                <div class="helper-note" style="margin-top:10px;">
+                  The page reads the manifest and fills report and image URLs automatically.
+                </div>
+              </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h3 class="section-title" style="font-size:15px;">Scoring Guide</h3>
             <div class="rubric-box">
               <div class="rubric-row">
                 <div class="rubric-score">2</div>
@@ -1027,246 +1137,4 @@
       loadSample(nextIndex);
     }
 
-    function randomSample() {
-      if (!state.manifest.length) return setMsg('Manifest is not loaded.', 'warn');
-      const index = Math.floor(Math.random() * state.manifest.length);
-      loadSample(index);
-    }
-
-    function updateSampleMeta() {
-      els.sampleTotalLabel.textContent = state.manifest.length ? String(state.manifest.length) : '-';
-      els.sampleIndexLabel.textContent = state.currentIndex >= 0 ? String(state.currentIndex + 1) : '-';
-    }
-
-    function updateQueryString(item) {
-      const params = new URLSearchParams(window.location.search);
-      params.set('manifest', els.manifestPath.value.trim() || './manifest.json');
-      if (item.sample_id) params.set('sample_id', item.sample_id);
-      if (item.sample_path) params.set('sample_path', item.sample_path);
-      history.replaceState({}, '', window.location.pathname + '?' + params.toString());
-    }
-
-    function normalizeGitHubImageUrl(url) {
-      if (!url) return '';
-      if (url.includes('github.com') && url.includes('/blob/')) {
-        return url.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/blob/', '/');
-      }
-      if (url.includes('github.com') && url.includes('/raw/')) {
-        return url.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/raw/', '/');
-      }
-      return url;
-    }
-
-    function bindImages() {
-      const real = normalizeGitHubImageUrl(realImageUrlStore.trim());
-      const synthetic = normalizeGitHubImageUrl(syntheticImageUrlStore.trim());
-
-      state.pair.real = real;
-      state.pair.synthetic = synthetic;
-
-      if (!real || !synthetic) {
-        state.images.A = '';
-        state.images.B = '';
-        state.mapping = { A_type: '', B_type: '', swapped: false };
-        renderImage('A', '');
-        renderImage('B', '');
-        renderTypeLabels();
-        clearAllSelections();
-        return setMsg('Missing real or synthetic image URL in manifest.', 'warn');
-      }
-
-      if (Math.random() > 0.5) {
-        state.images.A = real;
-        state.images.B = synthetic;
-        state.mapping.A_type = 'real';
-        state.mapping.B_type = 'synthetic';
-        state.mapping.swapped = false;
-      } else {
-        state.images.A = synthetic;
-        state.images.B = real;
-        state.mapping.A_type = 'synthetic';
-        state.mapping.B_type = 'real';
-        state.mapping.swapped = true;
-      }
-
-      renderImage('A', state.images.A);
-      renderImage('B', state.images.B);
-      renderTypeLabels();
-      clearAllSelections();
-      setMsg('Real and synthetic images have been loaded and randomized into A/B.', 'ok');
-    }
-
-    function renderTypeLabels() {
-      els.labelAType.textContent = 'Blind review';
-      els.labelBType.textContent = 'Blind review';
-    }
-
-    function renderImage(slot, url) {
-      const wrap = slot === 'A' ? els.wrapA : els.wrapB;
-      state.zoom[slot] = 1;
-      if (!url) {
-        wrap.innerHTML = '<div class="placeholder">No image loaded</div>';
-        return;
-      }
-      wrap.innerHTML =
-        '<img id="img' + slot + '" src="' + escapeHtml(url) + '" alt="' + slot +
-        '" style="transform: scale(1);" onerror="handleImageError(\'' + slot + '\', \'' + escapeJs(url) + '\')" />';
-    }
-
-    function handleImageError(slot, url) {
-      const wrap = slot === 'A' ? els.wrapA : els.wrapB;
-      wrap.innerHTML =
-        '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' +
-        escapeHtml(url) + '</span></div>';
-      setMsg('One or more images could not be loaded. Check the raw image URL in manifest.', 'warn');
-    }
-
-    function zoomImage(slot, delta) {
-      const img = document.getElementById('img' + slot);
-      if (!img) return;
-      state.zoom[slot] = Math.max(0.4, Math.min(4, state.zoom[slot] + delta));
-      img.style.transform = 'scale(' + state.zoom[slot] + ')';
-    }
-
-    function resetZoom(slot) {
-      const img = document.getElementById('img' + slot);
-      if (!img) return;
-      state.zoom[slot] = 1;
-      img.style.transform = 'scale(1)';
-    }
-
-    function getRadioValue(name) {
-      const checked = document.querySelector('input[name="' + name + '"]:checked');
-      return checked ? checked.value : '';
-    }
-
-    function clearAllSelections() {
-      ['binaryChoice', 'scoreA', 'scoreB'].forEach((groupName) => {
-        document.querySelectorAll('input[name="' + groupName + '"]').forEach((el) => {
-          el.checked = false;
-        });
-      });
-    }
-
-    function clearCurrentForm(showMessage = true) {
-      clearAllSelections();
-      els.comment.value = '';
-      if (showMessage) {
-        setMsg('Current form has been cleared.', 'ok');
-      }
-    }
-
-    function selectedImageType(choice) {
-      if (choice === 'A') return state.mapping.A_type;
-      if (choice === 'B') return state.mapping.B_type;
-      if (choice === 'tie') return 'tie';
-      return '';
-    }
-
-    function buildResult() {
-      if (!state.images.A || !state.images.B) {
-        throw new Error('Please load both real and synthetic images first.');
-      }
-
-      const choice = getRadioValue('binaryChoice');
-      const scoreA = getRadioValue('scoreA');
-      const scoreB = getRadioValue('scoreB');
-
-      if (!choice && scoreA === '' && scoreB === '') {
-        throw new Error('Please complete at least one action: binary preference, image A score, or image B score.');
-      }
-
-      return {
-        reviewer_name: els.doctorName.value.trim(),
-        sample_id: sampleIdStore || extractSampleId(samplePathStore),
-        sample_path: samplePathStore,
-        report_text: reportTextStore.trim(),
-        real_image_url: state.pair.real,
-        synthetic_image_url: state.pair.synthetic,
-        image_A_url: state.images.A,
-        image_B_url: state.images.B,
-        image_A_type: state.mapping.A_type,
-        image_B_type: state.mapping.B_type,
-        swapped: state.mapping.swapped ? 'yes' : 'no',
-        binary_choice: choice,
-        selected_image_type: selectedImageType(choice),
-        score_A: scoreA,
-        score_B: scoreB,
-        comment: els.comment.value.trim(),
-        timestamp: new Date().toISOString(),
-      };
-    }
-
-    function extractSampleId(samplePath) {
-      if (!samplePath) return '';
-      const cleaned = samplePath.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-      const parts = cleaned.split('/');
-      return parts[parts.length - 1] || cleaned;
-    }
-
-    function submitResult() {
-      try {
-        if (!API_URL) throw new Error('API_URL is missing.');
-        const result = buildResult();
-        setMsg('Submitting...', 'warn');
-        submitViaFormFields(API_URL, result);
-      } catch (error) {
-        state.submitInProgress = false;
-        setMsg(error.message || String(error), 'warn');
-      }
-    }
-
-    function submitViaFormFields(url, payload) {
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = url;
-      form.target = 'gas_submit_frame';
-      form.style.display = 'none';
-
-      Object.entries(payload).forEach(([key, value]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value == null ? '' : String(value);
-        form.appendChild(input);
-      });
-
-      document.body.appendChild(form);
-      state.submitInProgress = true;
-      form.submit();
-      form.remove();
-    }
-
-    function onIframeLoaded() {
-      if (!state.submitInProgress) return;
-      state.submitInProgress = false;
-      setMsg('Form submitted. Check Google Sheet for the new row.', 'ok');
-    }
-
-    function setMsg(text, type) {
-      els.msg.textContent = text;
-      els.msg.className = 'status ' + (type === 'ok' ? 'ok' : 'warn');
-    }
-
-    function escapeHtml(s) {
-      return String(s)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    function escapeJs(s) {
-      return String(s)
-        .replace(/\\/g, '\\\\')
-        .replace(/'/g, "\\'")
-        .replace(/"/g, '\\"');
-    }
-
-    window.zoomImage = zoomImage;
-    window.resetZoom = resetZoom;
-    window.handleImageError = handleImageError;
-  </script>
-</body>
-</html>
+    function random
