@@ -1107,4 +1107,84 @@
         image_B_type: state.mapping.B_type,
         swapped: state.mapping.swapped ? 'yes' : 'no',
         binary_choice: choice,
-        selected_image_type: se
+        selected_image_type: selectedImageType(choice),
+        score_A: scoreA,
+        score_B: scoreB,
+        comment: els.comment.value.trim(),
+        timestamp: new Date().toISOString(),
+      };
+    }
+
+    function extractSampleId(samplePath) {
+      if (!samplePath) return '';
+      const cleaned = samplePath.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+      const parts = cleaned.split('/');
+      return parts[parts.length - 1] || cleaned;
+    }
+
+    function submitResult() {
+      try {
+        if (!API_URL) throw new Error('API_URL is missing.');
+        const result = buildResult();
+        setMsg('Submitting...', 'warn');
+        submitViaFormFields(API_URL, result);
+      } catch (error) {
+        state.submitInProgress = false;
+        setMsg(error.message || String(error), 'warn');
+      }
+    }
+
+    function submitViaFormFields(url, payload) {
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = url;
+      form.target = 'gas_submit_frame';
+      form.style.display = 'none';
+
+      Object.entries(payload).forEach(([key, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value == null ? '' : String(value);
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      state.submitInProgress = true;
+      form.submit();
+      form.remove();
+    }
+
+    function onIframeLoaded() {
+      if (!state.submitInProgress) return;
+      state.submitInProgress = false;
+      setMsg('Form submitted. Check Google Sheet for the new row.', 'ok');
+    }
+
+    function setMsg(text, type) {
+      els.msg.textContent = text;
+      els.msg.className = 'status ' + (type === 'ok' ? 'ok' : 'warn');
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function escapeJs(s) {
+      return String(s)
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '\\"');
+    }
+
+    window.zoomImage = zoomImage;
+    window.resetZoom = resetZoom;
+    window.handleImageError = handleImageError;
+  </script>
+</body>
+</html>
