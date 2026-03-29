@@ -308,6 +308,49 @@
       padding: 16px;
     }
 
+    /* Scoring Rules Footer Style */
+    .scoring-footer {
+      margin-top: 40px;
+      padding: 24px;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .scoring-footer h3 {
+      margin-top: 0;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .scoring-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .scoring-item {
+      padding: 12px;
+      border-radius: 10px;
+      background: #f9fafb;
+      border: 1px solid #f3f4f6;
+    }
+
+    .scoring-item strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .scoring-item span {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
     iframe.hidden-frame {
       display: none;
       width: 0;
@@ -341,7 +384,6 @@
   </header>
 
   <main class="container">
-    <!-- LEFT / MAIN -->
     <section class="card">
       <h2 style="margin-bottom: 6px;">Report and CXR Comparison</h2>
       <div class="muted">Read the report first, then inspect images A and B. Zoom in, zoom out, and reset are supported.</div>
@@ -408,9 +450,35 @@
         <h3 style="margin-top:0;">Current Result Preview</h3>
         <pre id="resultPreview" style="margin:0; white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.5; color:#374151;">None</pre>
       </div>
+
+      <footer class="scoring-footer">
+        <h3>Scoring Guidelines</h3>
+        <div class="scoring-list">
+          <div class="scoring-item">
+            <strong>2 points: Perfect Match</strong>
+            <span>Synthetic image is a perfect match for the text prompt, with all pathologies and details accurately represented.</span>
+          </div>
+          <div class="scoring-item">
+            <strong>1 point: Good Match</strong>
+            <span>Synthetic image displays most pathologies/details mentioned in the text prompt, with no core errors.</span>
+          </div>
+          <div class="scoring-item">
+            <strong>0 point: Core Only</strong>
+            <span>Synthetic image only displays the core pathology of the text prompt, without all details reflected.</span>
+          </div>
+          <div class="scoring-item">
+            <strong>-1 point: Obvious Omissions</strong>
+            <span>Synthetic image fails to display all pathologies mentioned in the text prompt, with obvious omissions.</span>
+          </div>
+          <div class="scoring-item">
+            <strong>-2 points: Complete Mismatch</strong>
+            <span>Synthetic image is completely mismatched with the text prompt, with no corresponding pathologies or serious errors.</span>
+          </div>
+        </div>
+        <p style="margin-top: 16px; font-size: 14px; color: var(--muted); font-style: italic;">Please directly record the score for each sample set.</p>
+      </footer>
     </section>
 
-    <!-- RIGHT -->
     <aside class="stack">
       <section class="card">
         <h2>Manifest Loader</h2>
