@@ -12,18 +12,15 @@
       --line: #e5e7eb;
       --text: #111827;
       --muted: #6b7280;
-      --primary: #1e293b;
-      --primary-soft: #334155;
+      --primary: #111827;
+      --primary-soft: #1f2937;
       --ok: #065f46;
-      --okbg: #d1fae5;
+      --okbg: #ecfdf5;
       --warn: #92400e;
-      --warnbg: #fef3c7;
+      --warnbg: #fffbeb;
       --accent: #2563eb;
       --accent-soft: #eff6ff;
-      --accent-hover: #dbeafe;
-      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-      --shadow-hover: 0 14px 40px rgba(15, 23, 42, 0.12);
+      --shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
       --radius: 18px;
     }
 
@@ -34,62 +31,50 @@
     html, body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #f3f4f6 100%);
       color: var(--text);
-    }
-
-    /* Custom Scrollbar for better UI */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-    button, input, textarea, select {
-      font: inherit;
     }
 
     body {
       min-height: 100vh;
     }
 
+    button, input, textarea, select {
+      font: inherit;
+    }
+
     .topbar {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(229, 231, 235, 0.5);
-      padding: 16px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
       position: sticky;
       top: 0;
-      z-index: 30;
-      box-shadow: var(--shadow-sm);
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .topbar-left {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+      min-width: 0;
     }
 
     .topbar h1 {
       margin: 0;
-      font-size: 24px;
-      font-weight: 800;
+      font-size: 22px;
       line-height: 1.2;
       letter-spacing: -0.02em;
-      color: var(--primary);
     }
 
     .topbar p {
-      margin: 0;
+      margin: 4px 0 0;
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .topbar-badge {
@@ -97,73 +82,60 @@
       align-items: center;
       justify-content: center;
       min-height: 38px;
-      padding: 0 16px;
+      padding: 0 14px;
       border-radius: 999px;
-      border: 1px solid #bfdbfe;
+      border: 1px solid #dbeafe;
       background: var(--accent-soft);
       color: var(--accent);
       font-weight: 700;
       font-size: 13px;
       white-space: nowrap;
-      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.1);
     }
 
     .page {
-      max-width: 1800px;
+      max-width: 1840px;
       margin: 0 auto;
-      padding: 32px 24px;
+      padding: 16px;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) 420px;
-      gap: 24px;
+      grid-template-columns: minmax(0, 1.55fr) 390px;
+      gap: 16px;
       align-items: start;
     }
 
     .stack {
       display: grid;
-      gap: 24px;
+      gap: 16px;
     }
 
     .card {
       background: var(--card);
-      border: 1px solid rgba(229, 231, 235, 0.8);
+      border: 1px solid rgba(229, 231, 235, 0.9);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 18px;
       box-shadow: var(--shadow);
-      transition: box-shadow 0.3s ease;
     }
 
-    .card:hover {
-      box-shadow: var(--shadow-hover);
+    .compact-card {
+      padding: 16px;
     }
 
-    .card h2, .card h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
+    .card h2,
+    .card h3 {
+      margin: 0 0 8px;
       letter-spacing: -0.01em;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .card-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
     }
 
     .card-subtext {
       color: var(--muted);
-      font-size: 14.5px;
-      line-height: 1.6;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .field {
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
 
     .field:last-child {
@@ -172,59 +144,56 @@
 
     .field label {
       display: block;
-      margin-bottom: 10px;
-      font-size: 14.5px;
+      margin-bottom: 8px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--primary);
+      color: var(--text);
     }
 
-    input[type="text"], textarea, select {
+    input[type="text"],
+    textarea,
+    select {
       width: 100%;
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 14px 16px;
-      background: #fafafa;
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      padding: 11px 13px;
+      background: white;
       color: var(--text);
       outline: none;
-      transition: all 0.2s ease;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    input[type="text"]:focus, textarea:focus, select:focus {
-      border-color: var(--accent);
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.18);
     }
 
     textarea {
-      min-height: 140px;
+      min-height: 110px;
       resize: vertical;
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     .btn {
       border: 1px solid #d1d5db;
       background: white;
-      border-radius: 12px;
-      padding: 12px 16px;
+      border-radius: 14px;
+      padding: 11px 14px;
       cursor: pointer;
       font-weight: 600;
-      color: var(--primary);
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .btn:hover {
-      background: #f8fafc;
-      border-color: #94a3b8;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-      transform: translateY(-1px);
+      background: #f9fafb;
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
     }
 
     .btn:active {
       transform: translateY(1px);
-      box-shadow: none;
     }
 
     .btn-primary {
@@ -238,44 +207,43 @@
       border-color: var(--primary-soft);
     }
 
+    .btn-strong {
+      min-height: 48px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
     .action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
     }
 
     .action-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     .toolbar {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-top: 14px;
-    }
-
-    .toolbar .btn {
-      padding: 8px 12px;
-      font-size: 13px;
-      border-radius: 8px;
+      margin-top: 12px;
     }
 
     .status {
-      border-radius: 12px;
-      padding: 14px 16px;
-      font-size: 14.5px;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 13px;
       line-height: 1.5;
       border: 1px solid transparent;
-      font-weight: 500;
     }
 
     .ok {
       background: var(--okbg);
       color: var(--ok);
-      border-color: #a7f3d0;
+      border-color: #bbf7d0;
     }
 
     .warn {
@@ -292,50 +260,38 @@
       font-size: 12px;
     }
 
-    /* Enhanced Score Chips UX */
     .chip {
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 12px 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 11px 12px;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
       background: white;
       cursor: pointer;
-      min-height: 48px;
-      transition: all 0.2s ease;
+      min-height: 46px;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
       user-select: none;
-      font-weight: 600;
-      color: var(--muted);
     }
 
     .chip:hover {
-      background: var(--card-soft);
+      background: #f8fafc;
       border-color: #cbd5e1;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
     }
 
-    .chip input[type="radio"] {
-      width: 16px;
-      height: 16px;
+    .chip:active {
+      transform: translateY(1px);
+    }
+
+    .chip input {
       margin: 0;
-      accent-color: var(--accent);
-      cursor: pointer;
-    }
-
-    /* Magic selector to highlight the entire button when radio is checked */
-    .chip:has(input:checked) {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      color: var(--accent);
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.15);
-      transform: translateY(-1px);
     }
 
     .score-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+      gap: 8px;
       width: 100%;
     }
 
@@ -343,236 +299,220 @@
       grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
-    .sample-overview {
+    .score-chip {
+      justify-content: center;
+      width: 100%;
+      font-weight: 700;
+    }
+
+    .main-top-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr 0.8fr;
-      gap: 16px;
-      margin-bottom: 24px;
+      grid-template-columns: 1.15fr 0.75fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .report-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      padding: 16px 18px;
+      min-height: 148px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .report-box .label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .report-box .content {
+      font-size: 18px;
+      line-height: 1.65;
+      font-weight: 600;
+      color: #111827;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow: auto;
+      max-height: 210px;
+      padding-right: 4px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      height: 100%;
     }
 
     .meta-box {
       background: var(--card-soft);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 14px;
       font-size: 13px;
-      line-height: 1.55;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .meta-box input {
-      margin-top: 8px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #d1d5db;
+      line-height: 1.5;
     }
 
     .meta-box strong {
       display: block;
       font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      color: #374151;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
-      margin-bottom: 4px;
     }
 
     .meta-value {
-      font-size: 24px;
-      font-weight: 800;
+      font-size: 22px;
+      font-weight: 700;
       letter-spacing: -0.02em;
-      color: var(--primary);
-      margin-top: 4px;
+      color: var(--text);
     }
 
-    .report-box {
-      margin-top: 20px;
-      margin-bottom: 24px;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      background: #ffffff;
-      padding: 24px;
-      border-left: 5px solid var(--accent);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .report-box .label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--accent);
-      margin-bottom: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .report-box .content {
-      font-size: 18px;
-      line-height: 1.8;
-      font-weight: 500;
-      color: #0f172a;
-      white-space: pre-wrap;
-      word-break: break-word;
+    .reviewer-box {
+      grid-column: 1 / -1;
     }
 
     .viewer-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 14px;
     }
 
     .image-panel {
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
       overflow: hidden;
       background: white;
-      box-shadow: var(--shadow-sm);
     }
 
     .panel-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid #e2e8f0;
-      background: #f8fafc;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      background: #fafafa;
     }
 
     .panel-head strong {
       font-size: 16px;
-      font-weight: 700;
-      color: var(--primary);
     }
 
     .panel-body {
-      padding: 16px;
+      padding: 12px;
     }
 
-    /* Dark background specifically optimized for Medical X-Rays */
     .image-wrap {
       width: 100%;
-      height: 560px;
-      border-radius: 12px;
-      background: #0f172a; 
-      box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+      height: calc(100vh - 360px);
+      min-height: 430px;
+      max-height: 720px;
+      border-radius: 14px;
+      background: #000;
       overflow: auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
     }
 
     .image-wrap img {
       max-width: none;
       transform-origin: center center;
-      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.15s ease;
       display: block;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
     .placeholder {
-      color: #64748b;
+      color: #9ca3af;
       text-align: center;
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 14px;
       line-height: 1.7;
       padding: 24px;
     }
 
     .sticky-side {
       position: sticky;
-      top: 100px;
+      top: 78px;
+      max-height: calc(100vh - 94px);
+      overflow: auto;
+      padding-right: 2px;
     }
 
     .section-divider {
       height: 1px;
       background: var(--line);
-      margin: 24px 0;
+      margin: 14px 0;
     }
 
     .helper-note {
-      border-radius: 12px;
-      background: var(--card-soft);
-      border: 1px dashed #cbd5e1;
-      padding: 14px 16px;
-      font-size: 13.5px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .rubric-card {
-      margin-top: 24px;
-    }
-
-    .rubric-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .rubric-grid {
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      border: 1px solid var(--line);
       border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #374151;
+    }
+
+    .submit-area {
+      display: grid;
+      gap: 10px;
+      margin-top: 4px;
+      margin-bottom: 14px;
+    }
+
+    .rubric-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
       overflow: hidden;
-      background: white;
+      background: #fff;
+      margin-top: 10px;
     }
 
     .rubric-row {
-      display: contents;
-    }
-
-    .rubric-row:nth-child(even) .rubric-score,
-    .rubric-row:nth-child(even) .rubric-desc {
-      background: #fafafa;
-    }
-
-    .rubric-score, .rubric-desc {
-      padding: 16px;
+      display: grid;
+      grid-template-columns: 64px 1fr;
       border-bottom: 1px solid var(--line);
     }
 
-    .rubric-row:last-child .rubric-score,
-    .rubric-row:last-child .rubric-desc {
+    .rubric-row:last-child {
       border-bottom: none;
     }
 
     .rubric-score {
       background: #f8fafc;
-      font-weight: 800;
-      font-size: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      letter-spacing: -0.02em;
-      color: var(--primary);
-      border-right: 1px solid var(--line);
+      font-weight: 800;
+      font-size: 16px;
+      padding: 12px 8px;
     }
 
     .rubric-desc {
-      line-height: 1.65;
-      font-size: 14.5px;
-      color: #334155;
+      padding: 12px 12px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: #374151;
     }
 
     .rubric-footer {
-      margin-top: 16px;
-      padding: 16px;
-      border-radius: 12px;
+      margin-top: 10px;
+      padding: 12px 13px;
+      border-radius: 14px;
       background: var(--accent-soft);
-      border: 1px dashed #93c5fd;
-      color: #1e40af;
-      font-size: 14px;
-      line-height: 1.6;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      font-size: 13px;
+      line-height: 1.55;
       font-weight: 700;
-      text-align: center;
     }
 
     iframe.hidden-frame {
@@ -582,20 +522,43 @@
       border: 0;
     }
 
-    @media (max-width: 1440px) {
-      .layout { grid-template-columns: 1fr; }
-      .sticky-side { position: static; }
-    }
-
-    @media (max-width: 980px) {
-      .viewer-grid, .action-grid, .action-grid-3, .sample-overview, .score-grid, .score-grid.five-col, .rubric-grid {
+    @media (max-width: 1450px) {
+      .layout {
         grid-template-columns: 1fr;
       }
-      .rubric-score {
-        justify-content: flex-start;
-        border-right: none;
+
+      .sticky-side {
+        position: static;
+        max-height: none;
+        overflow: visible;
       }
-      .image-wrap { height: 420px; }
+
+      .image-wrap {
+        height: 520px;
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .main-top-grid,
+      .viewer-grid,
+      .action-grid,
+      .action-grid-3,
+      .score-grid,
+      .score-grid.five-col,
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .image-wrap {
+        height: 420px;
+        min-height: 420px;
+      }
+
+      .report-box .content {
+        max-height: 240px;
+        font-size: 17px;
+      }
     }
   </style>
 </head>
@@ -603,45 +566,45 @@
   <header class="topbar">
     <div class="topbar-left">
       <h1>CXR Report Matching Blind Review</h1>
-      <p>
-        Manifest-driven review. Read the report first, then compare blinded Image A and Image B.
-        Real and synthetic images are randomized into A/B for blind evaluation.
-      </p>
+      <p>Read the report first, then compare blinded Image A and Image B. Real and synthetic images are randomized into A/B.</p>
     </div>
     <div class="topbar-badge">CXR Only</div>
   </header>
 
   <main class="page">
     <div class="layout">
+      <!-- LEFT -->
       <section class="stack">
-        <section class="card">
-          <div class="card-title-row">
-            <div>
-              <h2 style="margin-bottom: 8px;">Report and CXR Comparison</h2>
-              <div class="card-subtext">
-                Review the report carefully before inspecting the images. Use the zoom controls for detailed comparison.
+        <section class="card compact-card">
+          <div class="main-top-grid">
+            <div class="report-box">
+              <div class="label">Report</div>
+              <div id="reportDisplay" class="content"></div>
+            </div>
+
+            <div class="meta-grid">
+              <div class="meta-box reviewer-box">
+                <strong>Reviewer Name</strong>
+                <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
+              </div>
+              <div class="meta-box">
+                <strong>Current Index</strong>
+                <div id="sampleIndexLabel" class="meta-value">-</div>
+              </div>
+              <div class="meta-box">
+                <strong>Total Samples</strong>
+                <div id="sampleTotalLabel" class="meta-value">-</div>
               </div>
             </div>
           </div>
+        </section>
 
-          <div class="sample-overview">
-            <div class="meta-box">
-              <strong>Reviewer Name</strong>
-              <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
+        <section class="card compact-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px;">
+            <div>
+              <h2 style="margin-bottom:4px;">Image Comparison</h2>
+              <div class="card-subtext">Use zoom controls for detailed inspection.</div>
             </div>
-            <div class="meta-box">
-              <strong>Current Index</strong>
-              <div id="sampleIndexLabel" class="meta-value">-</div>
-            </div>
-            <div class="meta-box">
-              <strong>Total Samples</strong>
-              <div id="sampleTotalLabel" class="meta-value">-</div>
-            </div>
-          </div>
-
-          <div class="report-box">
-            <div class="label">📄 Target Report</div>
-            <div id="reportDisplay" class="content"></div>
           </div>
 
           <div class="viewer-grid">
@@ -655,9 +618,9 @@
                   <div class="placeholder">Please load image A</div>
                 </div>
                 <div class="toolbar">
-                  <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom In (+)</button>
-                  <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom Out (-)</button>
-                  <button class="btn" type="button" onclick="resetZoom('A')">Reset</button>
+                  <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
+                  <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
+                  <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
                 </div>
               </div>
             </div>
@@ -672,148 +635,129 @@
                   <div class="placeholder">Please load image B</div>
                 </div>
                 <div class="toolbar">
-                  <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom In (+)</button>
-                  <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom Out (-)</button>
-                  <button class="btn" type="button" onclick="resetZoom('B')">Reset</button>
+                  <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
+                  <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
+                  <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
-        <section class="card rubric-card">
-          <div class="rubric-header">
-            <div>
-              <h2 style="margin-bottom: 8px;">Scoring Guide</h2>
-              <div class="card-subtext">
-                Use the following rubric when assigning scores to each image against the report text.
-              </div>
-            </div>
-          </div>
-
-          <div class="rubric-grid">
-            <div class="rubric-row">
-              <div class="rubric-score" style="color: #059669;">2</div>
-              <div class="rubric-desc">
-                The synthetic image is a perfect match for the text prompt, with all pathologies and details accurately represented.
-              </div>
-            </div>
-
-            <div class="rubric-row">
-              <div class="rubric-score" style="color: #65a30d;">1</div>
-              <div class="rubric-desc">
-                The synthetic image displays most of the pathologies/details mentioned in the text prompt, with no core errors.
-              </div>
-            </div>
-
-            <div class="rubric-row">
-              <div class="rubric-score" style="color: #d97706;">0</div>
-              <div class="rubric-desc">
-                The synthetic image only displays the core pathology of the text prompt, without all details reflected.
-              </div>
-            </div>
-
-            <div class="rubric-row">
-              <div class="rubric-score" style="color: #ea580c;">-1</div>
-              <div class="rubric-desc">
-                The synthetic image fails to display all pathologies mentioned in the text prompt, with obvious omissions.
-              </div>
-            </div>
-
-            <div class="rubric-row">
-              <div class="rubric-score" style="color: #dc2626;">-2</div>
-              <div class="rubric-desc">
-                The synthetic image is completely mismatched with the text prompt, with no corresponding pathologies or serious errors.
-              </div>
-            </div>
-          </div>
-
-          <div class="rubric-footer">
-            Please directly record the score for each sample set using the panel on the right.
-          </div>
-        </section>
       </section>
 
-      <aside class="stack sticky-side">
-        <section class="card">
-          <h2>Manifest Loader</h2>
-          <div class="field">
-            <label>Manifest path</label>
-            <input type="text" id="manifestPath" value="./manifest.json" />
-          </div>
-
-          <div class="action-grid">
-            <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
-            <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
-          </div>
-
-          <div class="action-grid-3" style="margin-top:16px;">
-            <button class="btn" id="prevBtn" type="button">Previous</button>
-            <button class="btn" id="randomBtn" type="button">Random</button>
-            <button class="btn" id="nextBtn" type="button">Next</button>
-          </div>
-
-          <div class="helper-note" style="margin-top: 20px;">
-            The page reads the manifest file and automatically fills the report and image URLs for blind review.
-          </div>
-        </section>
-
-        <section class="card">
-          <h2>Scoring Panel</h2>
-          <div class="status ok" style="margin-bottom: 20px;">
-            Binary preference and separate scoring are both supported. You may fill in either one, or both.
-          </div>
-
-          <div class="field">
-            <label>Which image matches the report better? (optional)</label>
-            <div class="score-grid">
-              <label class="chip score-chip"><input type="radio" name="binaryChoice" value="A" /> Image A</label>
-              <label class="chip score-chip"><input type="radio" name="binaryChoice" value="B" /> Image B</label>
-              <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> Tie</label>
+      <!-- RIGHT -->
+      <aside class="sticky-side">
+        <div class="stack">
+          <section class="card">
+            <h2>Manifest Loader</h2>
+            <div class="field">
+              <label>Manifest path</label>
+              <input type="text" id="manifestPath" value="./manifest.json" />
             </div>
-          </div>
 
-          <div class="section-divider"></div>
-
-          <div class="field">
-            <label>Image A score (-2 to 2, optional)</label>
-            <div class="score-grid five-col">
-              <label class="chip score-chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
-              <label class="chip score-chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
-              <label class="chip score-chip"><input type="radio" name="scoreA" value="0" /> 0</label>
-              <label class="chip score-chip"><input type="radio" name="scoreA" value="1" /> 1</label>
-              <label class="chip score-chip"><input type="radio" name="scoreA" value="2" /> 2</label>
+            <div class="action-grid">
+              <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
+              <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
             </div>
-          </div>
 
-          <div class="field">
-            <label>Image B score (-2 to 2, optional)</label>
-            <div class="score-grid five-col">
-              <label class="chip score-chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
-              <label class="chip score-chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
-              <label class="chip score-chip"><input type="radio" name="scoreB" value="0" /> 0</label>
-              <label class="chip score-chip"><input type="radio" name="scoreB" value="1" /> 1</label>
-              <label class="chip score-chip"><input type="radio" name="scoreB" value="2" /> 2</label>
+            <div class="action-grid-3" style="margin-top:10px;">
+              <button class="btn" id="prevBtn" type="button">Previous</button>
+              <button class="btn" id="randomBtn" type="button">Random sample</button>
+              <button class="btn" id="nextBtn" type="button">Next</button>
             </div>
-          </div>
 
-          <div class="field">
-            <label>Comment</label>
-            <textarea
-              id="comment"
-              placeholder="e.g. A better matches bibasilar atelectatic change, while B is less consistent with the report statement of no pleural effusion."
-            ></textarea>
-          </div>
+            <div class="helper-note" style="margin-top: 12px;">
+              The page reads the manifest and fills report and image URLs automatically.
+            </div>
+          </section>
 
-          <div class="action-grid">
-            <button class="btn btn-primary" id="submitBtn" type="button" style="font-size: 16px;">Submit Evaluation</button>
-            <button class="btn" id="clearBtn" type="button">Clear form</button>
-          </div>
+          <section class="card">
+            <h2>Scoring Panel</h2>
+            <div class="status ok" style="margin-bottom: 14px;">
+              Binary preference and separate scoring are both supported. You may fill in either one, or both.
+            </div>
 
-          <div id="msg" class="status warn" style="margin-top: 16px;">
-            Load the manifest first. Binary preference and scoring are optional, but at least one action is required.
-          </div>
-        </section>
+            <div class="field">
+              <label>Which image matches the report better? (optional)</label>
+              <div class="score-grid">
+                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="A" /> Image A</label>
+                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="B" /> Image B</label>
+                <label class="chip score-chip"><input type="radio" name="binaryChoice" value="tie" /> Tie</label>
+              </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="field">
+              <label>Image A score (-2 to 2, optional)</label>
+              <div class="score-grid five-col">
+                <label class="chip score-chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
+                <label class="chip score-chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
+                <label class="chip score-chip"><input type="radio" name="scoreA" value="0" /> 0</label>
+                <label class="chip score-chip"><input type="radio" name="scoreA" value="1" /> 1</label>
+                <label class="chip score-chip"><input type="radio" name="scoreA" value="2" /> 2</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Image B score (-2 to 2, optional)</label>
+              <div class="score-grid five-col">
+                <label class="chip score-chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
+                <label class="chip score-chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
+                <label class="chip score-chip"><input type="radio" name="scoreB" value="0" /> 0</label>
+                <label class="chip score-chip"><input type="radio" name="scoreB" value="1" /> 1</label>
+                <label class="chip score-chip"><input type="radio" name="scoreB" value="2" /> 2</label>
+              </div>
+            </div>
+
+            <div class="submit-area">
+              <button class="btn btn-primary btn-strong" id="submitBtn" type="button">Submit</button>
+              <button class="btn" id="clearBtn" type="button">Clear current form</button>
+            </div>
+
+            <div class="field">
+              <label>Comment</label>
+              <textarea
+                id="comment"
+                placeholder="Optional notes for this sample..."
+              ></textarea>
+            </div>
+
+            <div id="msg" class="status warn">
+              Load the manifest first. Binary preference and scoring are optional, but at least one action is required.
+            </div>
+
+            <div class="section-divider"></div>
+
+            <h3 style="margin-bottom:8px;">Scoring Guide</h3>
+            <div class="rubric-box">
+              <div class="rubric-row">
+                <div class="rubric-score">2</div>
+                <div class="rubric-desc">The synthetic image is a perfect match for the text prompt, with all pathologies and details accurately represented.</div>
+              </div>
+              <div class="rubric-row">
+                <div class="rubric-score">1</div>
+                <div class="rubric-desc">The synthetic image displays most of the pathologies/details mentioned in the text prompt, with no core errors.</div>
+              </div>
+              <div class="rubric-row">
+                <div class="rubric-score">0</div>
+                <div class="rubric-desc">The synthetic image only displays the core pathology of the text prompt, without all details reflected.</div>
+              </div>
+              <div class="rubric-row">
+                <div class="rubric-score">-1</div>
+                <div class="rubric-desc">The synthetic image fails to display all pathologies mentioned in the text prompt, with obvious omissions.</div>
+              </div>
+              <div class="rubric-row">
+                <div class="rubric-score">-2</div>
+                <div class="rubric-desc">The synthetic image is completely mismatched with the text prompt, with no corresponding pathologies or serious errors.</div>
+              </div>
+            </div>
+
+            <div class="rubric-footer">
+              Please directly record the score for each sample set.
+            </div>
+          </section>
+        </div>
       </aside>
     </div>
   </main>
@@ -871,7 +815,7 @@
       els.nextBtn.addEventListener('click', nextSample);
       els.randomBtn.addEventListener('click', randomSample);
       els.submitBtn.addEventListener('click', submitResult);
-      els.clearBtn.addEventListener('click', () => clearCurrentForm(true));
+      els.clearBtn.addEventListener('click', clearCurrentForm);
       els.gasSubmitFrame.addEventListener('load', onIframeLoaded);
 
       syncReportDisplay();
@@ -1078,7 +1022,7 @@
     function handleImageError(slot, url) {
       const wrap = slot === 'A' ? els.wrapA : els.wrapB;
       wrap.innerHTML =
-        '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px; opacity:0.8;">' +
+        '<div class="placeholder">Failed to load image.<br/><span style="font-size:12px;">' +
         escapeHtml(url) + '</span></div>';
       setMsg('One or more images could not be loaded. Check the raw image URL in manifest.', 'warn');
     }
@@ -1086,7 +1030,7 @@
     function zoomImage(slot, delta) {
       const img = document.getElementById('img' + slot);
       if (!img) return;
-      state.zoom[slot] = Math.max(0.4, Math.min(6, state.zoom[slot] + delta));
+      state.zoom[slot] = Math.max(0.4, Math.min(4, state.zoom[slot] + delta));
       img.style.transform = 'scale(' + state.zoom[slot] + ')';
     }
 
@@ -1151,81 +1095,84 @@
         image_B_type: state.mapping.B_type,
         swapped: state.mapping.swapped ? 'yes' : 'no',
         binary_choice: choice,
-        // --- ADDED MISSING CODE BELOW ---
         selected_image_type: selectedImageType(choice),
-        image_A_score: scoreA,
-        image_B_score: scoreB,
-        comment: els.comment.value.trim()
+        score_A: scoreA,
+        score_B: scoreB,
+        comment: els.comment.value.trim(),
+        timestamp: new Date().toISOString(),
       };
     }
 
-    async function submitResult() {
-      if (state.submitInProgress) return;
+    function extractSampleId(samplePath) {
+      if (!samplePath) return '';
+      const cleaned = samplePath.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+      const parts = cleaned.split('/');
+      return parts[parts.length - 1] || cleaned;
+    }
+
+    function submitResult() {
       try {
-        const data = buildResult();
-        state.submitInProgress = true;
+        if (!API_URL) throw new Error('API_URL is missing.');
+        const result = buildResult();
         setMsg('Submitting...', 'warn');
-        els.submitBtn.textContent = 'Submitting...';
-        els.submitBtn.disabled = true;
-
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = API_URL;
-        form.target = 'gas_submit_frame';
-
-        Object.keys(data).forEach(key => {
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = key;
-          input.value = data[key];
-          form.appendChild(input);
-        });
-
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
-        
-      } catch (e) {
-        setMsg(e.message, 'warn');
+        submitViaFormFields(API_URL, result);
+      } catch (error) {
         state.submitInProgress = false;
-        els.submitBtn.textContent = 'Submit Evaluation';
-        els.submitBtn.disabled = false;
+        setMsg(error.message || String(error), 'warn');
       }
     }
 
+    function submitViaFormFields(url, payload) {
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = url;
+      form.target = 'gas_submit_frame';
+      form.style.display = 'none';
+
+      Object.entries(payload).forEach(([key, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value == null ? '' : String(value);
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      state.submitInProgress = true;
+      form.submit();
+      form.remove();
+    }
+
     function onIframeLoaded() {
-      if (!state.submitInProgress) return; // Ignore initial load
+      if (!state.submitInProgress) return;
       state.submitInProgress = false;
-      els.submitBtn.textContent = 'Submit Evaluation';
-      els.submitBtn.disabled = false;
-      setMsg('Result submitted successfully!', 'ok');
-      
-      // Auto move to next sample after short delay
-      setTimeout(nextSample, 1000);
+      setMsg('Form submitted. Check Google Sheet for the new row.', 'ok');
     }
 
     function setMsg(text, type) {
-      els.msg.className = 'status ' + type;
-      els.msg.innerHTML = text;
+      els.msg.textContent = text;
+      els.msg.className = 'status ' + (type === 'ok' ? 'ok' : 'warn');
     }
 
-    function escapeHtml(unsafe) {
-      return (unsafe || '').toString()
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
-    function escapeJs(unsafe) {
-      return (unsafe || '').toString().replace(/'/g, "\\'");
+    function escapeJs(s) {
+      return String(s)
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '\\"');
     }
 
-    function extractSampleId(path) {
-      const parts = path.split('/');
-      return parts.pop() || path;
-    }
+    window.zoomImage = zoomImage;
+    window.resetZoom = resetZoom;
+    window.handleImageError = handleImageError;
   </script>
 </body>
 </html>
