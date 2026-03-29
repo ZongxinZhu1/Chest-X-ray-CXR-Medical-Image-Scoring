@@ -20,7 +20,7 @@
       --warnbg: #fffbeb;
       --accent: #2563eb;
       --accent-soft: #eff6ff;
-      --shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+      --shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
       --radius: 16px;
     }
 
@@ -47,7 +47,7 @@
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 60;
+      z-index: 50;
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
@@ -65,7 +65,7 @@
 
     .topbar h1 {
       margin: 0;
-      font-size: 19px;
+      font-size: 18px;
       line-height: 1.2;
       letter-spacing: -0.02em;
     }
@@ -81,7 +81,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 34px;
+      min-height: 32px;
       padding: 0 12px;
       border-radius: 999px;
       border: 1px solid #dbeafe;
@@ -100,7 +100,7 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.68fr) 350px;
+      grid-template-columns: minmax(0, 1.66fr) 360px;
       gap: 14px;
       align-items: start;
     }
@@ -171,7 +171,7 @@
     }
 
     textarea {
-      min-height: 96px;
+      min-height: 92px;
       resize: vertical;
       line-height: 1.5;
     }
@@ -213,17 +213,6 @@
       font-weight: 700;
     }
 
-    .btn-ghost {
-      background: #f8fafc;
-    }
-
-    .toolbar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
     .action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -234,6 +223,13 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
     }
 
     .status {
@@ -309,19 +305,26 @@
       font-weight: 700;
     }
 
+    .main-top-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
     .report-box {
       border: 1px solid var(--line);
       border-radius: 14px;
       background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
       padding: 12px 14px;
-      min-height: 96px;
+      min-height: 88px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
     }
 
     .report-box .label {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--muted);
       margin-bottom: 6px;
       font-weight: 700;
@@ -337,8 +340,46 @@
       white-space: pre-wrap;
       word-break: break-word;
       overflow: auto;
-      max-height: 76px;
+      max-height: 62px;
       padding-right: 2px;
+    }
+
+    .meta-line {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card-soft);
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: minmax(180px, 1.45fr) 0.8fr 0.8fr;
+      gap: 10px;
+      align-items: end;
+      min-height: 88px;
+    }
+
+    .meta-item {
+      min-width: 0;
+    }
+
+    .meta-item .meta-label {
+      display: block;
+      font-size: 11px;
+      margin-bottom: 6px;
+      color: #374151;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .meta-value {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .meta-inline-input {
+      width: 100%;
     }
 
     .viewer-grid {
@@ -373,9 +414,9 @@
 
     .image-wrap {
       width: 100%;
-      height: calc(100vh - 235px);
-      min-height: 520px;
-      max-height: 800px;
+      height: calc(100vh - 255px);
+      min-height: 500px;
+      max-height: 780px;
       border-radius: 12px;
       background: #000;
       overflow: auto;
@@ -401,93 +442,10 @@
 
     .sticky-side {
       position: sticky;
-      top: 64px;
-      max-height: calc(100vh - 76px);
+      top: 62px;
+      max-height: calc(100vh - 74px);
       overflow: auto;
       padding-right: 2px;
-    }
-
-    .manifest-card {
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .manifest-toggle {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid var(--line);
-      background: white;
-      padding: 14px 14px;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .manifest-toggle:hover {
-      background: #fafafa;
-    }
-
-    .manifest-toggle-left {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      min-width: 0;
-    }
-
-    .manifest-toggle-left span:last-child {
-      font-weight: 500;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .manifest-chevron {
-      font-size: 15px;
-      line-height: 1;
-      transition: transform 0.18s ease;
-      color: #475569;
-    }
-
-    .manifest-card.open .manifest-chevron {
-      transform: rotate(180deg);
-    }
-
-    .manifest-content {
-      display: none;
-      padding: 12px 14px 14px;
-      background: white;
-    }
-
-    .manifest-card.open .manifest-content {
-      display: block;
-    }
-
-    .review-side-card {
-      background: var(--card-soft);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .review-side-item .meta-label {
-      font-size: 11px;
-      color: #374151;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .review-side-item .meta-value {
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.1;
     }
 
     .section-divider {
@@ -560,6 +518,72 @@
       font-weight: 700;
     }
 
+    .collapsible-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .collapse-toggle {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      padding: 13px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .collapse-toggle:hover {
+      background: #fafafa;
+    }
+
+    .collapse-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .collapse-subtitle {
+      font-size: 11.5px;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .collapse-icon {
+      font-size: 14px;
+      color: var(--muted);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .collapsible-card.open .collapse-icon {
+      transform: rotate(180deg);
+    }
+
+    .collapse-content {
+      display: none;
+      padding: 0 14px 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .collapsible-card.open .collapse-content {
+      display: block;
+    }
+
+    .manifest-mini-status {
+      padding: 0 14px 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
     iframe.hidden-frame {
       display: none;
       width: 0;
@@ -584,7 +608,8 @@
       }
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1100px) {
+      .main-top-grid,
       .viewer-grid,
       .action-grid,
       .action-grid-3,
@@ -593,13 +618,18 @@
         grid-template-columns: 1fr;
       }
 
+      .meta-line {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
       .image-wrap {
         height: 440px;
-        min-height: 420px;
+        min-height: 440px;
       }
 
       .report-box .content {
-        max-height: 110px;
+        max-height: 120px;
       }
     }
   </style>
@@ -617,9 +647,26 @@
     <div class="layout">
       <section class="stack">
         <section class="card compact-card">
-          <div class="report-box">
-            <div class="label">Report</div>
-            <div id="reportDisplay" class="content"></div>
+          <div class="main-top-grid">
+            <div class="report-box">
+              <div class="label">Report</div>
+              <div id="reportDisplay" class="content"></div>
+            </div>
+
+            <div class="meta-line">
+              <div class="meta-item">
+                <span class="meta-label">Reviewer Name</span>
+                <input class="meta-inline-input" type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Current Index</span>
+                <div id="sampleIndexLabel" class="meta-value">-</div>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Total Samples</span>
+                <div id="sampleTotalLabel" class="meta-value">-</div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -671,17 +718,21 @@
 
       <aside class="sticky-side">
         <div class="stack">
-          <section class="card manifest-card" id="manifestCard">
-            <button class="manifest-toggle" id="manifestToggle" type="button" aria-expanded="false">
-              <div class="manifest-toggle-left">
+          <section class="card collapsible-card" id="manifestCard">
+            <button class="collapse-toggle" type="button" id="manifestToggleBtn" aria-expanded="false">
+              <span class="collapse-title-wrap">
                 <span>Manifest Loader</span>
-                <span>Collapsed by default. Open only when needed.</span>
-              </div>
-              <span class="manifest-chevron">▾</span>
+                <span class="collapse-subtitle">Collapsed by default. Expand only when needed.</span>
+              </span>
+              <span class="collapse-icon">▼</span>
             </button>
 
-            <div class="manifest-content" id="manifestContent">
-              <div class="field">
+            <div class="manifest-mini-status">
+              Current path: <span id="manifestPathMini">./manifest.json</span>
+            </div>
+
+            <div class="collapse-content" id="manifestCollapseContent">
+              <div class="field" style="margin-top:12px;">
                 <label>Manifest path</label>
                 <input type="text" id="manifestPath" value="./manifest.json" />
               </div>
@@ -697,24 +748,9 @@
                 <button class="btn" id="nextBtn" type="button">Next</button>
               </div>
 
-              <div class="helper-note" style="margin-top: 10px;">
+              <div class="helper-note" style="margin-top:10px;">
                 The page reads the manifest and fills report and image URLs automatically.
               </div>
-            </div>
-          </section>
-
-          <section class="review-side-card">
-            <div class="review-side-item">
-              <div class="meta-label">Reviewer Name</div>
-              <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
-            </div>
-            <div class="review-side-item">
-              <div class="meta-label">Current Index</div>
-              <div id="sampleIndexLabel" class="meta-value">-</div>
-            </div>
-            <div class="review-side-item">
-              <div class="meta-label">Total Samples</div>
-              <div id="sampleTotalLabel" class="meta-value">-</div>
             </div>
           </section>
 
@@ -759,7 +795,7 @@
 
             <div class="submit-area">
               <button class="btn btn-primary btn-strong" id="submitBtn" type="button">Submit</button>
-              <button class="btn btn-ghost" id="clearBtn" type="button">Clear current form</button>
+              <button class="btn" id="clearBtn" type="button">Clear current form</button>
             </div>
 
             <div class="field">
@@ -820,13 +856,17 @@
       currentIndex: -1,
       submitInProgress: false,
       pendingTarget: '',
-      manifestOpen: false
+      manifestExpanded: false
     };
 
     const els = {
       doctorName: document.getElementById('doctorName'),
       reportDisplay: document.getElementById('reportDisplay'),
       manifestPath: document.getElementById('manifestPath'),
+      manifestPathMini: document.getElementById('manifestPathMini'),
+      manifestCard: document.getElementById('manifestCard'),
+      manifestToggleBtn: document.getElementById('manifestToggleBtn'),
+      manifestCollapseContent: document.getElementById('manifestCollapseContent'),
       sampleIndexLabel: document.getElementById('sampleIndexLabel'),
       sampleTotalLabel: document.getElementById('sampleTotalLabel'),
       wrapA: document.getElementById('wrapA'),
@@ -843,8 +883,6 @@
       clearBtn: document.getElementById('clearBtn'),
       comment: document.getElementById('comment'),
       gasSubmitFrame: document.getElementById('gasSubmitFrame'),
-      manifestCard: document.getElementById('manifestCard'),
-      manifestToggle: document.getElementById('manifestToggle')
     };
 
     let reportTextStore = '';
@@ -864,27 +902,34 @@
       els.submitBtn.addEventListener('click', submitResult);
       els.clearBtn.addEventListener('click', clearCurrentForm);
       els.gasSubmitFrame.addEventListener('load', onIframeLoaded);
-      els.manifestToggle.addEventListener('click', toggleManifest);
+      els.manifestToggleBtn.addEventListener('click', toggleManifestCard);
+      els.manifestPath.addEventListener('input', syncManifestMiniPath);
 
       syncReportDisplay();
       renderTypeLabels();
       updateSampleMeta();
       hydrateFromQuery();
-      setManifestOpen(false);
+      syncManifestMiniPath();
+      setManifestExpanded(false);
 
       if (els.manifestPath.value.trim()) {
         loadManifest();
       }
     }
 
-    function setManifestOpen(open) {
-      state.manifestOpen = open;
-      els.manifestCard.classList.toggle('open', open);
-      els.manifestToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    function toggleManifestCard() {
+      setManifestExpanded(!state.manifestExpanded);
     }
 
-    function toggleManifest() {
-      setManifestOpen(!state.manifestOpen);
+    function setManifestExpanded(expanded) {
+      state.manifestExpanded = expanded;
+      els.manifestCard.classList.toggle('open', expanded);
+      els.manifestToggleBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    }
+
+    function syncManifestMiniPath() {
+      const value = els.manifestPath.value.trim() || './manifest.json';
+      els.manifestPathMini.textContent = value;
     }
 
     function syncReportDisplay() {
@@ -904,6 +949,7 @@
     async function loadManifest() {
       try {
         const path = els.manifestPath.value.trim() || './manifest.json';
+        syncManifestMiniPath();
         setMsg('Loading manifest...', 'warn');
 
         const resp = await fetch(path, { cache: 'no-store' });
@@ -930,6 +976,7 @@
 
         loadSample(targetIndex);
         setMsg('Manifest loaded successfully.', 'ok');
+        setManifestExpanded(false);
       } catch (error) {
         setMsg(error.message || String(error), 'warn');
       }
