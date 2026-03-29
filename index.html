@@ -308,30 +308,6 @@
       padding: 16px;
     }
 
-    .instruction-box {
-      margin-top: 14px;
-      border-radius: 12px;
-      padding: 14px 16px;
-      background: #f9fafb;
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .instruction-box strong.title {
-      display: block;
-      margin-bottom: 8px;
-      color: #111827;
-      font-size: 14px;
-    }
-
-    .instruction-box .note {
-      margin-top: 10px;
-      color: #111827;
-      font-weight: 600;
-    }
-
     iframe.hidden-frame {
       display: none;
       width: 0;
@@ -504,16 +480,6 @@
         </div>
 
         <div id="msg" class="status warn" style="margin-top: 14px;">Load the manifest first. Binary preference and scoring are optional, but at least one action is required.</div>
-
-        <div class="instruction-box">
-          <strong class="title">Scoring guideline</strong>
-          <div><strong>2 points:</strong> The image is a perfect match to the report, and all pathologies and details are accurately represented.</div>
-          <div><strong>1 point:</strong> The image reflects most of the pathologies and details mentioned in the report, with no major error.</div>
-          <div><strong>0 point:</strong> The image reflects only the core pathology in the report, while some details are missing.</div>
-          <div><strong>-1 point:</strong> The image fails to reflect all pathologies mentioned in the report and shows obvious omissions.</div>
-          <div><strong>-2 point:</strong> The image is completely mismatched with the report, with no corresponding pathology or with serious errors.</div>
-          <div class="note">Please assign a score directly for each sample set.</div>
-        </div>
       </section>
     </aside>
   </main>
