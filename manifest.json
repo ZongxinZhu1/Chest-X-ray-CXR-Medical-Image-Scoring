@@ -1,0 +1,930 @@
+[
+  {
+    "sample_id": "7f24382c-fccc9a12-ef8d675c-d15fea49-3b88539d",
+    "sample_path": "p17/p17680505/s56341016/7f24382c-fccc9a12-ef8d675c-d15fea49-3b88539d",
+    "report_text": "Normal chest x-ray.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17680505/s56341016/7f24382c-fccc9a12-ef8d675c-d15fea49-3b88539d.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17680505/s56341016/7f24382c-fccc9a12-ef8d675c-d15fea49-3b88539d.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "8d6208f0-5fc2de74-a650ee53-d2c6b5d5-6dea8c9e",
+    "sample_path": "p17/p17243723/s55351374/8d6208f0-5fc2de74-a650ee53-d2c6b5d5-6dea8c9e",
+    "report_text": "Left basilar atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17243723/s55351374/8d6208f0-5fc2de74-a650ee53-d2c6b5d5-6dea8c9e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17243723/s55351374/8d6208f0-5fc2de74-a650ee53-d2c6b5d5-6dea8c9e.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "f313a4fd-d3207828-c0dc57a1-d801b4b5-0f9c6d5b",
+    "sample_path": "p14/p14093782/s55429636/f313a4fd-d3207828-c0dc57a1-d801b4b5-0f9c6d5b",
+    "report_text": "Moderate right-sided pleural effusion.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14093782/s55429636/f313a4fd-d3207828-c0dc57a1-d801b4b5-0f9c6d5b.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14093782/s55429636/f313a4fd-d3207828-c0dc57a1-d801b4b5-0f9c6d5b.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "2a4e071c-c88292f0-43702f84-2c5aa63c-927c5a33",
+    "sample_path": "p11/p11089893/s53423783/2a4e071c-c88292f0-43702f84-2c5aa63c-927c5a33",
+    "report_text": "Normal chest radiographs.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11089893/s53423783/2a4e071c-c88292f0-43702f84-2c5aa63c-927c5a33.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11089893/s53423783/2a4e071c-c88292f0-43702f84-2c5aa63c-927c5a33.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "bfa8657f-7267fede-a4efae6e-8aa4de7d-fd0fe80e",
+    "sample_path": "p17/p17747104/s55091006/bfa8657f-7267fede-a4efae6e-8aa4de7d-fd0fe80e",
+    "report_text": "Clear lungs.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17747104/s55091006/bfa8657f-7267fede-a4efae6e-8aa4de7d-fd0fe80e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17747104/s55091006/bfa8657f-7267fede-a4efae6e-8aa4de7d-fd0fe80e.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "b46d60e1-3184565e-4af84d80-21834d08-77e0f083",
+    "sample_path": "p12/p12950657/s57637411/b46d60e1-3184565e-4af84d80-21834d08-77e0f083",
+    "report_text": "Cardiomegaly without superimposed acute cardiopulmonary process.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12950657/s57637411/b46d60e1-3184565e-4af84d80-21834d08-77e0f083.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12950657/s57637411/b46d60e1-3184565e-4af84d80-21834d08-77e0f083.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "36f2baf4-ca447d45-8d43515b-e4fb3a6e-754e4793",
+    "sample_path": "p10/p10635271/s54277016/36f2baf4-ca447d45-8d43515b-e4fb3a6e-754e4793",
+    "report_text": "Pacer leads in appropriate position.  Large hiatal hernia on the\n left.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10635271/s54277016/36f2baf4-ca447d45-8d43515b-e4fb3a6e-754e4793.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10635271/s54277016/36f2baf4-ca447d45-8d43515b-e4fb3a6e-754e4793.png",
+    "label": "support devices"
+  },
+  {
+    "sample_id": "4535711c-b8aa17ae-fea37fdf-4beff83d-ffc5a06d",
+    "sample_path": "p18/p18718699/s54447947/4535711c-b8aa17ae-fea37fdf-4beff83d-ffc5a06d",
+    "report_text": "Mild increase in size of the moderate left sided pleural effusion",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18718699/s54447947/4535711c-b8aa17ae-fea37fdf-4beff83d-ffc5a06d.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18718699/s54447947/4535711c-b8aa17ae-fea37fdf-4beff83d-ffc5a06d.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "080efa31-eb928779-aab938cd-6dcea29a-1e86df19",
+    "sample_path": "p11/p11385069/s54283409/080efa31-eb928779-aab938cd-6dcea29a-1e86df19",
+    "report_text": "Mild bibasilar atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11385069/s54283409/080efa31-eb928779-aab938cd-6dcea29a-1e86df19.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11385069/s54283409/080efa31-eb928779-aab938cd-6dcea29a-1e86df19.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "01e5d847-be163373-2ebad005-8d00cc5a-38b46087",
+    "sample_path": "p18/p18994071/s50489638/01e5d847-be163373-2ebad005-8d00cc5a-38b46087",
+    "report_text": "Mild pulmonary edema.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18994071/s50489638/01e5d847-be163373-2ebad005-8d00cc5a-38b46087.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18994071/s50489638/01e5d847-be163373-2ebad005-8d00cc5a-38b46087.png",
+    "label": "edema"
+  },
+  {
+    "sample_id": "5e059dc3-23a86026-b21be0ea-53c0b31a-b82d461e",
+    "sample_path": "p12/p12609993/s53961456/5e059dc3-23a86026-b21be0ea-53c0b31a-b82d461e",
+    "report_text": "Low lung volumes with mild bibasilar atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12609993/s53961456/5e059dc3-23a86026-b21be0ea-53c0b31a-b82d461e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12609993/s53961456/5e059dc3-23a86026-b21be0ea-53c0b31a-b82d461e.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "7f923dae-426cdf7f-80637084-49f957be-468c22f4",
+    "sample_path": "p17/p17222773/s54825323/7f923dae-426cdf7f-80637084-49f957be-468c22f4",
+    "report_text": "Cardiomegaly without evidence of acute intrathoracic process.  If\n a prior cardiac workup has not been done, a cardiac consult is recommended.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17222773/s54825323/7f923dae-426cdf7f-80637084-49f957be-468c22f4.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17222773/s54825323/7f923dae-426cdf7f-80637084-49f957be-468c22f4.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "8c338ba2-0f29e8ad-01e501ce-8bbaf393-c5b91cdf",
+    "sample_path": "p15/p15667886/s55045298/8c338ba2-0f29e8ad-01e501ce-8bbaf393-c5b91cdf",
+    "report_text": "Multi-focal pulmonary opacities, better assessed on concurrent\n chest CT.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15667886/s55045298/8c338ba2-0f29e8ad-01e501ce-8bbaf393-c5b91cdf.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15667886/s55045298/8c338ba2-0f29e8ad-01e501ce-8bbaf393-c5b91cdf.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "881a769f-bdf2ea81-3d514562-4e428016-61610dce",
+    "sample_path": "p16/p16962305/s58777504/881a769f-bdf2ea81-3d514562-4e428016-61610dce",
+    "report_text": "Findings suggest pneumonia in the left lower lobe.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16962305/s58777504/881a769f-bdf2ea81-3d514562-4e428016-61610dce.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16962305/s58777504/881a769f-bdf2ea81-3d514562-4e428016-61610dce.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "fec57bc4-92f0e297-abfb4be5-643a9509-30270ccc",
+    "sample_path": "p16/p16062724/s54398738/fec57bc4-92f0e297-abfb4be5-643a9509-30270ccc",
+    "report_text": "Mild cardiomegaly with probable mild hilar congestion.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16062724/s54398738/fec57bc4-92f0e297-abfb4be5-643a9509-30270ccc.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16062724/s54398738/fec57bc4-92f0e297-abfb4be5-643a9509-30270ccc.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "8a3fc7d9-f7bbe6a3-c45d5223-76530d7b-315de76d",
+    "sample_path": "p16/p16581981/s56568752/8a3fc7d9-f7bbe6a3-c45d5223-76530d7b-315de76d",
+    "report_text": "Possible multifocal pneumonia.  CT imaging may provide further information in\n evaluating for infectious process.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16581981/s56568752/8a3fc7d9-f7bbe6a3-c45d5223-76530d7b-315de76d.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16581981/s56568752/8a3fc7d9-f7bbe6a3-c45d5223-76530d7b-315de76d.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "dd835ff3-23fd8ffe-98d639bf-b322a961-0dfdb1de",
+    "sample_path": "p15/p15719632/s54669463/dd835ff3-23fd8ffe-98d639bf-b322a961-0dfdb1de",
+    "report_text": "Right upper lobe pneumonia.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15719632/s54669463/dd835ff3-23fd8ffe-98d639bf-b322a961-0dfdb1de.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15719632/s54669463/dd835ff3-23fd8ffe-98d639bf-b322a961-0dfdb1de.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "9917ef02-d2041f0c-f09ecb5e-07f8f908-56fa4857",
+    "sample_path": "p12/p12208657/s59571824/9917ef02-d2041f0c-f09ecb5e-07f8f908-56fa4857",
+    "report_text": "Pacer defibrillator unit with leads in the right atrium, right\n ventricle, and a distal vein of the coronary sinus.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12208657/s59571824/9917ef02-d2041f0c-f09ecb5e-07f8f908-56fa4857.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12208657/s59571824/9917ef02-d2041f0c-f09ecb5e-07f8f908-56fa4857.png",
+    "label": "support devices"
+  },
+  {
+    "sample_id": "6a913f51-5a863111-add15f34-f94f2488-3d688a65",
+    "sample_path": "p15/p15211758/s51996107/6a913f51-5a863111-add15f34-f94f2488-3d688a65",
+    "report_text": "No short interval change in left greater than right small\n effusions.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15211758/s51996107/6a913f51-5a863111-add15f34-f94f2488-3d688a65.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15211758/s51996107/6a913f51-5a863111-add15f34-f94f2488-3d688a65.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "45aa0fe1-701ebb44-36d496d9-58fca3f1-a7777666",
+    "sample_path": "p14/p14884535/s57106245/45aa0fe1-701ebb44-36d496d9-58fca3f1-a7777666",
+    "report_text": "No changes of the left-sided pleural effusion.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14884535/s57106245/45aa0fe1-701ebb44-36d496d9-58fca3f1-a7777666.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14884535/s57106245/45aa0fe1-701ebb44-36d496d9-58fca3f1-a7777666.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "fc8b1264-3d9b3dd1-0a17a75d-4788d0fb-dc59a2a6",
+    "sample_path": "p12/p12139844/s59494068/fc8b1264-3d9b3dd1-0a17a75d-4788d0fb-dc59a2a6",
+    "report_text": "No evidence of intrathoracic injury.  No definite displaced rib\n fracture.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12139844/s59494068/fc8b1264-3d9b3dd1-0a17a75d-4788d0fb-dc59a2a6.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12139844/s59494068/fc8b1264-3d9b3dd1-0a17a75d-4788d0fb-dc59a2a6.png",
+    "label": "fracture"
+  },
+  {
+    "sample_id": "082236f2-601635b6-24dc7754-27e3eea9-e1892c40",
+    "sample_path": "p15/p15116019/s52261565/082236f2-601635b6-24dc7754-27e3eea9-e1892c40",
+    "report_text": "No evidence of acute cardiopulmonary process. Mild cardiomegaly.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15116019/s52261565/082236f2-601635b6-24dc7754-27e3eea9-e1892c40.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15116019/s52261565/082236f2-601635b6-24dc7754-27e3eea9-e1892c40.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "18c78432-0b838656-ad0c368e-a7d41eca-b6933db5",
+    "sample_path": "p14/p14552415/s55227368/18c78432-0b838656-ad0c368e-a7d41eca-b6933db5",
+    "report_text": "No evidence of acute cardiopulmonary process.  Cardiomegaly.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14552415/s55227368/18c78432-0b838656-ad0c368e-a7d41eca-b6933db5.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14552415/s55227368/18c78432-0b838656-ad0c368e-a7d41eca-b6933db5.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "20f27a04-4d8a74d1-cb1b1228-e834d79b-d304417a",
+    "sample_path": "p12/p12658758/s55447044/20f27a04-4d8a74d1-cb1b1228-e834d79b-d304417a",
+    "report_text": "Lower lung atelectasis appears chronic.  Mid upper lungs are well aerated.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12658758/s55447044/20f27a04-4d8a74d1-cb1b1228-e834d79b-d304417a.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12658758/s55447044/20f27a04-4d8a74d1-cb1b1228-e834d79b-d304417a.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "0861eb49-3e51b13f-74f50b11-b328dd60-870285cf",
+    "sample_path": "p14/p14202902/s52980564/0861eb49-3e51b13f-74f50b11-b328dd60-870285cf",
+    "report_text": "Mild edema.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14202902/s52980564/0861eb49-3e51b13f-74f50b11-b328dd60-870285cf.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14202902/s52980564/0861eb49-3e51b13f-74f50b11-b328dd60-870285cf.png",
+    "label": "edema"
+  },
+  {
+    "sample_id": "6ce4d531-5841c362-218bd351-cd394c3c-7c685261",
+    "sample_path": "p18/p18598323/s54530356/6ce4d531-5841c362-218bd351-cd394c3c-7c685261",
+    "report_text": "Moderate right-sided pleural effusion with underlying volume loss.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18598323/s54530356/6ce4d531-5841c362-218bd351-cd394c3c-7c685261.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18598323/s54530356/6ce4d531-5841c362-218bd351-cd394c3c-7c685261.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "a53cbb0a-c37762ec-83c068d0-240a4a66-e8806008",
+    "sample_path": "p10/p10386699/s51882066/a53cbb0a-c37762ec-83c068d0-240a4a66-e8806008",
+    "report_text": "No definite acute cardiopulmonary process.  Please note that CT\n is more sensitive in detecting pulmonary nodules.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10386699/s51882066/a53cbb0a-c37762ec-83c068d0-240a4a66-e8806008.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10386699/s51882066/a53cbb0a-c37762ec-83c068d0-240a4a66-e8806008.png",
+    "label": "lung lesion"
+  },
+  {
+    "sample_id": "d0ad5adb-3e074ba7-a74d4da9-6d3a56ee-2b642897",
+    "sample_path": "p17/p17449903/s55735283/d0ad5adb-3e074ba7-a74d4da9-6d3a56ee-2b642897",
+    "report_text": "Mild cardiomegaly with hilar congestion.  Chronic deformity at the shoulders.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17449903/s55735283/d0ad5adb-3e074ba7-a74d4da9-6d3a56ee-2b642897.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17449903/s55735283/d0ad5adb-3e074ba7-a74d4da9-6d3a56ee-2b642897.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "5e985b33-028f7f83-cfe4a1aa-49d16c71-d9b07741",
+    "sample_path": "p11/p11523342/s54327597/5e985b33-028f7f83-cfe4a1aa-49d16c71-d9b07741",
+    "report_text": "Low lung volumes with mild bibasilar atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11523342/s54327597/5e985b33-028f7f83-cfe4a1aa-49d16c71-d9b07741.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11523342/s54327597/5e985b33-028f7f83-cfe4a1aa-49d16c71-d9b07741.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "188ae415-e0ce4cdb-08a59e5c-3356706e-d861edf6",
+    "sample_path": "p10/p10553790/s57862980/188ae415-e0ce4cdb-08a59e5c-3356706e-d861edf6",
+    "report_text": "Similar cardiomegaly and suggestion of pulmonary venous hypertension, but no\n evidence of acute cardiopulmonary disease.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10553790/s57862980/188ae415-e0ce4cdb-08a59e5c-3356706e-d861edf6.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10553790/s57862980/188ae415-e0ce4cdb-08a59e5c-3356706e-d861edf6.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "e529a13c-351e3d49-06a128fe-456216fa-607cc89e",
+    "sample_path": "p10/p10595272/s59189184/e529a13c-351e3d49-06a128fe-456216fa-607cc89e",
+    "report_text": "Top normal heart size.  Chronic pleural thickening at the lateral right lung\n base.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10595272/s59189184/e529a13c-351e3d49-06a128fe-456216fa-607cc89e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10595272/s59189184/e529a13c-351e3d49-06a128fe-456216fa-607cc89e.png",
+    "label": "pleural other"
+  },
+  {
+    "sample_id": "2a2076ad-723be8e2-d77dacc4-d7dd88da-406f00ee",
+    "sample_path": "p18/p18860322/s54103094/2a2076ad-723be8e2-d77dacc4-d7dd88da-406f00ee",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18860322/s54103094/2a2076ad-723be8e2-d77dacc4-d7dd88da-406f00ee.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18860322/s54103094/2a2076ad-723be8e2-d77dacc4-d7dd88da-406f00ee.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "17a8adf8-43ac5b3d-799e580c-1ad52087-128b0e1f",
+    "sample_path": "p12/p12327003/s52820757/17a8adf8-43ac5b3d-799e580c-1ad52087-128b0e1f",
+    "report_text": "Normal chest radiographs.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12327003/s52820757/17a8adf8-43ac5b3d-799e580c-1ad52087-128b0e1f.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12327003/s52820757/17a8adf8-43ac5b3d-799e580c-1ad52087-128b0e1f.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "b2d8a692-57be4a74-22093646-94352f70-977323d1",
+    "sample_path": "p10/p10024913/s58116491/b2d8a692-57be4a74-22093646-94352f70-977323d1",
+    "report_text": "Low lung volumes and likely bibasilar atelectasis.  No definite\n evidence of acute cardiopulmonary process.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10024913/s58116491/b2d8a692-57be4a74-22093646-94352f70-977323d1.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10024913/s58116491/b2d8a692-57be4a74-22093646-94352f70-977323d1.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "ded9845d-9b6f1248-1cde2ae8-d4c40aa4-a2d575b3",
+    "sample_path": "p10/p10188472/s50107474/ded9845d-9b6f1248-1cde2ae8-d4c40aa4-a2d575b3",
+    "report_text": "Minimal right basilar atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10188472/s50107474/ded9845d-9b6f1248-1cde2ae8-d4c40aa4-a2d575b3.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10188472/s50107474/ded9845d-9b6f1248-1cde2ae8-d4c40aa4-a2d575b3.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "0facac59-23765960-bcd24728-419b401f-91ee8b95",
+    "sample_path": "p16/p16504235/s58692003/0facac59-23765960-bcd24728-419b401f-91ee8b95",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16504235/s58692003/0facac59-23765960-bcd24728-419b401f-91ee8b95.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16504235/s58692003/0facac59-23765960-bcd24728-419b401f-91ee8b95.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "a439b3b8-c47b2909-970514ad-4de4280c-674ddb0a",
+    "sample_path": "p10/p10218444/s59439105/a439b3b8-c47b2909-970514ad-4de4280c-674ddb0a",
+    "report_text": "Multifocal pneumonia in the right lung.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10218444/s59439105/a439b3b8-c47b2909-970514ad-4de4280c-674ddb0a.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10218444/s59439105/a439b3b8-c47b2909-970514ad-4de4280c-674ddb0a.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "1d010f87-461e765c-c2220040-18d7e0c6-1af52b75",
+    "sample_path": "p10/p10920734/s56355809/1d010f87-461e765c-c2220040-18d7e0c6-1af52b75",
+    "report_text": "Single lead defibrillator with the tip at the right ventricle.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10920734/s56355809/1d010f87-461e765c-c2220040-18d7e0c6-1af52b75.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10920734/s56355809/1d010f87-461e765c-c2220040-18d7e0c6-1af52b75.png",
+    "label": "support devices"
+  },
+  {
+    "sample_id": "84dd0fd5-7a3af2c8-fa3d349c-409e8aa4-d659afd3",
+    "sample_path": "p16/p16047854/s52904270/84dd0fd5-7a3af2c8-fa3d349c-409e8aa4-d659afd3",
+    "report_text": "Normal chest.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16047854/s52904270/84dd0fd5-7a3af2c8-fa3d349c-409e8aa4-d659afd3.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16047854/s52904270/84dd0fd5-7a3af2c8-fa3d349c-409e8aa4-d659afd3.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "ad62d57d-1c5f1244-b42d3eb4-91e7c24c-b78d2616",
+    "sample_path": "p10/p10884125/s55986699/ad62d57d-1c5f1244-b42d3eb4-91e7c24c-b78d2616",
+    "report_text": "Small bilateral pleural effusions.  No other acute cardiopulmonary process.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10884125/s55986699/ad62d57d-1c5f1244-b42d3eb4-91e7c24c-b78d2616.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10884125/s55986699/ad62d57d-1c5f1244-b42d3eb4-91e7c24c-b78d2616.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "c8568620-37ed5a0d-5d0c96a7-f0b71809-dba02a1a",
+    "sample_path": "p18/p18559862/s55409309/c8568620-37ed5a0d-5d0c96a7-f0b71809-dba02a1a",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18559862/s55409309/c8568620-37ed5a0d-5d0c96a7-f0b71809-dba02a1a.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18559862/s55409309/c8568620-37ed5a0d-5d0c96a7-f0b71809-dba02a1a.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "fabd4f59-1ee52083-5cddd2c5-186cc8bb-8a3b8148",
+    "sample_path": "p15/p15672829/s53399488/fabd4f59-1ee52083-5cddd2c5-186cc8bb-8a3b8148",
+    "report_text": "Mild basilar atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15672829/s53399488/fabd4f59-1ee52083-5cddd2c5-186cc8bb-8a3b8148.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15672829/s53399488/fabd4f59-1ee52083-5cddd2c5-186cc8bb-8a3b8148.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "00c35d60-8df6e36e-6cdd8247-3d8903b8-a341b47c",
+    "sample_path": "p10/p10790076/s59997534/00c35d60-8df6e36e-6cdd8247-3d8903b8-a341b47c",
+    "report_text": "Central venous catheter tip in the mid SVC. Enlargement of the\n pulmonary artery compatible with pulmonary arterial hypertension.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10790076/s59997534/00c35d60-8df6e36e-6cdd8247-3d8903b8-a341b47c.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10790076/s59997534/00c35d60-8df6e36e-6cdd8247-3d8903b8-a341b47c.png",
+    "label": "support devices"
+  },
+  {
+    "sample_id": "ff2891da-aecda7d4-810d7f8f-53a0e765-86087c3b",
+    "sample_path": "p14/p14586209/s57906625/ff2891da-aecda7d4-810d7f8f-53a0e765-86087c3b",
+    "report_text": "Bibasilar reticular opacities, left worse than right, are\n compatible with interstitial lung disease.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14586209/s57906625/ff2891da-aecda7d4-810d7f8f-53a0e765-86087c3b.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14586209/s57906625/ff2891da-aecda7d4-810d7f8f-53a0e765-86087c3b.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "6fb67bbb-0d9820fc-dc5162e0-865f1c70-b9b54478",
+    "sample_path": "p18/p18650767/s56896665/6fb67bbb-0d9820fc-dc5162e0-865f1c70-b9b54478",
+    "report_text": "Mild pulmonary edema.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18650767/s56896665/6fb67bbb-0d9820fc-dc5162e0-865f1c70-b9b54478.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18650767/s56896665/6fb67bbb-0d9820fc-dc5162e0-865f1c70-b9b54478.png",
+    "label": "edema"
+  },
+  {
+    "sample_id": "19c7fa4b-2cb2f260-ac9a6efb-0a98b225-4ba3be48",
+    "sample_path": "p10/p10029874/s55355911/19c7fa4b-2cb2f260-ac9a6efb-0a98b225-4ba3be48",
+    "report_text": "Improving left lower lobe opacity.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10029874/s55355911/19c7fa4b-2cb2f260-ac9a6efb-0a98b225-4ba3be48.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10029874/s55355911/19c7fa4b-2cb2f260-ac9a6efb-0a98b225-4ba3be48.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "1f13aaa2-9e9b7ab4-37981cd6-60b39fb3-c36600e2",
+    "sample_path": "p12/p12614981/s57459597/1f13aaa2-9e9b7ab4-37981cd6-60b39fb3-c36600e2",
+    "report_text": "Right middle lobe pneumonia.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12614981/s57459597/1f13aaa2-9e9b7ab4-37981cd6-60b39fb3-c36600e2.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12614981/s57459597/1f13aaa2-9e9b7ab4-37981cd6-60b39fb3-c36600e2.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "e7fc8483-14792d5b-0402f17a-9c716878-8cd4a96e",
+    "sample_path": "p11/p11761621/s53897882/e7fc8483-14792d5b-0402f17a-9c716878-8cd4a96e",
+    "report_text": "Cardiomegaly but no definite acute cardiopulmonary process.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11761621/s53897882/e7fc8483-14792d5b-0402f17a-9c716878-8cd4a96e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11761621/s53897882/e7fc8483-14792d5b-0402f17a-9c716878-8cd4a96e.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "8acda963-124d90b5-78e1363b-c6312707-7838852e",
+    "sample_path": "p15/p15095931/s57369832/8acda963-124d90b5-78e1363b-c6312707-7838852e",
+    "report_text": "Top-normal to mildly enlarged cardiac silhouette size, without evidence for\n acute cardiopulmonary process.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15095931/s57369832/8acda963-124d90b5-78e1363b-c6312707-7838852e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15095931/s57369832/8acda963-124d90b5-78e1363b-c6312707-7838852e.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "f8f63824-15b1247c-d2ee1b4e-a45bec30-dd8a0973",
+    "sample_path": "p17/p17985517/s53347393/f8f63824-15b1247c-d2ee1b4e-a45bec30-dd8a0973",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17985517/s53347393/f8f63824-15b1247c-d2ee1b4e-a45bec30-dd8a0973.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17985517/s53347393/f8f63824-15b1247c-d2ee1b4e-a45bec30-dd8a0973.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "75c03c7d-332b9a85-849404ac-9910d7bb-8e8638d7",
+    "sample_path": "p16/p16468274/s56873349/75c03c7d-332b9a85-849404ac-9910d7bb-8e8638d7",
+    "report_text": "Large left pneumothorax without signs of tension.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16468274/s56873349/75c03c7d-332b9a85-849404ac-9910d7bb-8e8638d7.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16468274/s56873349/75c03c7d-332b9a85-849404ac-9910d7bb-8e8638d7.png",
+    "label": "pneumothorax"
+  },
+  {
+    "sample_id": "5b4a7f04-5ae9d3c1-536966c5-98d54567-b63632fe",
+    "sample_path": "p18/p18698162/s54335280/5b4a7f04-5ae9d3c1-536966c5-98d54567-b63632fe",
+    "report_text": "Normal chest radiographs.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18698162/s54335280/5b4a7f04-5ae9d3c1-536966c5-98d54567-b63632fe.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18698162/s54335280/5b4a7f04-5ae9d3c1-536966c5-98d54567-b63632fe.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "8dfe93a8-cbfc81a4-b5899aa9-f7433264-9c229e84",
+    "sample_path": "p16/p16093185/s58232460/8dfe93a8-cbfc81a4-b5899aa9-f7433264-9c229e84",
+    "report_text": "Bilateral pleural effusions are small, if present at all.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16093185/s58232460/8dfe93a8-cbfc81a4-b5899aa9-f7433264-9c229e84.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16093185/s58232460/8dfe93a8-cbfc81a4-b5899aa9-f7433264-9c229e84.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "438385d3-0993d9ca-8f4d6d3f-cd263040-14187222",
+    "sample_path": "p11/p11871004/s59313556/438385d3-0993d9ca-8f4d6d3f-cd263040-14187222",
+    "report_text": "Mild cardiomegaly, chronicity indeterminate; no other findings of\n cardiac decompensation. ED QA nurses notified of final reading by email.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11871004/s59313556/438385d3-0993d9ca-8f4d6d3f-cd263040-14187222.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11871004/s59313556/438385d3-0993d9ca-8f4d6d3f-cd263040-14187222.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "e224bb24-e99f2b1f-11532ad1-5a4cd93f-5047aa8e",
+    "sample_path": "p15/p15400175/s54284277/e224bb24-e99f2b1f-11532ad1-5a4cd93f-5047aa8e",
+    "report_text": "Normal chest radiographs.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15400175/s54284277/e224bb24-e99f2b1f-11532ad1-5a4cd93f-5047aa8e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15400175/s54284277/e224bb2d9bbd0a8-d864bf13-36232016-3bd289a8-0b550e1b4-e99f2b1f-11532ad1-5a4cd93f-5047aa8e.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "6dbce421-d12a9c05-73bad115-9d5f2eef-ce5887c9",
+    "sample_path": "p15/p15578761/s51799485/6dbce421-d12a9c05-73bad115-9d5f2eef-ce5887c9",
+    "report_text": "Successful placement of pacemaker defibrillator with leads\n terminating in expected positions.  No complications.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15578761/s51799485/6dbce421-d12a9c05-73bad115-9d5f2eef-ce5887c9.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15578761/s51799485/6dbce421-d12a9c05-73bad115-9d5f2eef-ce5887c9.png",
+    "label": "support devices"
+  },
+  {
+    "sample_id": "fddf66f8-f6f17071-908a9dc0-3356661a-0de8fd37",
+    "sample_path": "p13/p13032036/s52488560/fddf66f8-f6f17071-908a9dc0-3356661a-0de8fd37",
+    "report_text": "Hazy opacity in the left apex consistent with known malignancy.\n No superimposed acute process.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13032036/s52488560/fddf66f8-f6f17071-908a9dc0-3356661a-0de8fd37.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13032036/s52488560/fddf66f8-f6f17071-908a9dc0-3356661a-0de8fd37.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "d9bbd0a8-d864bf13-36232016-3bd289a8-0b550e1b",
+    "sample_path": "p11/p11875240/s58225797/d9bbd0a8-d864bf13-36232016-3bd289a8-0b550e1b",
+    "report_text": "Normal chest radiographs.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11875240/s58225797/d9bbd0a8-d864bf13-36232016-3bd289a8-0b550e1b.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11875240/s58225797/d9bbd0a8-d864bf13-36232016-3bd289a8-0b550e1b.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "455e4f15-4c4b821a-e41d0b71-c3112966-efdff2af",
+    "sample_path": "p14/p14545252/s58144372/455e4f15-4c4b821a-e41d0b71-c3112966-efdff2af",
+    "report_text": "Small bilateral effusions",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14545252/s58144372/455e4f15-4c4b821a-e41d0b71-c3112966-efdff2af.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14545252/s58144372/455e4f15-4c4b821a-e41d0b71-c3112966-efdff2af.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "64946833-96dc4727-240abfd4-fd9e9872-47b31c03",
+    "sample_path": "p17/p17898418/s58046982/64946833-96dc4727-240abfd4-fd9e9872-47b31c03",
+    "report_text": "Minimal bibasilar atelectasis. There is no evidence of cardiac\n decompensation.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17898418/s58046982/64946833-96dc4727-240abfd4-fd9e9872-47b31c03.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17898418/s58046982/64946833-96dc4727-240abfd4-fd9e9872-47b31c03.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "fb0aea85-1925bd7c-454bdb3a-3c84527e-9068b1a2",
+    "sample_path": "p18/p18039782/s55391699/fb0aea85-1925bd7c-454bdb3a-3c84527e-9068b1a2",
+    "report_text": "Uncomplicated insertion dual lead defibrillator in good position.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18039782/s55391699/fb0aea85-1925bd7c-454bdb3a-3c84527e-9068b1a2.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18039782/s55391699/fb0aea85-1925bd7c-454bdb3a-3c84527e-9068b1a2.png",
+    "label": "support devices"
+  },
+  {
+    "sample_id": "b534331c-9d6ef088-0d617888-0a59c813-bd511356",
+    "sample_path": "p16/p16562665/s54027444/b534331c-9d6ef088-0d617888-0a59c813-bd511356",
+    "report_text": "Moderate to large right pneumothorax with leftward mediastinal shift.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16562665/s54027444/b534331c-9d6ef088-0d617888-0a59c813-bd511356.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16562665/s54027444/b534331c-9d6ef088-0d617888-0a59c813-bd511356.png",
+    "label": "pneumothorax"
+  },
+  {
+    "sample_id": "0e731e5d-399fe4c7-ac9e0aeb-92969be7-bd2b25b9",
+    "sample_path": "p13/p13525396/s55391827/0e731e5d-399fe4c7-ac9e0aeb-92969be7-bd2b25b9",
+    "report_text": "Resolution of right lower lobe consolidation.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13525396/s55391827/0e731e5d-399fe4c7-ac9e0aeb-92969be7-bd2b25b9.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13525396/s55391827/0e731e5d-399fe4c7-ac9e0aeb-92969be7-bd2b25b9.png",
+    "label": "consolidation"
+  },
+  {
+    "sample_id": "c4b892ac-6c975874-4d73a3c4-95f6b40e-ba00dc1e",
+    "sample_path": "p14/p14943766/s56529252/c4b892ac-6c975874-4d73a3c4-95f6b40e-ba00dc1e",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14943766/s56529252/c4b892ac-6c975874-4d73a3c4-95f6b40e-ba00dc1e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14943766/s56529252/c4b892ac-6c975874-4d73a3c4-95f6b40e-ba00dc1e.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "d021462a-25707e88-b4725925-a7a8b1b5-c76053c1",
+    "sample_path": "p15/p15286725/s54129539/d021462a-25707e88-b4725925-a7a8b1b5-c76053c1",
+    "report_text": "Normal chest radiograph.  No free air.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15286725/s54129539/d021462a-25707e88-b4725925-a7a8b1b5-c76053c1.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15286725/s54129539/d021462a-25707e88-b4725925-a7a8b1b5-c76053c1.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "c0380381-99310a6c-516980d3-5243be5c-0dc917dd",
+    "sample_path": "p16/p16924642/s52416176/c0380381-99310a6c-516980d3-5243be5c-0dc917dd",
+    "report_text": "Near resolution of prior seen bilateral consolidations.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16924642/s52416176/c0380381-99310a6c-516980d3-5243be5c-0dc917dd.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16924642/s52416176/c0380381-99310a6c-516980d3-5243be5c-0dc917dd.png",
+    "label": "consolidation"
+  },
+  {
+    "sample_id": "83f76be9-de6b14c8-5588141a-8b926479-ae6d50cd",
+    "sample_path": "p14/p14190122/s55812627/83f76be9-de6b14c8-5588141a-8b926479-ae6d50cd",
+    "report_text": "Continued presence of small right pleural effusion.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14190122/s55812627/83f76be9-de6b14c8-5588141a-8b926479-ae6d50cd.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14190122/s55812627/83f76be9-de6b14c8-5588141a-8b926479-ae6d50cd.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "41caf3bb-b82c54c4-1b276eaf-c8f7aa9c-1cb30ab4",
+    "sample_path": "p13/p13117076/s56837456/41caf3bb-b82c54c4-1b276eaf-c8f7aa9c-1cb30ab4",
+    "report_text": "Peripheral wedge-shaped opacity with the lingula is concerning for an area of\n infarction.  Chest CTA is recommended for further assessment.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13117076/s56837456/41caf3bb-b82c54c4-1b276eaf-c8f7aa9c-1cb30ab4.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13117076/s56837456/41caf3bb-b82c54c4-1b276eaf-c8f7aa9c-1cb30ab4.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "ce654f90-0e5e616a-2f32a0d9-9a7f1cfa-5af5be5e",
+    "sample_path": "p14/p14316370/s57155393/ce654f90-0e5e616a-2f32a0d9-9a7f1cfa-5af5be5e",
+    "report_text": "Normal chest.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14316370/s57155393/ce654f90-0e5e616a-2f32a0d9-9a7f1cfa-5af5be5e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14316370/s57155393/ce654f90-0e5e616a-2f32a0d9-9a7f1cfa-5af5be5e.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "20c45a49-b23db7a1-b624a68b-ca0a0ccc-4e32381b",
+    "sample_path": "p13/p13902086/s57136990/20c45a49-b23db7a1-b624a68b-ca0a0ccc-4e32381b",
+    "report_text": "Normal chest x-ray. However, cross-sectional imaging or bone scan would be\n more sensitive for detection of lytic lesions.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13902086/s57136990/20c45a49-b23db7a1-b624a68b-ca0a0ccc-4e32381b.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13902086/s57136990/20c45a49-b23db7a1-b624a68b-ca0a0ccc-4e32381b.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "cb9b628e-785bb944-59e89dd4-68e551a2-47e9d639",
+    "sample_path": "p15/p15340094/s54310085/cb9b628e-785bb944-59e89dd4-68e551a2-47e9d639",
+    "report_text": "Right lower lobe pneumonia.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15340094/s54310085/cb9b628e-785bb944-59e89dd4-68e551a2-47e9d639.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15340094/s54310085/cb9b628e-785bb944-59e89dd4-68e551a2-47e9d639.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "e78c6db4-2af41755-4ac46de7-053831ee-14b58c84",
+    "sample_path": "p17/p17028950/s51301736/e78c6db4-2af41755-4ac46de7-053831ee-14b58c84",
+    "report_text": "No findings to suggest pneumonia.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17028950/s51301736/e78c6db4-2af41755-4ac46de7-053831ee-14b58c84.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17028950/s51301736/e78c6db4-2af41755-4ac46de7-053831ee-14b58c84.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "0eeaffb9-69027edc-62c94aa6-4f1bcf91-c263da75",
+    "sample_path": "p12/p12308226/s59760599/0eeaffb9-69027edc-62c94aa6-4f1bcf91-c263da75",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12308226/s59760599/0eeaffb9-69027edc-62c94aa6-4f1bcf91-c263da75.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12308226/s59760599/0eeaffb9-69027edc-62c94aa6-4f1bcf91-c263da75.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "0e9e0490-bf5676e1-9f78ac8a-30fed29d-c5b7c888",
+    "sample_path": "p12/p12302912/s54110665/0e9e0490-bf5676e1-9f78ac8a-30fed29d-c5b7c888",
+    "report_text": "No evidence of pneumomediastinum or free intraperitoneal air. \n Minimal right atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12302912/s54110665/0e9e0490-bf5676e1-9f78ac8a-30fed29d-c5b7c888.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12302912/s54110665/0e9e0490-bf5676e1-9f78ac8a-30fed29d-c5b7c888.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "9e6c4431-a4def7b3-49c87afe-e0663e3a-dc9153af",
+    "sample_path": "p18/p18449040/s51632747/9e6c4431-a4def7b3-49c87afe-e0663e3a-dc9153af",
+    "report_text": "Streaky atelectasis in the left lower lobe.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18449040/s51632747/9e6c4431-a4def7b3-49c87afe-e0663e3a-dc9153af.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18449040/s51632747/9e6c4431-a4def7b3-49c87afe-e0663e3a-dc9153af.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "f76351e9-9d435189-c234c639-fb107d96-fb7e1f16",
+    "sample_path": "p10/p10717732/s58111153/f76351e9-9d435189-c234c639-fb107d96-fb7e1f16",
+    "report_text": "Small left pleural effusion.\n Diffuse left pulmonary parenchymal abnormality as before.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10717732/s58111153/f76351e9-9d435189-c234c639-fb107d96-fb7e1f16.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10717732/s58111153/f76351e9-9d435189-c234c639-fb107d96-fb7e1f16.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "f4a0c35b-907b40e6-001f3b51-cb45b107-86e94e69",
+    "sample_path": "p17/p17096578/s57569940/f4a0c35b-907b40e6-001f3b51-cb45b107-86e94e69",
+    "report_text": "Possible right middle lobe pneumonia in the appropriate clinical context.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17096578/s57569940/f4a0c35b-907b40e6-001f3b51-cb45b107-86e94e69.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17096578/s57569940/f4a0c35b-907b40e6-001f3b51-cb45b107-86e94e69.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "85a3a977-87726ca2-2b835016-1e9b8e60-6c206f6b",
+    "sample_path": "p13/p13314213/s53890718/85a3a977-87726ca2-2b835016-1e9b8e60-6c206f6b",
+    "report_text": "Mild left basilar atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13314213/s53890718/85a3a977-87726ca2-2b835016-1e9b8e60-6c206f6b.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13314213/s53890718/85a3a977-87726ca2-2b835016-1e9b8e60-6c206f6b.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "fe64040a-cfddb842-cf1187a3-6e88f2b2-81aca808",
+    "sample_path": "p12/p12954888/s52506040/fe64040a-cfddb842-cf1187a3-6e88f2b2-81aca808",
+    "report_text": "Low lung volumes with mild bibasilar atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12954888/s52506040/fe64040a-cfddb842-cf1187a3-6e88f2b2-81aca808.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12954888/s52506040/fe64040a-cfddb842-cf1187a3-6e88f2b2-81aca808.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "d91f32c7-6d5962b3-90308bba-070507e8-e176bf36",
+    "sample_path": "p13/p13063188/s54348468/d91f32c7-6d5962b3-90308bba-070507e8-e176bf36",
+    "report_text": "Findings suggestive of mild pulmonary edema.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13063188/s54348468/d91f32c7-6d5962b3-90308bba-070507e8-e176bf36.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13063188/s54348468/d91f32c7-6d5962b3-90308bba-070507e8-e176bf36.png",
+    "label": "edema"
+  },
+  {
+    "sample_id": "0591a365-ecbc478d-13c9744c-8bdb23a2-10187a62",
+    "sample_path": "p17/p17947972/s57449082/0591a365-ecbc478d-13c9744c-8bdb23a2-10187a62",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17947972/s57449082/0591a365-ecbc478d-13c9744c-8bdb23a2-10187a62.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17947972/s57449082/0591a365-ecbc478d-13c9744c-8bdb23a2-10187a62.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "23d0ee84-1467ce87-7bc1bafc-e0959fd0-a2540870",
+    "sample_path": "p13/p13950510/s59530307/23d0ee84-1467ce87-7bc1bafc-e0959fd0-a2540870",
+    "report_text": "Recurrent right apical pneumothorax.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13950510/s59530307/23d0ee84-1467ce87-7bc1bafc-e0959fd0-a2540870.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13950510/s59530307/23d0ee84-1467ce87-7bc1bafc-e0959fd0-a2540870.png",
+    "label": "pneumothorax"
+  },
+  {
+    "sample_id": "a299fb13-723faa0a-ab0e17da-b1992b5b-f76e1676",
+    "sample_path": "p11/p11274035/s58814544/a299fb13-723faa0a-ab0e17da-b1992b5b-f76e1676",
+    "report_text": "Small right pleural effusion.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11274035/s58814544/a299fb13-723faa0a-ab0e17da-b1992b5b-f76e1676.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11274035/s58814544/a299fb13-723faa0a-ab0e17da-b1992b5b-f76e1676.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "404e1d68-2619531b-8a093899-7a72b804-ee681df8",
+    "sample_path": "p18/p18148760/s50776093/404e1d68-2619531b-8a093899-7a72b804-ee681df8",
+    "report_text": "Tiny bilateral pleural effusions.  Otherwise, unremarkable.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18148760/s50776093/404e1d68-2619531b-8a093899-7a72b804-ee681df8.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18148760/s50776093/404e1d68-2619531b-8a093899-7a72b804-ee681df8.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "43724e5c-82b6a19c-9a9eb7ad-944541ad-91e1633d",
+    "sample_path": "p10/p10135726/s58076077/43724e5c-82b6a19c-9a9eb7ad-944541ad-91e1633d",
+    "report_text": "Large amount of right basilar atelectasis, and more mild left basilar\n atelectasis.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10135726/s58076077/43724e5c-82b6a19c-9a9eb7ad-944541ad-91e1633d.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10135726/s58076077/43724e5c-82b6a19c-9a9eb7ad-944541ad-91e1633d.png",
+    "label": "atelectasis"
+  },
+  {
+    "sample_id": "001aab77-00f58710-2f7d060b-33213f2d-dccb8daf",
+    "sample_path": "p14/p14277220/s55719848/001aab77-00f58710-2f7d060b-33213f2d-dccb8daf",
+    "report_text": "No evidence of acute injury.  Bilateral hazy interstitial opacities are likely\n representative of fibrotic changes.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14277220/s55719848/001aab77-00f58710-2f7d060b-33213f2d-dccb8daf.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14277220/s55719848/001aab77-00f58710-2f7d060b-33213f2d-dccb8daf.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "223b7554-79124b13-95fae213-c90e5979-56e15031",
+    "sample_path": "p12/p12431768/s50467666/223b7554-79124b13-95fae213-c90e5979-56e15031",
+    "report_text": "Minimal residual right middle lobe opacity, otherwise clear\n lungs.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12431768/s50467666/223b7554-79124b13-95fae213-c90e5979-56e15031.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12431768/s50467666/223b7554-79124b13-95fae213-c90e5979-56e15031.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "6f00a430-2365f609-df38a7b6-76e3c657-d3e5d052",
+    "sample_path": "p12/p12214410/s53871589/6f00a430-2365f609-df38a7b6-76e3c657-d3e5d052",
+    "report_text": "Small left pleural effusion.  No radiographic evidence of significant\n cardiopulmonary abnormalities.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12214410/s53871589/6f00a430-2365f609-df38a7b6-76e3c657-d3e5d052.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12214410/s53871589/6f00a430-2365f609-df38a7b6-76e3c657-d3e5d052.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "80b84bdb-ec448dbc-a269c1bc-406b40f7-20bad8bf",
+    "sample_path": "p12/p12332206/s57183369/80b84bdb-ec448dbc-a269c1bc-406b40f7-20bad8bf",
+    "report_text": "No significant interval change in left pleural lesions and pleural effusion.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12332206/s57183369/80b84bdb-ec448dbc-a269c1bc-406b40f7-20bad8bf.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12332206/s57183369/80b84bdb-ec448dbc-a269c1bc-406b40f7-20bad8bf.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "c3a47fbf-b479e551-5a353fcd-93e2c2db-f360c0b0",
+    "sample_path": "p18/p18065780/s51177480/c3a47fbf-b479e551-5a353fcd-93e2c2db-f360c0b0",
+    "report_text": "An opacity over the right heart border is not confirmed on the lateral view. \n If symptoms persist, recommend repeat chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18065780/s51177480/c3a47fbf-b479e551-5a353fcd-93e2c2db-f360c0b0.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18065780/s51177480/c3a47fbf-b479e551-5a353fcd-93e2c2db-f360c0b0.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "3aa75860-37707b36-3bd33a80-c53a7423-4803977c",
+    "sample_path": "p15/p15670628/s51095697/3aa75860-37707b36-3bd33a80-c53a7423-4803977c",
+    "report_text": "Transvenous right atrial biventricular pacer defibrillator leads follow\n standard placements",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15670628/s51095697/3aa75860-37707b36-3bd33a80-c53a7423-4803977c.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15670628/s51095697/3aa75860-37707b36-3bd33a80-c53a7423-4803977c.png",
+    "label": "support devices"
+  },
+  {
+    "sample_id": "8ea24f50-fa9f7c5f-36f3a722-ee20d2c2-fbd39d93",
+    "sample_path": "p12/p12349882/s55150203/8ea24f50-fa9f7c5f-36f3a722-ee20d2c2-fbd39d93",
+    "report_text": "Normal chest.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12349882/s55150203/8ea24f50-fa9f7c5f-36f3a722-ee20d2c2-fbd39d93.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12349882/s55150203/8ea24f50-fa9f7c5f-36f3a722-ee20d2c2-fbd39d93.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "7dd48ae0-1639556a-e2a4bf0e-86ef040b-4ebcd705",
+    "sample_path": "p18/p18982058/s57846850/7dd48ae0-1639556a-e2a4bf0e-86ef040b-4ebcd705",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18982058/s57846850/7dd48ae0-1639556a-e2a4bf0e-86ef040b-4ebcd705.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18982058/s57846850/7dd48ae0-1639556a-e2a4bf0e-86ef040b-4ebcd705.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "a505b0c6-3a67484b-227f9e03-75dd334e-6d2e8c42",
+    "sample_path": "p15/p15656571/s56681590/a505b0c6-3a67484b-227f9e03-75dd334e-6d2e8c42",
+    "report_text": "Mild pulmonary interstitial edema.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15656571/s56681590/a505b0c6-3a67484b-227f9e03-75dd334e-6d2e8c42.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15656571/s56681590/a505b0c6-3a67484b-227f9e03-75dd334e-6d2e8c42.png",
+    "label": "edema"
+  },
+  {
+    "sample_id": "d0819199-9438fd8a-83a92638-b4365193-b27e1bc6",
+    "sample_path": "p14/p14475614/s56116015/d0819199-9438fd8a-83a92638-b4365193-b27e1bc6",
+    "report_text": "Left lower lobe opacity is of doubtful significance, however, if symptoms\n persist repeat chest radiograph imaging may be considered.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p14/p14475614/s56116015/d0819199-9438fd8a-83a92638-b4365193-b27e1bc6.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p14/p14475614/s56116015/d0819199-9438fd8a-83a92638-b4365193-b27e1bc6.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "6512b578-3174975a-e596785d-97bd0065-6e6bbb6c",
+    "sample_path": "p13/p13001519/s51844642/6512b578-3174975a-e596785d-97bd0065-6e6bbb6c",
+    "report_text": "Normal chest findings.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13001519/s51844642/6512b578-3174975a-e596785d-97bd0065-6e6bbb6c.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13001519/s51844642/6512b578-3174975a-e596785d-97bd0065-6e6bbb6c.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "75f5f2d8-fcfc67fd-0e34f99f-81f3925a-ca72bdd0",
+    "sample_path": "p12/p12763937/s59926192/75f5f2d8-fcfc67fd-0e34f99f-81f3925a-ca72bdd0",
+    "report_text": "Known small pulmonary nodulew, which have been more fully characterized on\n recent CT chest ___.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12763937/s59926192/75f5f2d8-fcfc67fd-0e34f99f-81f3925a-ca72bdd0.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12763937/s59926192/75f5f2d8-fcfc67fd-0e34f99f-81f3925a-ca72bdd0.png",
+    "label": "lung lesion"
+  },
+  {
+    "sample_id": "4d651bf9-cb37be64-fd968b3f-0466ecee-24961c61",
+    "sample_path": "p17/p17784250/s55552338/4d651bf9-cb37be64-fd968b3f-0466ecee-24961c61",
+    "report_text": "Normal chest radiograph.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17784250/s55552338/4d651bf9-cb37be64-fd968b3f-0466ecee-24961c61.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17784250/s55552338/4d651bf9-cb37be64-fd968b3f-0466ecee-24961c61.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "ad5c43eb-0b99b37b-758e467f-9450e672-d518a4f7",
+    "sample_path": "p13/p13316281/s58377219/ad5c43eb-0b99b37b-758e467f-9450e672-d518a4f7",
+    "report_text": "Small bilateral pleural effusions.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p13/p13316281/s58377219/ad5c43eb-0b99b37b-758e467f-9450e672-d518a4f7.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p13/p13316281/s58377219/ad5c43eb-0b99b37b-758e467f-9450e672-d518a4f7.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "50e161d0-f68698b1-317399dc-6a9c23fb-a306fbd6",
+    "sample_path": "p12/p12008517/s54958863/50e161d0-f68698b1-317399dc-6a9c23fb-a306fbd6",
+    "report_text": "Right lower lobe pneumonia.  Recommended followup radiographs\n after treatment to document resolution.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12008517/s54958863/50e161d0-f68698b1-317399dc-6a9c23fb-a306fbd6.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12008517/s54958863/50e161d0-f68698b1-317399dc-6a9c23fb-a306fbd6.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "4ad119f2-d65bd760-ec8053d8-8df0196e-a3f2261e",
+    "sample_path": "p10/p10695982/s59055312/4ad119f2-d65bd760-ec8053d8-8df0196e-a3f2261e",
+    "report_text": "Moderate cardiomegaly without acute intrathoracic processes.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10695982/s59055312/4ad119f2-d65bd760-ec8053d8-8df0196e-a3f2261e.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10695982/s59055312/4ad119f2-d65bd760-ec8053d8-8df0196e-a3f2261e.png",
+    "label": "cardiomegaly"
+  },
+  {
+    "sample_id": "ff182114-1ee88603-30f0dc99-aa5b0dba-2182beca",
+    "sample_path": "p12/p12150735/s55089779/ff182114-1ee88603-30f0dc99-aa5b0dba-2182beca",
+    "report_text": "Patchy peripheral lower lobe predominant ground-glass opacities may reflect\n resolving opacities previously seen on CT dated ___.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p12/p12150735/s55089779/ff182114-1ee88603-30f0dc99-aa5b0dba-2182beca.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p12/p12150735/s55089779/ff182114-1ee88603-30f0dc99-aa5b0dba-2182beca.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "364765b4-05474bc4-2ca46e2c-2f01daab-d2f2a113",
+    "sample_path": "p11/p11631709/s57356356/364765b4-05474bc4-2ca46e2c-2f01daab-d2f2a113",
+    "report_text": "Appropriate pacemaker defibrillator position with lead\n terminating in the right ventricle as expected.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11631709/s57356356/364765b4-05474bc4-2ca46e2c-2f01daab-d2f2a113.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11631709/s57356356/364765b4-05474bc4-2ca46e2c-2f01daab-d2f2a113.png",
+    "label": "support devices"
+  },
+  {
+    "sample_id": "0483ed4c-5a7fe545-28b8fed1-41860068-71d7183d",
+    "sample_path": "p11/p11728917/s55957268/0483ed4c-5a7fe545-28b8fed1-41860068-71d7183d",
+    "report_text": "Resolving pulmonary edema.  Followup radiographs are suggested to\n document complete resolution as described above.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11728917/s55957268/0483ed4c-5a7fe545-28b8fed1-41860068-71d7183d.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11728917/s55957268/0483ed4c-5a7fe545-28b8fed1-41860068-71d7183d.png",
+    "label": "edema"
+  },
+  {
+    "sample_id": "d3a35ce9-e5df8522-9b54ec51-1c1588f8-c1403eaa",
+    "sample_path": "p10/p10532853/s51409686/d3a35ce9-e5df8522-9b54ec51-1c1588f8-c1403eaa",
+    "report_text": "No significant change in right loculated hydropneumothorax.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p10/p10532853/s51409686/d3a35ce9-e5df8522-9b54ec51-1c1588f8-c1403eaa.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p10/p10532853/s51409686/d3a35ce9-e5df8522-9b54ec51-1c1588f8-c1403eaa.png",
+    "label": "pneumothorax"
+  },
+  {
+    "sample_id": "0d1ee757-2f51a800-76fba6af-1b64a578-ef622eab",
+    "sample_path": "p11/p11358644/s55116580/0d1ee757-2f51a800-76fba6af-1b64a578-ef622eab",
+    "report_text": "No evidence of radiopaque foreign body or acute process. \n Radiation-related changes of the mass in the right upper lobe.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11358644/s55116580/0d1ee757-2f51a800-76fba6af-1b64a578-ef622eab.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11358644/s55116580/0d1ee757-2f51a800-76fba6af-1b64a578-ef622eab.png",
+    "label": "lung lesion"
+  },
+  {
+    "sample_id": "fdb66a65-18b61492-554aec2d-7e98bb40-3e09f0e7",
+    "sample_path": "p18/p18746935/s53496913/fdb66a65-18b61492-554aec2d-7e98bb40-3e09f0e7",
+    "report_text": "Possible right lower lobe pneumonia.  No evidence of cardiac decompensation.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18746935/s53496913/fdb66a65-18b61492-554aec2d-7e98bb40-3e09f0e7.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18746935/s53496913/fdb66a65-18b61492-554aec2d-7e98bb40-3e09f0e7.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "24370ba3-45a361d5-209ac920-bcda7d6c-ca1f68b0",
+    "sample_path": "p11/p11321914/s50882875/24370ba3-45a361d5-209ac920-bcda7d6c-ca1f68b0",
+    "report_text": "Small right pleural effusion.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11321914/s50882875/24370ba3-45a361d5-209ac920-bcda7d6c-ca1f68b0.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11321914/s50882875/24370ba3-45a361d5-209ac920-bcda7d6c-ca1f68b0.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "d6457936-87e7117c-03a3c68e-761d0f05-7c46f348",
+    "sample_path": "p17/p17222442/s51696762/d6457936-87e7117c-03a3c68e-761d0f05-7c46f348",
+    "report_text": "Moderate right pleural effusion.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17222442/s51696762/d6457936-87e7117c-03a3c68e-761d0f05-7c46f348.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17222442/s51696762/d6457936-87e7117c-03a3c68e-761d0f05-7c46f348.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "dff8ae11-69844b0c-27600710-30fae95b-25f4552a",
+    "sample_path": "p11/p11392385/s59193530/dff8ae11-69844b0c-27600710-30fae95b-25f4552a",
+    "report_text": "Small bilateral pleural effusions.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11392385/s59193530/dff8ae11-69844b0c-27600710-30fae95b-25f4552a.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11392385/s59193530/dff8ae11-69844b0c-27600710-30fae95b-25f4552a.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "04c99f3c-6b1a07cf-e0007e69-ace1cf39-bffa2ab5",
+    "sample_path": "p17/p17384401/s51139641/04c99f3c-6b1a07cf-e0007e69-ace1cf39-bffa2ab5",
+    "report_text": "Normal chest.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17384401/s51139641/04c99f3c-6b1a07cf-e0007e69-ace1cf39-bffa2ab5.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17384401/s51139641/04c99f3c-6b1a07cf-e0007e69-ace1cf39-bffa2ab5.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "9b169258-8060f47a-72901dde-bf2f668a-86670b45",
+    "sample_path": "p18/p18947574/s53359811/9b169258-8060f47a-72901dde-bf2f668a-86670b45",
+    "report_text": "Normal chest.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p18/p18947574/s53359811/9b169258-8060f47a-72901dde-bf2f668a-86670b45.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p18/p18947574/s53359811/9b169258-8060f47a-72901dde-bf2f668a-86670b45.png",
+    "label": "no finding"
+  },
+  {
+    "sample_id": "ff906c66-77b073c0-cb085cf6-d3864892-c8b477b0",
+    "sample_path": "p16/p16860825/s50671542/ff906c66-77b073c0-cb085cf6-d3864892-c8b477b0",
+    "report_text": "Consolidaiton in the right mid lung compatible with pneumonia. \n Recommend repeat CXR after treatment to document resolution.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p16/p16860825/s50671542/ff906c66-77b073c0-cb085cf6-d3864892-c8b477b0.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p16/p16860825/s50671542/ff906c66-77b073c0-cb085cf6-d3864892-c8b477b0.png",
+    "label": "pneumonia"
+  },
+  {
+    "sample_id": "c4033cab-ab9921ae-4b1ef4c9-69c17123-ca6e6a2f",
+    "sample_path": "p11/p11217016/s56305512/c4033cab-ab9921ae-4b1ef4c9-69c17123-ca6e6a2f",
+    "report_text": "No definite acute abnormality.  Opacity at the left base likely\n reflects summation of normal structures.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11217016/s56305512/c4033cab-ab9921ae-4b1ef4c9-69c17123-ca6e6a2f.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11217016/s56305512/c4033cab-ab9921ae-4b1ef4c9-69c17123-ca6e6a2f.png",
+    "label": "lung opacity"
+  },
+  {
+    "sample_id": "f0778e9e-3c88b194-d0b44753-efb5635c-fcd69de4",
+    "sample_path": "p11/p11306899/s51634957/f0778e9e-3c88b194-d0b44753-efb5635c-fcd69de4",
+    "report_text": "No significant change in moderate bilateral pleural effusions.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p11/p11306899/s51634957/f0778e9e-3c88b194-d0b44753-efb5635c-fcd69de4.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p11/p11306899/s51634957/f0778e9e-3c88b194-d0b44753-efb5635c-fcd69de4.png",
+    "label": "pleural effusion"
+  },
+  {
+    "sample_id": "1e5b79db-8ee1dc94-6d3d8f24-10757275-3c008151",
+    "sample_path": "p17/p17698107/s58434035/1e5b79db-8ee1dc94-6d3d8f24-10757275-3c008151",
+    "report_text": "Normal chest.",
+    "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p17/p17698107/s58434035/1e5b79db-8ee1dc94-6d3d8f24-10757275-3c008151.jpg",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p17/p17698107/s58434035/1e5b79db-8ee1dc94-6d3d8f24-10757275-3c008151.png",
+    "label": "no finding"
+  }
+]
