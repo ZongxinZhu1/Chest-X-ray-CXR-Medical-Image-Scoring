@@ -12,8 +12,8 @@
       --line: #e5e7eb;
       --text: #111827;
       --muted: #6b7280;
-      --primary: #111827;
-      --primary-soft: #1f2937;
+      --primary: #0f172a;
+      --primary-soft: #1e293b;
       --ok: #065f46;
       --okbg: #ecfdf5;
       --warn: #92400e;
@@ -21,7 +21,7 @@
       --accent: #2563eb;
       --accent-soft: #eff6ff;
       --shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
-      --radius: 18px;
+      --radius: 16px;
     }
 
     * {
@@ -47,7 +47,7 @@
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 60;
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
@@ -100,7 +100,7 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.62fr) 360px;
+      grid-template-columns: minmax(0, 1.66fr) 350px;
       gap: 14px;
       align-items: start;
     }
@@ -112,14 +112,14 @@
 
     .card {
       background: var(--card);
-      border: 1px solid rgba(229, 231, 235, 0.9);
+      border: 1px solid rgba(229, 231, 235, 0.95);
       border-radius: var(--radius);
       padding: 14px;
       box-shadow: var(--shadow);
     }
 
     .compact-card {
-      padding: 14px;
+      padding: 12px;
     }
 
     .card h2,
@@ -213,6 +213,17 @@
       font-weight: 700;
     }
 
+    .btn-ghost {
+      background: #f8fafc;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
     .action-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -223,13 +234,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-    }
-
-    .toolbar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
     }
 
     .status {
@@ -307,17 +311,17 @@
 
     .main-top-grid {
       display: grid;
-      grid-template-columns: 1.28fr 0.82fr;
+      grid-template-columns: 1.38fr 1fr;
       gap: 12px;
       align-items: stretch;
     }
 
     .report-box {
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 14px;
       background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
       padding: 12px 14px;
-      min-height: 110px;
+      min-height: 96px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -334,50 +338,48 @@
 
     .report-box .content {
       font-size: 14px;
-      line-height: 1.45;
+      line-height: 1.42;
       font-weight: 600;
       color: #111827;
       white-space: pre-wrap;
       word-break: break-word;
       overflow: auto;
-      max-height: 90px;
+      max-height: 76px;
       padding-right: 2px;
     }
 
-    .meta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      height: 100%;
-    }
-
-    .meta-box {
-      background: var(--card-soft);
+    .review-meta-row {
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 11px 12px;
-      font-size: 12px;
-      line-height: 1.4;
+      background: var(--card-soft);
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: minmax(180px, 1.5fr) 110px 110px;
+      gap: 10px;
+      align-items: center;
     }
 
-    .meta-box strong {
-      display: block;
+    .meta-inline {
+      min-width: 0;
+    }
+
+    .meta-inline .meta-label {
       font-size: 11px;
-      margin-bottom: 6px;
       color: #374151;
+      font-weight: 700;
       letter-spacing: 0.03em;
       text-transform: uppercase;
+      margin-bottom: 5px;
     }
 
-    .meta-value {
+    .meta-inline .meta-value {
       font-size: 18px;
       font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
+      line-height: 1.1;
     }
 
-    .reviewer-box {
-      grid-column: 1 / -1;
+    .reviewer-inline-input {
+      width: 100%;
     }
 
     .viewer-grid {
@@ -412,9 +414,9 @@
 
     .image-wrap {
       width: 100%;
-      height: calc(100vh - 285px);
-      min-height: 460px;
-      max-height: 760px;
+      height: calc(100vh - 255px);
+      min-height: 500px;
+      max-height: 780px;
       border-radius: 12px;
       background: #000;
       overflow: auto;
@@ -444,6 +446,66 @@
       max-height: calc(100vh - 76px);
       overflow: auto;
       padding-right: 2px;
+    }
+
+    .manifest-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .manifest-toggle {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      background: white;
+      padding: 14px 14px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .manifest-toggle:hover {
+      background: #fafafa;
+    }
+
+    .manifest-toggle-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .manifest-toggle-left span:last-child {
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .manifest-chevron {
+      font-size: 15px;
+      line-height: 1;
+      transition: transform 0.18s ease;
+      color: #475569;
+    }
+
+    .manifest-card.open .manifest-chevron {
+      transform: rotate(180deg);
+    }
+
+    .manifest-content {
+      display: none;
+      padding: 12px 14px 14px;
+      border-top: none;
+      background: white;
+    }
+
+    .manifest-card.open .manifest-content {
+      display: block;
     }
 
     .section-divider {
@@ -535,7 +597,7 @@
       }
 
       .image-wrap {
-        height: 520px;
+        height: 560px;
         max-height: none;
       }
     }
@@ -546,18 +608,21 @@
       .action-grid,
       .action-grid-3,
       .score-grid,
-      .score-grid.five-col,
-      .meta-grid {
+      .score-grid.five-col {
+        grid-template-columns: 1fr;
+      }
+
+      .review-meta-row {
         grid-template-columns: 1fr;
       }
 
       .image-wrap {
-        height: 420px;
+        height: 440px;
         min-height: 420px;
       }
 
       .report-box .content {
-        max-height: 120px;
+        max-height: 110px;
       }
     }
   </style>
@@ -581,17 +646,17 @@
               <div id="reportDisplay" class="content"></div>
             </div>
 
-            <div class="meta-grid">
-              <div class="meta-box reviewer-box">
-                <strong>Reviewer Name</strong>
-                <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
+            <div class="review-meta-row">
+              <div class="meta-inline">
+                <div class="meta-label">Reviewer Name</div>
+                <input class="reviewer-inline-input" type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
               </div>
-              <div class="meta-box">
-                <strong>Current Index</strong>
+              <div class="meta-inline">
+                <div class="meta-label">Current Index</div>
                 <div id="sampleIndexLabel" class="meta-value">-</div>
               </div>
-              <div class="meta-box">
-                <strong>Total Samples</strong>
+              <div class="meta-inline">
+                <div class="meta-label">Total Samples</div>
                 <div id="sampleTotalLabel" class="meta-value">-</div>
               </div>
             </div>
@@ -646,26 +711,35 @@
 
       <aside class="sticky-side">
         <div class="stack">
-          <section class="card">
-            <h2>Manifest Loader</h2>
-            <div class="field">
-              <label>Manifest path</label>
-              <input type="text" id="manifestPath" value="./manifest.json" />
-            </div>
+          <section class="card manifest-card" id="manifestCard">
+            <button class="manifest-toggle" id="manifestToggle" type="button" aria-expanded="false">
+              <div class="manifest-toggle-left">
+                <span>Manifest Loader</span>
+                <span>Collapsed by default. Open only when needed.</span>
+              </div>
+              <span class="manifest-chevron">▾</span>
+            </button>
 
-            <div class="action-grid">
-              <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
-              <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
-            </div>
+            <div class="manifest-content" id="manifestContent">
+              <div class="field">
+                <label>Manifest path</label>
+                <input type="text" id="manifestPath" value="./manifest.json" />
+              </div>
 
-            <div class="action-grid-3" style="margin-top:8px;">
-              <button class="btn" id="prevBtn" type="button">Previous</button>
-              <button class="btn" id="randomBtn" type="button">Random sample</button>
-              <button class="btn" id="nextBtn" type="button">Next</button>
-            </div>
+              <div class="action-grid">
+                <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
+                <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
+              </div>
 
-            <div class="helper-note" style="margin-top: 10px;">
-              The page reads the manifest and fills report and image URLs automatically.
+              <div class="action-grid-3" style="margin-top:8px;">
+                <button class="btn" id="prevBtn" type="button">Previous</button>
+                <button class="btn" id="randomBtn" type="button">Random sample</button>
+                <button class="btn" id="nextBtn" type="button">Next</button>
+              </div>
+
+              <div class="helper-note" style="margin-top: 10px;">
+                The page reads the manifest and fills report and image URLs automatically.
+              </div>
             </div>
           </section>
 
@@ -710,7 +784,7 @@
 
             <div class="submit-area">
               <button class="btn btn-primary btn-strong" id="submitBtn" type="button">Submit</button>
-              <button class="btn" id="clearBtn" type="button">Clear current form</button>
+              <button class="btn btn-ghost" id="clearBtn" type="button">Clear current form</button>
             </div>
 
             <div class="field">
@@ -770,7 +844,8 @@
       manifest: [],
       currentIndex: -1,
       submitInProgress: false,
-      pendingTarget: ''
+      pendingTarget: '',
+      manifestOpen: false
     };
 
     const els = {
@@ -793,6 +868,8 @@
       clearBtn: document.getElementById('clearBtn'),
       comment: document.getElementById('comment'),
       gasSubmitFrame: document.getElementById('gasSubmitFrame'),
+      manifestCard: document.getElementById('manifestCard'),
+      manifestToggle: document.getElementById('manifestToggle')
     };
 
     let reportTextStore = '';
@@ -812,15 +889,27 @@
       els.submitBtn.addEventListener('click', submitResult);
       els.clearBtn.addEventListener('click', clearCurrentForm);
       els.gasSubmitFrame.addEventListener('load', onIframeLoaded);
+      els.manifestToggle.addEventListener('click', toggleManifest);
 
       syncReportDisplay();
       renderTypeLabels();
       updateSampleMeta();
       hydrateFromQuery();
+      setManifestOpen(false);
 
       if (els.manifestPath.value.trim()) {
         loadManifest();
       }
+    }
+
+    function setManifestOpen(open) {
+      state.manifestOpen = open;
+      els.manifestCard.classList.toggle('open', open);
+      els.manifestToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function toggleManifest() {
+      setManifestOpen(!state.manifestOpen);
     }
 
     function syncReportDisplay() {
