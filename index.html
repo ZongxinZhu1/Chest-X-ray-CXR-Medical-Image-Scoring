@@ -100,7 +100,7 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.66fr) 350px;
+      grid-template-columns: minmax(0, 1.68fr) 350px;
       gap: 14px;
       align-items: start;
     }
@@ -309,13 +309,6 @@
       font-weight: 700;
     }
 
-    .main-top-grid {
-      display: grid;
-      grid-template-columns: 1.38fr 1fr;
-      gap: 12px;
-      align-items: stretch;
-    }
-
     .report-box {
       border: 1px solid var(--line);
       border-radius: 14px;
@@ -346,40 +339,6 @@
       overflow: auto;
       max-height: 76px;
       padding-right: 2px;
-    }
-
-    .review-meta-row {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--card-soft);
-      padding: 10px 12px;
-      display: grid;
-      grid-template-columns: minmax(180px, 1.5fr) 110px 110px;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .meta-inline {
-      min-width: 0;
-    }
-
-    .meta-inline .meta-label {
-      font-size: 11px;
-      color: #374151;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .meta-inline .meta-value {
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.1;
-    }
-
-    .reviewer-inline-input {
-      width: 100%;
     }
 
     .viewer-grid {
@@ -414,9 +373,9 @@
 
     .image-wrap {
       width: 100%;
-      height: calc(100vh - 255px);
-      min-height: 500px;
-      max-height: 780px;
+      height: calc(100vh - 235px);
+      min-height: 520px;
+      max-height: 800px;
       border-radius: 12px;
       background: #000;
       overflow: auto;
@@ -500,12 +459,35 @@
     .manifest-content {
       display: none;
       padding: 12px 14px 14px;
-      border-top: none;
       background: white;
     }
 
     .manifest-card.open .manifest-content {
       display: block;
+    }
+
+    .review-side-card {
+      background: var(--card-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .review-side-item .meta-label {
+      font-size: 11px;
+      color: #374151;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .review-side-item .meta-value {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.1;
     }
 
     .section-divider {
@@ -603,16 +585,11 @@
     }
 
     @media (max-width: 1024px) {
-      .main-top-grid,
       .viewer-grid,
       .action-grid,
       .action-grid-3,
       .score-grid,
       .score-grid.five-col {
-        grid-template-columns: 1fr;
-      }
-
-      .review-meta-row {
         grid-template-columns: 1fr;
       }
 
@@ -640,26 +617,9 @@
     <div class="layout">
       <section class="stack">
         <section class="card compact-card">
-          <div class="main-top-grid">
-            <div class="report-box">
-              <div class="label">Report</div>
-              <div id="reportDisplay" class="content"></div>
-            </div>
-
-            <div class="review-meta-row">
-              <div class="meta-inline">
-                <div class="meta-label">Reviewer Name</div>
-                <input class="reviewer-inline-input" type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
-              </div>
-              <div class="meta-inline">
-                <div class="meta-label">Current Index</div>
-                <div id="sampleIndexLabel" class="meta-value">-</div>
-              </div>
-              <div class="meta-inline">
-                <div class="meta-label">Total Samples</div>
-                <div id="sampleTotalLabel" class="meta-value">-</div>
-              </div>
-            </div>
+          <div class="report-box">
+            <div class="label">Report</div>
+            <div id="reportDisplay" class="content"></div>
           </div>
         </section>
 
@@ -740,6 +700,21 @@
               <div class="helper-note" style="margin-top: 10px;">
                 The page reads the manifest and fills report and image URLs automatically.
               </div>
+            </div>
+          </section>
+
+          <section class="review-side-card">
+            <div class="review-side-item">
+              <div class="meta-label">Reviewer Name</div>
+              <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
+            </div>
+            <div class="review-side-item">
+              <div class="meta-label">Current Index</div>
+              <div id="sampleIndexLabel" class="meta-value">-</div>
+            </div>
+            <div class="review-side-item">
+              <div class="meta-label">Total Samples</div>
+              <div id="sampleTotalLabel" class="meta-value">-</div>
             </div>
           </section>
 
