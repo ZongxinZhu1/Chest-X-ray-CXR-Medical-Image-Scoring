@@ -6,722 +6,212 @@
   <title>CXR Report Matching Blind Review</title>
   <style>
     :root {
-      --bg: #eef2f7;
-      --bg-2: #f7f9fc;
-      --card: rgba(255, 255, 255, 0.96);
-      --card-strong: #ffffff;
-      --line: #dbe3ee;
-      --line-soft: #e8eef5;
-      --text: #162033;
-      --muted: #6b778c;
-      --primary: #173a63;
-      --primary-hover: #204a7c;
-      --primary-soft: #eaf2ff;
-      --accent: #2f6fed;
-      --accent-soft: #edf4ff;
-      --ok: #0f766e;
-      --okbg: #ebfffb;
-      --warn: #9a6700;
-      --warnbg: #fff7db;
-      --shadow: 0 10px 30px rgba(22, 32, 51, 0.08);
-      --shadow-soft: 0 4px 14px rgba(22, 32, 51, 0.05);
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-      --radius-sm: 12px;
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --card-soft: #f8fafc;
+      --line: #e5e7eb;
+      --text: #111827;
+      --muted: #6b7280;
+      /* 将主色调改为医学蓝，增强按钮和选中状态的引导性 */
+      --primary: #2563eb; 
+      --primary-soft: #1d4ed8;
+      --ok: #065f46;
+      --okbg: #ecfdf5;
+      --warn: #92400e;
+      --warnbg: #fffbeb;
+      --accent: #2563eb;
+      --accent-soft: #eff6ff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius: 16px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
-      margin: 0;
-      padding: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, #f8fbff 0%, #eef2f7 42%, #e9eef5 100%);
+      margin: 0; padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #f3f4f6 100%);
       color: var(--text);
-    }
-
-    body {
       min-height: 100vh;
     }
 
-    button, input, textarea, select {
-      font: inherit;
-    }
+    button, input, textarea, select { font: inherit; }
 
+    /* 顶部导航 */
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      padding: 14px 22px;
-      background: rgba(248, 251, 255, 0.88);
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(219, 227, 238, 0.85);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
     }
 
-    .topbar-left h1 {
-      margin: 0;
-      font-size: 22px;
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-      font-weight: 800;
-      color: #162033;
-    }
-
-    .topbar-left p {
-      margin: 5px 0 0;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
+    .topbar-left { min-width: 0; }
+    .topbar h1 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .topbar p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
 
     .topbar-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 0 14px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #edf4ff 0%, #e3efff 100%);
-      border: 1px solid #cfe0ff;
-      color: #245bc8;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.01em;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid #bfdbfe; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; white-space: nowrap;
     }
 
-    .page {
-      max-width: 1840px;
-      margin: 0 auto;
-      padding: 18px;
-    }
+    .page { max-width: 1840px; margin: 0 auto; padding: 16px; }
 
+    /* 核心响应式布局 */
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.72fr) 380px;
-      gap: 18px;
-      align-items: start;
+      grid-template-columns: minmax(0, 1.8fr) 400px; /* 右侧边栏稍微加宽以容纳文字 */
+      gap: 16px; align-items: start;
     }
 
-    .stack {
-      display: grid;
-      gap: 18px;
-    }
+    .stack { display: grid; gap: 16px; }
 
     .card {
-      background: var(--card);
-      border: 1px solid rgba(219, 227, 238, 0.95);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
     }
 
-    .card-inner {
-      padding: 18px;
-    }
+    .card h2 { margin: 0 0 8px; font-size: 16px; font-weight: 700; }
+    .card-subtext { color: var(--muted); font-size: 13px; margin-bottom: 12px;}
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 700; color: var(--text); }
 
-    .section-title {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+    input[type="text"], textarea {
+      width: 100%; border: 1px solid #d1d5db; border-radius: 10px;
+      padding: 10px 14px; background: #fff; font-size: 14px;
+      transition: all 0.2s ease;
     }
-
-    .section-subtext {
-      font-size: 12.5px;
-      color: var(--muted);
-      line-height: 1.45;
+    input[type="text"]:focus, textarea:focus {
+      border-color: #93c5fd; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); outline: none;
     }
+    textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
 
-    .report-card {
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(248,250,253,0.98) 100%);
-    }
-
-    .report-head {
-      padding: 16px 20px 10px;
-      border-bottom: 1px solid var(--line-soft);
-      background: linear-gradient(180deg, #fbfdff 0%, #f6f9fd 100%);
-    }
-
-    .report-head-top {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .report-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 28px;
-      padding: 0 12px;
-      border-radius: 999px;
-      background: var(--primary-soft);
-      color: var(--primary);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid #d8e6ff;
-    }
-
-    .report-title {
-      text-align: center;
-      margin: 0;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--muted);
-    }
-
-    .report-body {
-      padding: 20px 26px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .report-frame {
-      width: min(100%, 1080px);
-      min-height: 118px;
-      max-height: 190px;
-      overflow: auto;
-      padding: 8px 4px;
-    }
-
-    .report-text {
-      margin: 0;
-      text-align: center;
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 25px;
-      line-height: 1.65;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      color: #132238;
-    }
-
-    .viewer-card .card-inner {
-      padding: 16px;
-    }
-
-    .viewer-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .image-panel {
-      background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 15px;
-      border-bottom: 1px solid var(--line-soft);
-      background: linear-gradient(180deg, #fcfdff 0%, #f7f9fc 100%);
-    }
-
-    .panel-head strong {
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .panel-label {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .panel-body {
-      padding: 12px;
-    }
-
-    .image-wrap {
-      width: 100%;
-      height: calc(100vh - 295px);
-      min-height: 520px;
-      max-height: 780px;
-      border-radius: 14px;
-      background: #020406;
-      overflow: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-    }
-
-    .image-wrap img {
-      max-width: none;
-      transform-origin: center center;
-      transition: transform 0.15s ease;
-      display: block;
-    }
-
-    .placeholder {
-      padding: 24px;
-      text-align: center;
-      color: #98a3b6;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
+    /* 按钮样式 */
     .btn {
-      border: 1px solid #d6deea;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-      color: var(--text);
-      border-radius: 12px;
-      padding: 10px 13px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: 0.16s ease;
-      box-shadow: 0 1px 0 rgba(255,255,255,0.9);
+      border: 1px solid #d1d5db; background: white; border-radius: 10px;
+      padding: 10px 16px; cursor: pointer; font-weight: 600; font-size: 13px;
+      transition: all 0.15s ease; color: #374151;
     }
+    .btn:hover { background: #f9fafb; border-color: #9ca3af; box-shadow: var(--shadow); }
+    .btn:active { transform: translateY(1px); }
 
-    .btn:hover {
-      background: #ffffff;
-      border-color: #bfd0e7;
-      box-shadow: 0 5px 16px rgba(22, 32, 51, 0.08);
-      transform: translateY(-1px);
-    }
+    .btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+    .btn-primary:hover { background: var(--primary-soft); border-color: var(--primary-soft); color: white; }
+    .btn-strong { min-height: 48px; font-size: 15px; font-weight: 700; width: 100%; }
 
-    .btn:active {
-      transform: translateY(0);
-    }
+    .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .action-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; justify-content: center;}
 
-    .btn-primary {
-      background: linear-gradient(180deg, #173a63 0%, #143355 100%);
-      color: white;
-      border-color: #173a63;
-      box-shadow: 0 10px 20px rgba(23, 58, 99, 0.18);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(180deg, #204a7c 0%, #173a63 100%);
-      border-color: #204a7c;
-      box-shadow: 0 12px 24px rgba(23, 58, 99, 0.24);
-    }
-
-    .btn-strong {
-      min-height: 46px;
-      font-size: 15px;
-      font-weight: 800;
-      border-radius: 14px;
-    }
-
-    .sticky-side {
-      position: sticky;
-      top: 76px;
-      max-height: calc(100vh - 92px);
-      overflow: auto;
-      padding-right: 2px;
-    }
-
-    .side-card {
-      padding: 16px;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(247,250,253,0.98) 100%);
-    }
-
-    .side-block {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 14px;
-      background: rgba(255,255,255,0.75);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    .side-title {
-      margin: 0 0 12px;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .field {
-      margin-bottom: 14px;
-    }
-
-    .field:last-child {
-      margin-bottom: 0;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 12.5px;
-      font-weight: 800;
-      color: #2d3b52;
-    }
-
-    input[type="text"],
-    textarea {
-      width: 100%;
-      border: 1px solid #d5deea;
-      border-radius: 14px;
-      padding: 11px 12px;
-      background: rgba(255,255,255,0.96);
-      color: var(--text);
-      outline: none;
-      transition: 0.15s ease;
-    }
-
-    input[type="text"]:focus,
-    textarea:focus {
-      border-color: #97bbff;
-      box-shadow: 0 0 0 4px rgba(110, 156, 255, 0.16);
-    }
-
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-      line-height: 1.55;
-    }
-
-    .reviewer-progress {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .reviewer-name-box {
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .reviewer-name-box input {
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 14px 14px 14px 14px;
-      background: transparent;
-    }
-
-    .reviewer-name-box input:focus {
-      box-shadow: inset 0 0 0 1px #97bbff, 0 0 0 4px rgba(110, 156, 255, 0.12);
-    }
-
-    .meta-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .meta-chip {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px 14px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-
-    .meta-chip .label {
-      display: block;
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      font-weight: 800;
-      margin-bottom: 7px;
-    }
-
-    .meta-chip .value {
-      font-size: 22px;
-      line-height: 1;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: #162033;
-    }
-
+    /* 状态提示块 */
     .status {
-      border-radius: 14px;
-      padding: 12px 13px;
-      font-size: 12.5px;
-      line-height: 1.5;
-      border: 1px solid transparent;
+      border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.5;
+      border: 1px solid transparent; display: flex; align-items: center; gap: 8px;
     }
+    .ok { background: var(--okbg); color: var(--ok); border-color: #a7f3d0; }
+    .warn { background: var(--warnbg); color: var(--warn); border-color: #fde68a; }
 
-    .ok {
-      background: var(--okbg);
-      color: var(--ok);
-      border-color: #bceee7;
-    }
-
-    .warn {
-      background: var(--warnbg);
-      color: var(--warn);
-      border-color: #f0d98f;
-    }
-
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--line) 14%, var(--line) 86%, transparent 100%);
-      margin: 14px 0;
-    }
-
-    .score-grid {
-      display: grid;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .score-grid.choice-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .score-grid.choice-5 {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
-
+    /* ★ 优化：打分按钮 (Chip) 及其选中状态 */
     .chip {
-      border: 1px solid #d6deea;
-      border-radius: 14px;
-      padding: 11px 10px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-      cursor: pointer;
-      min-height: 44px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: 0.15s ease;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.95);
-      user-select: none;
+      border: 1px solid var(--line); border-radius: 10px; padding: 10px 4px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: white; cursor: pointer; font-size: 13px; font-weight: 600;
+      transition: all 0.15s ease; user-select: none; text-align: center;
+    }
+    .chip:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .chip input { display: none; /* 隐藏原生单选框 */ }
+    
+    /* 使用 :has 伪类实现选中高亮 */
+    .chip:has(input:checked) {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
     }
 
-    .chip:hover {
-      border-color: #bcd0ea;
-      box-shadow: 0 6px 14px rgba(22, 32, 51, 0.07);
-      transform: translateY(-1px);
+    .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+    .score-grid.five-col { grid-template-columns: repeat(5, 1fr); }
+
+    /* 报告区 */
+    .main-top-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; align-items: stretch; }
+    .report-box {
+      border: 1px solid var(--line); border-radius: 14px;
+      background: #fff; padding: 16px; min-height: 120px;
+      display: flex; flex-direction: column; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .report-box .label { font-size: 11px; color: var(--muted); margin-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+    .report-box .content {
+      font-size: 14.5px; line-height: 1.6; font-weight: 500; color: #1f2937;
+      white-space: pre-wrap; word-break: break-word; overflow-y: auto; max-height: 120px;
+      padding-right: 8px;
     }
 
-    .chip input {
-      margin: 0;
+    /* Meta 数据区 */
+    .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+    .meta-box {
+      background: var(--card-soft); border: 1px solid var(--line);
+      border-radius: 12px; padding: 12px 14px;
     }
+    .meta-box strong { display: block; font-size: 11px; margin-bottom: 6px; color: #4b5563; text-transform: uppercase; }
+    .meta-value { font-size: 18px; font-weight: 700; color: var(--text); }
+    .reviewer-box { grid-column: 1 / -1; }
+    .reviewer-box input { padding: 6px 10px; font-weight: bold; border-color: #e5e7eb; }
 
-    .submit-area {
-      display: grid;
-      gap: 8px;
-      margin-top: 4px;
-      margin-bottom: 14px;
+    /* 阅片区 */
+    .viewer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .image-panel { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: white; }
+    .panel-head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 16px; border-bottom: 1px solid var(--line); background: #f8fafc;
     }
-
-    .collapsible-card {
-      padding: 0;
-      overflow: hidden;
+    .panel-head strong { font-size: 14px; font-weight: 700; }
+    .panel-body { padding: 12px; background: #fff; }
+    
+    .image-wrap {
+      width: 100%; height: calc(100vh - 340px); min-height: 500px;
+      border-radius: 10px; background: #0f172a; overflow: auto;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
     }
+    .image-wrap img { max-width: none; transform-origin: center center; transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1); display: block; }
+    .placeholder { color: #94a3b8; text-align: center; font-size: 14px; padding: 20px; }
 
-    .collapse-toggle {
-      width: 100%;
-      border: none;
-      background: transparent;
-      text-align: left;
-      padding: 15px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      cursor: pointer;
-      font-weight: 800;
-      font-size: 14px;
-      color: #1d2a40;
+    /* 侧边栏及其他辅助 */
+    .sticky-side { position: sticky; top: 76px; max-height: calc(100vh - 90px); overflow-y: auto; padding-right: 4px; }
+    /* 隐藏滚动条让侧边栏更干净 */
+    .sticky-side::-webkit-scrollbar { width: 6px; }
+    .sticky-side::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+    .section-divider { height: 1px; background: var(--line); margin: 20px 0; }
+    .helper-note { border-radius: 10px; background: #f8fafc; border: 1px solid var(--line); padding: 12px; font-size: 12.5px; line-height: 1.5; color: #4b5563; }
+    .muted { color: var(--muted); }
+    .small { font-size: 12px; }
+
+    /* Rubric 指南区 */
+    .rubric-box { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff; margin-top: 12px; }
+    .rubric-row { display: grid; grid-template-columns: 48px 1fr; border-bottom: 1px solid var(--line); }
+    .rubric-row:last-child { border-bottom: none; }
+    .rubric-score { background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #334155; }
+    .rubric-desc { padding: 10px 12px; font-size: 12px; line-height: 1.5; color: #475569; }
+
+    iframe.hidden-frame { display: none; width: 0; height: 0; border: 0; }
+
+    @media (max-width: 1400px) {
+      .layout { grid-template-columns: 1fr; }
+      .sticky-side { position: static; max-height: none; overflow: visible; }
+      .image-wrap { height: 500px; }
     }
-
-    .collapse-toggle:hover {
-      background: rgba(248, 251, 255, 0.7);
-    }
-
-    .collapse-title-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      min-width: 0;
-    }
-
-    .collapse-subtitle {
-      font-size: 11.5px;
-      color: var(--muted);
-      font-weight: 600;
-      line-height: 1.35;
-    }
-
-    .collapse-icon {
-      color: var(--muted);
-      transition: transform 0.2s ease;
-      flex-shrink: 0;
-    }
-
-    .collapsible-card.open .collapse-icon {
-      transform: rotate(180deg);
-    }
-
-    .manifest-mini-status {
-      padding: 0 16px 14px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .collapse-content {
-      display: none;
-      padding: 0 16px 16px;
-      border-top: 1px solid var(--line-soft);
-    }
-
-    .collapsible-card.open .collapse-content {
-      display: block;
-    }
-
-    .action-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .action-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .helper-note {
-      border-radius: 14px;
-      background: linear-gradient(180deg, #f8fbff 0%, #f2f7ff 100%);
-      border: 1px solid #dbe8ff;
-      padding: 10px 12px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: #4a607f;
-    }
-
-    .rubric-box {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-      background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
-      margin-top: 8px;
-    }
-
-    .rubric-row {
-      display: grid;
-      grid-template-columns: 58px 1fr;
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .rubric-row:last-child {
-      border-bottom: none;
-    }
-
-    .rubric-score {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f5f8fc;
-      font-size: 15px;
-      font-weight: 900;
-      color: #22344f;
-      padding: 12px 8px;
-    }
-
-    .rubric-desc {
-      padding: 12px 12px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: #4c5b72;
-    }
-
-    .rubric-footer {
-      margin-top: 10px;
-      padding: 11px 12px;
-      border-radius: 14px;
-      background: linear-gradient(180deg, #eef5ff 0%, #e8f2ff 100%);
-      border: 1px solid #d5e5ff;
-      color: #2958ad;
-      font-size: 12.5px;
-      line-height: 1.5;
-      font-weight: 800;
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    iframe.hidden-frame {
-      display: none;
-      width: 0;
-      height: 0;
-      border: 0;
-    }
-
-    @media (max-width: 1480px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sticky-side {
-        position: static;
-        max-height: none;
-        overflow: visible;
-      }
-
-      .image-wrap {
-        height: 560px;
-        max-height: none;
-      }
-    }
-
     @media (max-width: 1024px) {
-      .viewer-grid,
-      .score-grid.choice-3,
-      .score-grid.choice-5,
-      .action-grid,
-      .action-grid-3,
-      .meta-row {
-        grid-template-columns: 1fr;
-      }
-
-      .report-text {
-        font-size: 20px;
-      }
-
-      .image-wrap {
-        height: 430px;
-        min-height: 430px;
-      }
+      .main-top-grid, .viewer-grid { grid-template-columns: 1fr; }
+      .image-wrap { height: 400px; min-height: 400px; }
     }
   </style>
 </head>
@@ -729,72 +219,75 @@
   <header class="topbar">
     <div class="topbar-left">
       <h1>CXR Report Matching Blind Review</h1>
-      <p>Read the report first, then compare blinded Image A and Image B. Real and synthetic images are randomized into A/B.</p>
+      <p>Read the report first, then compare blinded Image A and Image B. Real/Synthetic are randomized.</p>
     </div>
     <div class="topbar-badge">CXR Only</div>
   </header>
 
   <main class="page">
     <div class="layout">
-      <!-- LEFT MAIN -->
       <section class="stack">
-        <!-- REPORT CENTERED -->
-        <section class="card report-card">
-          <div class="report-head">
-            <div class="report-head-top">
-              <span class="report-pill">Report</span>
+        <section class="card">
+          <div class="main-top-grid">
+            <div class="report-box">
+              <div class="label">Reference Report</div>
+              <div id="reportDisplay" class="content">Waiting for manifest...</div>
             </div>
-            <p class="report-title">Read the text carefully before comparing the images</p>
-          </div>
-          <div class="report-body">
-            <div class="report-frame">
-              <div id="reportDisplay" class="report-text">No report provided</div>
+
+            <div class="meta-grid">
+              <div class="meta-box reviewer-box">
+                <strong>Reviewer Name</strong>
+                <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
+              </div>
+              <div class="meta-box">
+                <strong>Current Index</strong>
+                <div id="sampleIndexLabel" class="meta-value">-</div>
+              </div>
+              <div class="meta-box">
+                <strong>Total Samples</strong>
+                <div id="sampleTotalLabel" class="meta-value">-</div>
+              </div>
             </div>
           </div>
         </section>
 
-        <!-- IMAGE COMPARISON -->
-        <section class="card viewer-card">
-          <div class="card-inner">
-            <div class="section-header">
-              <div>
-                <h2 class="section-title">Image Comparison</h2>
-                <div class="section-subtext">Use zoom controls for detailed inspection.</div>
+        <section class="card">
+          <div style="margin-bottom:16px;">
+            <h2>Image Comparison</h2>
+            <div class="card-subtext">Use zoom controls below each image for detailed inspection.</div>
+          </div>
+
+          <div class="viewer-grid">
+            <div class="image-panel">
+              <div class="panel-head">
+                <strong>Image A</strong>
+                <span class="muted small" id="labelAType">Blind review</span>
+              </div>
+              <div class="panel-body">
+                <div class="image-wrap" id="wrapA">
+                  <div class="placeholder">Please load manifest to view image</div>
+                </div>
+                <div class="toolbar">
+                  <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom In (+)</button>
+                  <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom Out (-)</button>
+                  <button class="btn" type="button" onclick="resetZoom('A')">Reset</button>
+                </div>
               </div>
             </div>
 
-            <div class="viewer-grid">
-              <div class="image-panel">
-                <div class="panel-head">
-                  <strong>Image A</strong>
-                  <span class="panel-label" id="labelAType">Blind review</span>
-                </div>
-                <div class="panel-body">
-                  <div class="image-wrap" id="wrapA">
-                    <div class="placeholder">Please load image A</div>
-                  </div>
-                  <div class="toolbar">
-                    <button class="btn" type="button" onclick="zoomImage('A', 0.2)">Zoom A in</button>
-                    <button class="btn" type="button" onclick="zoomImage('A', -0.2)">Zoom A out</button>
-                    <button class="btn" type="button" onclick="resetZoom('A')">Reset A</button>
-                  </div>
-                </div>
+            <div class="image-panel">
+              <div class="panel-head">
+                <strong>Image B</strong>
+                <span class="muted small" id="labelBType">Blind review</span>
               </div>
-
-              <div class="image-panel">
-                <div class="panel-head">
-                  <strong>Image B</strong>
-                  <span class="panel-label" id="labelBType">Blind review</span>
+              <div class="panel-body">
+                <div class="image-wrap" id="wrapB">
+                  <div class="placeholder">Please load manifest to view image</div>
                 </div>
-                <div class="panel-body">
-                  <div class="image-wrap" id="wrapB">
-                    <div class="placeholder">Please load image B</div>
-                  </div>
-                  <div class="toolbar">
-                    <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom B in</button>
-                    <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom B out</button>
-                    <button class="btn" type="button" onclick="resetZoom('B')">Reset B</button>
-                  </div>
+                <div class="toolbar">
+                  <button class="btn" type="button" onclick="zoomImage('B', 0.2)">Zoom In (+)</button>
+                  <button class="btn" type="button" onclick="zoomImage('B', -0.2)">Zoom Out (-)</button>
+                  <button class="btn" type="button" onclick="resetZoom('B')">Reset</button>
                 </div>
               </div>
             </div>
@@ -802,38 +295,29 @@
         </section>
       </section>
 
-      <!-- RIGHT SIDE -->
       <aside class="sticky-side">
         <div class="stack">
-          <!-- SCORING PANEL -->
-          <section class="card side-card">
-            <h2 class="side-title">Scoring Panel</h2>
-
-            <div class="reviewer-progress">
-              <div class="side-block reviewer-name-box">
-                <label style="display:block; padding: 12px 14px 0; font-size:12px; font-weight:800; color:#41516a;">Reviewer Name</label>
-                <input type="text" id="doctorName" placeholder="e.g. Dr. Zhang" />
-              </div>
-
-              <div class="meta-row">
-                <div class="meta-chip">
-                  <span class="label">Current Index</span>
-                  <div id="sampleIndexLabel" class="value">-</div>
-                </div>
-                <div class="meta-chip">
-                  <span class="label">Total Samples</span>
-                  <div id="sampleTotalLabel" class="value">-</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="status ok" style="margin-bottom: 14px;">
-              Binary preference and separate scoring are both supported. You may fill in either one, or both.
-            </div>
-
+          <section class="card">
+            <h2>Manifest Loader</h2>
             <div class="field">
-              <label>Which image matches the report better? (optional)</label>
-              <div class="score-grid choice-3">
+              <input type="text" id="manifestPath" value="./manifest.json" placeholder="URL or path to manifest.json" />
+            </div>
+            <div class="action-grid">
+              <button class="btn btn-primary" id="loadManifestBtn" style="color:white;" type="button">Load Manifest</button>
+              <button class="btn" id="reloadCurrentBtn" type="button">Reload Info</button>
+            </div>
+            <div class="action-grid-3" style="margin-top:10px;">
+              <button class="btn" id="prevBtn" type="button">← Prev</button>
+              <button class="btn" id="randomBtn" type="button">Random</button>
+              <button class="btn" id="nextBtn" type="button">Next →</button>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Evaluation Panel</h2>
+            <div class="field" style="margin-top: 16px;">
+              <label>1. Which image matches the report better?</label>
+              <div class="score-grid">
                 <label class="chip"><input type="radio" name="binaryChoice" value="A" /> Image A</label>
                 <label class="chip"><input type="radio" name="binaryChoice" value="B" /> Image B</label>
                 <label class="chip"><input type="radio" name="binaryChoice" value="tie" /> Tie</label>
@@ -843,8 +327,8 @@
             <div class="section-divider"></div>
 
             <div class="field">
-              <label>Image A score (-2 to 2, optional)</label>
-              <div class="score-grid choice-5">
+              <label>2. Image A Accuracy Score (-2 to 2)</label>
+              <div class="score-grid five-col">
                 <label class="chip"><input type="radio" name="scoreA" value="-2" /> -2</label>
                 <label class="chip"><input type="radio" name="scoreA" value="-1" /> -1</label>
                 <label class="chip"><input type="radio" name="scoreA" value="0" /> 0</label>
@@ -854,8 +338,8 @@
             </div>
 
             <div class="field">
-              <label>Image B score (-2 to 2, optional)</label>
-              <div class="score-grid choice-5">
+              <label>3. Image B Accuracy Score (-2 to 2)</label>
+              <div class="score-grid five-col">
                 <label class="chip"><input type="radio" name="scoreB" value="-2" /> -2</label>
                 <label class="chip"><input type="radio" name="scoreB" value="-1" /> -1</label>
                 <label class="chip"><input type="radio" name="scoreB" value="0" /> 0</label>
@@ -864,87 +348,42 @@
               </div>
             </div>
 
-            <div class="submit-area">
-              <button class="btn btn-primary btn-strong" id="submitBtn" type="button">Submit</button>
-              <button class="btn" id="clearBtn" type="button">Clear current form</button>
-            </div>
-
             <div class="field">
-              <label>Comment</label>
-              <textarea id="comment" placeholder="Optional notes for this sample..."></textarea>
+              <label>4. Optional Comments</label>
+              <textarea id="comment" placeholder="Any specific findings or anomalies missed..."></textarea>
             </div>
 
-            <div id="msg" class="status warn">
-              Load the manifest first. Binary preference and scoring are optional, but at least one action is required.
+            <div style="display: grid; gap: 10px; margin-top: 20px;">
+              <button class="btn btn-primary btn-strong" id="submitBtn" type="button">Submit & Next</button>
+              <button class="btn" id="clearBtn" type="button">Clear Form</button>
             </div>
+
+            <div id="msg" class="status" style="margin-top: 12px; display: none;"></div>
 
             <div class="section-divider"></div>
 
-            <!-- COLLAPSIBLE MANIFEST -->
-            <div class="card collapsible-card" id="manifestCard" style="border-radius: 18px; box-shadow:none; background:rgba(255,255,255,0.6);">
-              <button class="collapse-toggle" type="button" id="manifestToggleBtn" aria-expanded="false">
-                <span class="collapse-title-wrap">
-                  <span>Manifest Loader</span>
-                  <span class="collapse-subtitle">Collapsed by default. Expand only when needed.</span>
-                </span>
-                <span class="collapse-icon">▼</span>
-              </button>
-
-              <div class="manifest-mini-status">
-                Current path: <span id="manifestPathMini">./manifest.json</span>
-              </div>
-
-              <div class="collapse-content" id="manifestCollapseContent">
-                <div class="field" style="margin-top:12px;">
-                  <label>Manifest path</label>
-                  <input type="text" id="manifestPath" value="./manifest.json" />
-                </div>
-
-                <div class="action-grid">
-                  <button class="btn" id="loadManifestBtn" type="button">Load manifest</button>
-                  <button class="btn" id="reloadCurrentBtn" type="button">Reload current</button>
-                </div>
-
-                <div class="action-grid-3" style="margin-top:8px;">
-                  <button class="btn" id="prevBtn" type="button">Previous</button>
-                  <button class="btn" id="randomBtn" type="button">Random sample</button>
-                  <button class="btn" id="nextBtn" type="button">Next</button>
-                </div>
-
-                <div class="helper-note" style="margin-top:10px;">
-                  The page reads the manifest and fills report and image URLs automatically.
-                </div>
-              </div>
-            </div>
-
-            <div class="section-divider"></div>
-
-            <h3 class="section-title" style="font-size:15px;">Scoring Guide</h3>
+            <h3>Scoring Rubric</h3>
             <div class="rubric-box">
               <div class="rubric-row">
                 <div class="rubric-score">2</div>
-                <div class="rubric-desc">The synthetic image is a perfect match for the text prompt, with all pathologies and details accurately represented.</div>
+                <div class="rubric-desc">Perfect match, all pathologies and details accurately represented.</div>
               </div>
               <div class="rubric-row">
                 <div class="rubric-score">1</div>
-                <div class="rubric-desc">The synthetic image displays most of the pathologies/details mentioned in the text prompt, with no core errors.</div>
+                <div class="rubric-desc">Good match, displays most details, no core errors.</div>
               </div>
               <div class="rubric-row">
                 <div class="rubric-score">0</div>
-                <div class="rubric-desc">The synthetic image only displays the core pathology of the text prompt, without all details reflected.</div>
+                <div class="rubric-desc">Displays only the core pathology, lacking details.</div>
               </div>
               <div class="rubric-row">
                 <div class="rubric-score">-1</div>
-                <div class="rubric-desc">The synthetic image fails to display all pathologies mentioned in the text prompt, with obvious omissions.</div>
+                <div class="rubric-desc">Fails to display all pathologies, obvious omissions.</div>
               </div>
               <div class="rubric-row">
                 <div class="rubric-score">-2</div>
-                <div class="rubric-desc">The synthetic image is completely mismatched with the text prompt, with no corresponding pathologies or serious errors.</div>
+                <div class="rubric-desc">Complete mismatch or serious generation error.</div>
               </div>
-            </div>
-
-            <div class="rubric-footer">
-              Please directly record the score for each sample set.
             </div>
           </section>
         </div>
@@ -955,6 +394,7 @@
   <iframe name="gas_submit_frame" id="gasSubmitFrame" class="hidden-frame"></iframe>
 
   <script>
+    // 替换为您的真实 Google Apps Script URL
     const API_URL = 'https://script.google.com/macros/s/AKfycbxYm35LYnfcQ7XmiE3dd_B-47kC53OqyWNUl_ouvoS0Z-c6S4rYZrWV67pusKJ4dB0E/exec';
 
     const state = {
@@ -965,18 +405,13 @@
       manifest: [],
       currentIndex: -1,
       submitInProgress: false,
-      pendingTarget: '',
-      manifestExpanded: false
+      pendingTarget: ''
     };
 
     const els = {
       doctorName: document.getElementById('doctorName'),
       reportDisplay: document.getElementById('reportDisplay'),
       manifestPath: document.getElementById('manifestPath'),
-      manifestPathMini: document.getElementById('manifestPathMini'),
-      manifestCard: document.getElementById('manifestCard'),
-      manifestToggleBtn: document.getElementById('manifestToggleBtn'),
-      manifestCollapseContent: document.getElementById('manifestCollapseContent'),
       sampleIndexLabel: document.getElementById('sampleIndexLabel'),
       sampleTotalLabel: document.getElementById('sampleTotalLabel'),
       wrapA: document.getElementById('wrapA'),
@@ -1001,6 +436,7 @@
     let realImageUrlStore = '';
     let syntheticImageUrlStore = '';
 
+    // 初始化事件绑定
     init();
 
     function init() {
@@ -1010,40 +446,21 @@
       els.nextBtn.addEventListener('click', nextSample);
       els.randomBtn.addEventListener('click', randomSample);
       els.submitBtn.addEventListener('click', submitResult);
-      els.clearBtn.addEventListener('click', clearCurrentForm);
+      els.clearBtn.addEventListener('click', () => clearCurrentForm(true));
       els.gasSubmitFrame.addEventListener('load', onIframeLoaded);
-      els.manifestToggleBtn.addEventListener('click', toggleManifestCard);
-      els.manifestPath.addEventListener('input', syncManifestMiniPath);
 
       syncReportDisplay();
       renderTypeLabels();
       updateSampleMeta();
       hydrateFromQuery();
-      syncManifestMiniPath();
-      setManifestExpanded(false);
 
       if (els.manifestPath.value.trim()) {
         loadManifest();
       }
     }
 
-    function toggleManifestCard() {
-      setManifestExpanded(!state.manifestExpanded);
-    }
-
-    function setManifestExpanded(expanded) {
-      state.manifestExpanded = expanded;
-      els.manifestCard.classList.toggle('open', expanded);
-      els.manifestToggleBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    }
-
-    function syncManifestMiniPath() {
-      const value = els.manifestPath.value.trim() || './manifest.json';
-      els.manifestPathMini.textContent = value;
-    }
-
     function syncReportDisplay() {
-      els.reportDisplay.textContent = reportTextStore.trim() || 'No report provided';
+      els.reportDisplay.textContent = reportTextStore.trim() || 'No report provided.';
     }
 
     function hydrateFromQuery() {
@@ -1059,18 +476,13 @@
     async function loadManifest() {
       try {
         const path = els.manifestPath.value.trim() || './manifest.json';
-        syncManifestMiniPath();
         setMsg('Loading manifest...', 'warn');
 
         const resp = await fetch(path, { cache: 'no-store' });
-        if (!resp.ok) {
-          throw new Error('Failed to load manifest: ' + resp.status + ' ' + resp.statusText);
-        }
+        if (!resp.ok) throw new Error('Failed to load manifest: ' + resp.status);
 
         const data = await resp.json();
-        if (!Array.isArray(data) || !data.length) {
-          throw new Error('Manifest is empty or invalid.');
-        }
+        if (!Array.isArray(data) || !data.length) throw new Error('Manifest is empty or invalid.');
 
         state.manifest = data;
         updateSampleMeta();
@@ -1086,22 +498,14 @@
 
         loadSample(targetIndex);
         setMsg('Manifest loaded successfully.', 'ok');
-        setManifestExpanded(false);
       } catch (error) {
         setMsg(error.message || String(error), 'warn');
       }
     }
 
     function loadSample(index) {
-      if (!state.manifest.length) {
-        setMsg('Manifest is not loaded.', 'warn');
-        return;
-      }
-
-      if (index < 0 || index >= state.manifest.length) {
-        setMsg('Sample index out of range.', 'warn');
-        return;
-      }
+      if (!state.manifest.length) return setMsg('Manifest is not loaded.', 'warn');
+      if (index < 0 || index >= state.manifest.length) return setMsg('Sample index out of range.', 'warn');
 
       const item = state.manifest[index];
       state.currentIndex = index;
@@ -1119,22 +523,226 @@
       clearCurrentForm(false);
     }
 
-    function reloadCurrentSample() {
-      if (state.currentIndex >= 0) {
-        loadSample(state.currentIndex);
+    function reloadCurrentSample() { if (state.currentIndex >= 0) loadSample(state.currentIndex); }
+    function prevSample() {
+      if (!state.manifest.length) return;
+      loadSample(state.currentIndex <= 0 ? state.manifest.length - 1 : state.currentIndex - 1);
+    }
+    function nextSample() {
+      if (!state.manifest.length) return;
+      loadSample(state.currentIndex >= state.manifest.length - 1 ? 0 : state.currentIndex + 1);
+    }
+    function randomSample() {
+      if (!state.manifest.length) return;
+      loadSample(Math.floor(Math.random() * state.manifest.length));
+    }
+
+    function updateSampleMeta() {
+      els.sampleTotalLabel.textContent = state.manifest.length ? String(state.manifest.length) : '-';
+      els.sampleIndexLabel.textContent = state.currentIndex >= 0 ? String(state.currentIndex + 1) : '-';
+    }
+
+    function updateQueryString(item) {
+      const params = new URLSearchParams(window.location.search);
+      params.set('manifest', els.manifestPath.value.trim());
+      if (item.sample_id) params.set('sample_id', item.sample_id);
+      history.replaceState({}, '', window.location.pathname + '?' + params.toString());
+    }
+
+    function normalizeGitHubImageUrl(url) {
+      if (!url) return '';
+      if (url.includes('github.com') && url.includes('/blob/')) return url.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/blob/', '/');
+      if (url.includes('github.com') && url.includes('/raw/')) return url.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/raw/', '/');
+      return url;
+    }
+
+    function bindImages() {
+      const real = state.pair.real = normalizeGitHubImageUrl(realImageUrlStore.trim());
+      const synthetic = state.pair.synthetic = normalizeGitHubImageUrl(syntheticImageUrlStore.trim());
+
+      if (!real || !synthetic) {
+        state.images = { A: '', B: '' };
+        state.mapping = { A_type: '', B_type: '', swapped: false };
+        renderImage('A', ''); renderImage('B', ''); renderTypeLabels();
+        return setMsg('Missing real or synthetic image URL in manifest.', 'warn');
+      }
+
+      // Randomize A/B Assignment
+      state.mapping.swapped = Math.random() > 0.5;
+      if (state.mapping.swapped) {
+        state.images.A = synthetic; state.images.B = real;
+        state.mapping.A_type = 'synthetic'; state.mapping.B_type = 'real';
+      } else {
+        state.images.A = real; state.images.B = synthetic;
+        state.mapping.A_type = 'real'; state.mapping.B_type = 'synthetic';
+      }
+
+      renderImage('A', state.images.A);
+      renderImage('B', state.images.B);
+      renderTypeLabels();
+    }
+
+    function renderTypeLabels() {
+      els.labelAType.textContent = 'Blind review';
+      els.labelBType.textContent = 'Blind review';
+    }
+
+    function renderImage(slot, url) {
+      const wrap = slot === 'A' ? els.wrapA : els.wrapB;
+      state.zoom[slot] = 1;
+      if (!url) {
+        wrap.innerHTML = '<div class="placeholder">No image loaded</div>';
+        return;
+      }
+      wrap.innerHTML = `<img id="img${slot}" src="${escapeHtml(url)}" alt="Image ${slot}" style="transform: scale(1);" onerror="handleImageError('${slot}', '${escapeJs(url)}')" />`;
+    }
+
+    function handleImageError(slot, url) {
+      const wrap = slot === 'A' ? els.wrapA : els.wrapB;
+      wrap.innerHTML = `<div class="placeholder" style="color:#ef4444;">Failed to load image.<br/><br/><span style="font-size:11px;word-break:break-all;">${escapeHtml(url)}</span></div>`;
+    }
+
+    function zoomImage(slot, delta) {
+      const img = document.getElementById('img' + slot);
+      if (!img) return;
+      state.zoom[slot] = Math.max(0.4, Math.min(5, state.zoom[slot] + delta));
+      img.style.transform = `scale(${state.zoom[slot]})`;
+    }
+
+    function resetZoom(slot) {
+      const img = document.getElementById('img' + slot);
+      if (!img) return;
+      state.zoom[slot] = 1;
+      img.style.transform = 'scale(1)';
+    }
+
+    function getRadioValue(name) {
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      return checked ? checked.value : '';
+    }
+
+    function clearCurrentForm(showMessage = true) {
+      document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
+      els.comment.value = '';
+      if (showMessage) setMsg('Form cleared.', 'ok');
+    }
+
+    // 补全提取 ID 函数
+    function extractSampleId(samplePath) {
+      if (!samplePath) return '';
+      const parts = samplePath.split('/');
+      return parts[parts.length - 1].replace(/\.(jpg|jpeg|png|webp)$/i, '');
+    }
+
+    // 补全提交相关逻辑
+    function buildResult() {
+      const choice = getRadioValue('binaryChoice');
+      const scoreA = getRadioValue('scoreA');
+      const scoreB = getRadioValue('scoreB');
+
+      if (!choice && scoreA === '' && scoreB === '') {
+        throw new Error('Please select at least one choice or score before submitting.');
+      }
+
+      let selectedType = '';
+      if (choice === 'A') selectedType = state.mapping.A_type;
+      else if (choice === 'B') selectedType = state.mapping.B_type;
+      else if (choice === 'tie') selectedType = 'tie';
+
+      return {
+        reviewer_name: els.doctorName.value.trim(),
+        sample_id: sampleIdStore || extractSampleId(samplePathStore),
+        sample_path: samplePathStore,
+        report_text: reportTextStore.trim(),
+        real_image_url: state.pair.real,
+        synthetic_image_url: state.pair.synthetic,
+        image_A_url: state.images.A,
+        image_B_url: state.images.B,
+        image_A_type: state.mapping.A_type,
+        image_B_type: state.mapping.B_type,
+        swapped: state.mapping.swapped ? 'yes' : 'no',
+        binary_choice: choice,
+        selected_image_type: selectedType,
+        score_A: scoreA,
+        score_B: scoreB,
+        comment: els.comment.value.trim(),
+        timestamp: new Date().toISOString()
+      };
+    }
+
+    function submitResult() {
+      if (state.submitInProgress) return;
+      
+      try {
+        const res = buildResult();
+        if (!res.reviewer_name) {
+          setMsg('Please enter your Reviewer Name before submitting.', 'warn');
+          els.doctorName.focus();
+          return;
+        }
+
+        state.submitInProgress = true;
+        setMsg('Submitting result...', 'warn');
+        els.submitBtn.textContent = "Submitting...";
+        els.submitBtn.disabled = true;
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = API_URL;
+        form.target = 'gas_submit_frame';
+
+        for (const key in res) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = res[key];
+          form.appendChild(input);
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+
+      } catch (e) {
+        setMsg(e.message, 'warn');
+        state.submitInProgress = false;
+        els.submitBtn.textContent = "Submit & Next";
+        els.submitBtn.disabled = false;
       }
     }
 
-    function prevSample() {
-      if (!state.manifest.length) return setMsg('Manifest is not loaded.', 'warn');
-      const nextIndex = state.currentIndex <= 0 ? state.manifest.length - 1 : state.currentIndex - 1;
-      loadSample(nextIndex);
+    function onIframeLoaded() {
+      if (state.submitInProgress) {
+        state.submitInProgress = false;
+        els.submitBtn.textContent = "Submit & Next";
+        els.submitBtn.disabled = false;
+        setMsg('Successfully submitted! Loading next sample...', 'ok');
+        
+        // 提交成功后自动延迟切换到下一张
+        setTimeout(() => {
+          nextSample();
+          els.msg.style.display = 'none'; // 切换后隐藏成功提示
+        }, 800);
+      }
     }
 
-    function nextSample() {
-      if (!state.manifest.length) return setMsg('Manifest is not loaded.', 'warn');
-      const nextIndex = state.currentIndex >= state.manifest.length - 1 ? 0 : state.currentIndex + 1;
-      loadSample(nextIndex);
+    function setMsg(txt, type) {
+      els.msg.style.display = 'flex';
+      els.msg.textContent = txt;
+      els.msg.className = 'status ' + type;
     }
 
-    function random
+    // 辅助工具函数
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, function(match) {
+        const escape = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+        return escape[match];
+      });
+    }
+
+    function escapeJs(str) {
+      return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+  </script>
+</body>
+</html>
