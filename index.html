@@ -697,6 +697,12 @@
       z-index: 120;
     }
 
+    .toast.warn {
+      background: linear-gradient(135deg, rgba(146, 64, 14, 0.98) 0%, rgba(217, 119, 6, 0.95) 100%);
+      border: 1px solid rgba(253, 230, 138, 0.8);
+      box-shadow: 0 28px 70px rgba(146, 64, 14, 0.26);
+    }
+
     .toast.show {
       opacity: 1;
       transform: translate(-50%, -50%) translateY(0);
@@ -1349,7 +1355,7 @@
       if (!state.submitInProgress) return;
       state.submitInProgress = false;
       setMsg('Form submitted. Check Google Sheet for the new row.', 'ok');
-      showCenterToast('Submitted successfully. Loading next sample...');
+      showCenterToast('Submitted successfully. Loading next sample...', 'ok');
       setTimeout(() => {
         if (state.manifest.length) {
           nextSample();
@@ -1357,20 +1363,26 @@
       }, 900);
     }
 
-    function showCenterToast(text) {
+    function showCenterToast(text, type = 'ok') {
       if (toastTimer) {
         clearTimeout(toastTimer);
       }
       els.centerToast.textContent = text;
+      els.centerToast.classList.remove('warn');
+      if (type === 'warn') {
+        els.centerToast.classList.add('warn');
+      }
       els.centerToast.classList.add('show');
       toastTimer = setTimeout(() => {
         els.centerToast.classList.remove('show');
+        els.centerToast.classList.remove('warn');
       }, 1400);
     }
 
     function setMsg(text, type) {
       els.msg.textContent = text;
       els.msg.className = 'status ' + (type === 'ok' ? 'ok' : 'warn');
+      showCenterToast(text, type === 'ok' ? 'ok' : 'warn');
     }
 
     function escapeHtml(s) {
