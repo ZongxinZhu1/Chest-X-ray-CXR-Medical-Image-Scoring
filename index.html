@@ -1271,6 +1271,11 @@
         throw new Error('Please load both real and synthetic images first.');
       }
 
+      const reviewerName = els.doctorName.value.trim();
+      if (!reviewerName) {
+        throw new Error('Please enter Reviewer Name before submitting.');
+      }
+
       const choice = getRadioValue('binaryChoice');
       const scoreA = getRadioValue('scoreA');
       const scoreB = getRadioValue('scoreB');
@@ -1280,7 +1285,7 @@
       }
 
       return {
-        reviewer_name: els.doctorName.value.trim(),
+        reviewer_name: reviewerName,
         sample_id: sampleIdStore || extractSampleId(samplePathStore),
         sample_path: samplePathStore,
         report_text: reportTextStore.trim(),
