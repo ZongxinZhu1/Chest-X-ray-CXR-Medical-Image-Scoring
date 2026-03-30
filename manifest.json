@@ -436,7 +436,7 @@
     "sample_path": "p15/p15400175/s54284277/e224bb24-e99f2b1f-11532ad1-5a4cd93f-5047aa8e",
     "report_text": "Normal chest radiographs.",
     "real_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/real/p15/p15400175/s54284277/e224bb24-e99f2b1f-11532ad1-5a4cd93f-5047aa8e.jpg",
-    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15400175/s54284277/e224bb2d9bbd0a8-d864bf13-36232016-3bd289a8-0b550e1b4-e99f2b1f-11532ad1-5a4cd93f-5047aa8e.png",
+    "synthetic_image_url": "https://raw.githubusercontent.com/ZongxinZhu1/Chest-X-ray-CXR-Medical-Image-Scoring/main/synthetic/p15/p15400175/s54284277/e224bb24-e99f2b1f-11532ad1-5a4cd93f-5047aa8e.png",
     "label": "no finding"
   },
   {
